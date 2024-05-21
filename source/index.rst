@@ -67,3 +67,15 @@ If you want to install the latest GitHub version:
    :caption: Content:
 
    Contributors
+
+
+This work was supported by the EU within the WATER MINING (Next generation water-smart management systems: large scale demonstrations for a circular economy and society) - 
+Horizon 2020 research and innovation programme under grant agreement No 869474.
+
+
+Developed by TU Delft. 
+
+.. figure:: c:\Users\rodoulaktori\surfdrive - Rodoula Ktori@surfdrive.surf.nl\PhD\tu_delft_logo.png
+   :width: 600px
+   :alt: Image
+
