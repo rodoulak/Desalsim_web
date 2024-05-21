@@ -1,0 +1,457 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Tutotrial: Thermal crystallizer (TCr) unit &mdash; DesalSim: Desalination and Brine Treatment simulation model 1.0.4 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=80d5e7a1" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=19f00094" />
+
+  
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="../_static/jquery.js?v=5d32c60e"></script>
+        <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="../_static/documentation_options.js?v=71272d9f"></script>
+        <script src="../_static/doctools.js?v=9a2dae69"></script>
+        <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Files description" href="../File%20descr/Description.html" />
+    <link rel="prev" title="Tutotrial: Multi-plug flow reactor (MF-PFR) unit" href="MF-PFR_Tutorial.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../index.html" class="icon icon-home">
+            DesalSim: Desalination and Brine Treatment simulation model
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Tutorials:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="Desalsim_Tutorial.html">Desalsim Tutorial</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Economic_Tutorial.html">Tutorial for Economic model</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Example_1_Tutorial.html">Example 1: Tutorial</a></li>
+<li class="toctree-l1"><a class="reference internal" href="EDBM_Tutorial.html">Tutorial: Electrodialysis with Bipolar membranes (EDBM) unit</a></li>
+<li class="toctree-l1"><a class="reference internal" href="MED_Tutorial.html">Tutotrial: Multi-effect distillation (MED) unit</a></li>
+<li class="toctree-l1"><a class="reference internal" href="NF_Tutorial.html">Tutotrial: Nanofiltration (NF) unit</a></li>
+<li class="toctree-l1"><a class="reference internal" href="MF-PFR_Tutorial.html">Tutotrial: Multi-plug flow reactor (MF-PFR) unit</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Tutotrial: Thermal crystallizer (TCr) unit</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#getting-started">1. Getting started</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#import-class">1.1. Import class</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#define-feed-characteristics">1.2. Define feed characteristics</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#set-operating-assumptions">1.3. Set operating assumptions</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#set-constants">1.4. Set constants</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#use-thermal-calc-class">2. Use thermal_calc class</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#overview">2.1. Overview</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#create-thermal-calc-objects">2.2. Create thermal_calc objects</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#use-mass-bal-cryst-method">2.3. Use <code class="docutils literal notranslate"><span class="pre">mass_bal_cryst</span></code> method</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#use-heat-bal-cryst-method">2.4. Use <code class="docutils literal notranslate"><span class="pre">heat_bal_cryst</span></code> method</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#print-results">2.5. Print results</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#use-conc-cal-class">3. Use <code class="docutils literal notranslate"><span class="pre">conc_cal</span></code> class</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#oveview">3.1. Oveview</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#create-conc-cal-objectives-and-call-functions">3.2. Create conc_cal objectives and call functions</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#assigned-the-results-to-output-parameters">3.2. Assigned the results to output parameters</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#use-calculate-energy-class">4. Use <code class="docutils literal notranslate"><span class="pre">calculate_energy</span></code> class</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#id1">4.1. Oveview</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#create-nf-energy-objectives-calculate-energy-consumption-and-assign-the-results-to-output-parameters">4.2. Create nf_energy objectives, calculate Energy Consumption and assign the results to output parameters</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id2">4.3. Print results</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">File description:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../File%20descr/Description.html">Files description</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Content:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../Contributors.html">Contributors and Guidelines</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">DesalSim: Desalination and Brine Treatment simulation model</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">Tutotrial: Thermal crystallizer (TCr) unit</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../_sources/Tutorials/TCr_Tutorial.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="tutotrial-thermal-crystallizer-tcr-unit">
+<h1>Tutotrial: Thermal crystallizer (TCr) unit<a class="headerlink" href="#tutotrial-thermal-crystallizer-tcr-unit" title="Link to this heading"></a></h1>
+<p>TCr is a thermal based process that is used to crystallize salt. In this work, TCr aims to recover high quality water from brine solutions and crystallize salts.</p>
+<figure class="align-default">
+<a class="reference internal image-reference" href="https://github.com/rodoulak/Desalination-and-Brine-Treatment-Simulation-/assets/150446818/1cd7f730-e4fa-4a0c-b332-822899e02433"><img alt="Image" src="https://github.com/rodoulak/Desalination-and-Brine-Treatment-Simulation-/assets/150446818/1cd7f730-e4fa-4a0c-b332-822899e02433" style="width: 600px;" /></a>
+</figure>
+<p>In <strong>desalsim</strong> package, the TCr unit is used to model the operation of a Thermal crystallizer technology. Upon simulation, it will generate the influent/effluent mass flows and their concentrations, the cooling water, and the energy requirements.
+The TCr function consists of three classes: <cite>thermal_calc</cite>, <cite>conc_cal</cite>, <cite>calculate_energy</cite>.
+In this tutorial, we will focus on how to use the classes and their methods. <strong>Table 1</strong> gives an overview of the main inputs and outputs for each process unit of Thermal crystallizer.</p>
+<table class="docutils align-default" id="id3">
+<caption><span class="caption-text">Table 1. Overview of the main inputs and outputs of Thermal crystallizer.</span><a class="headerlink" href="#id3" title="Link to this table"></a></caption>
+<colgroup>
+<col style="width: 20.0%" />
+<col style="width: 40.0%" />
+<col style="width: 40.0%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Process</p></th>
+<th class="head"><p>Input</p></th>
+<th class="head"><p>Output</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Thermal crystallizer</p></td>
+<td><p>Feed flow rate [m³/h]</p></td>
+<td><p>Flow rate of water [kg/h]</p></td>
+</tr>
+<tr class="row-odd"><td></td>
+<td><p>Ion concentration [g/L]</p></td>
+<td><p>Flow rate of NaCl [kg/h]</p></td>
+</tr>
+<tr class="row-even"><td></td>
+<td><p>Feed temperature [°C]</p></td>
+<td><p>Cooling water flow rate [m³/h]</p></td>
+</tr>
+<tr class="row-odd"><td></td>
+<td><p>Steam temperature [°C]</p></td>
+<td><p>Electrical [kWhel] and thermal [kWhth] requirements</p></td>
+</tr>
+</tbody>
+</table>
+<p>The mathematical description of Thermal Crystallizer technology is given in <a class="reference external" href="https://github.com/rodoulak/Desalination-and-Brine-Treatment-Simulation-/tree/main/paper/Mathematical_description.pdf">Mathematical description</a>, see Section A.3.</p>
+<section id="getting-started">
+<h2>1. Getting started<a class="headerlink" href="#getting-started" title="Link to this heading"></a></h2>
+<section id="import-class">
+<h3>1.1. Import class<a class="headerlink" href="#import-class" title="Link to this heading"></a></h3>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">desalsim</span>
+</pre></div>
+</div>
+<p>Then import the class:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">desalsim.thermal_cryst_f</span> <span class="kn">import</span> <span class="n">thermal_calc</span>
+<span class="kn">from</span> <span class="nn">desalsim.thermal_cryst_f</span> <span class="kn">import</span> <span class="n">conc_cal</span>
+<span class="kn">from</span> <span class="nn">desalsim.thermal_cryst_f</span> <span class="kn">import</span> <span class="n">calculate_energy</span>
+</pre></div>
+</div>
+<p>Additionally, function for calculating density (<code class="docutils literal notranslate"><span class="pre">density_calc.py</span></code>) need to be imported or constants (<code class="docutils literal notranslate"><span class="pre">comparison.py</span></code>) where user can add constant values like MW, prices etc, need to be imported.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">desalsim.density_calc</span> <span class="kn">import</span> <span class="n">density_calc</span>
+<span class="kn">from</span> <span class="nn">desalsim</span> <span class="kn">import</span> <span class="n">constants</span>
+<span class="kn">from</span> <span class="nn">desalsim</span> <span class="kn">import</span> <span class="n">scaleup</span>
+</pre></div>
+</div>
+</section>
+<section id="define-feed-characteristics">
+<h3>1.2. Define feed characteristics<a class="headerlink" href="#define-feed-characteristics" title="Link to this heading"></a></h3>
+<p>You can initialize the feed solution by setting the flow rate, specifying the focus components and their concentration.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Feed concentration</span>
+<span class="n">components</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;Na&#39;</span><span class="p">,</span> <span class="s1">&#39;Cl&#39;</span><span class="p">,</span> <span class="s1">&#39;K&#39;</span><span class="p">,</span> <span class="s1">&#39;Mg&#39;</span><span class="p">,</span> <span class="s1">&#39;Ca&#39;</span><span class="p">,</span> <span class="s1">&#39;SO4&#39;</span><span class="p">]</span>
+<span class="n">Cf_tcr_in</span> <span class="o">=</span> <span class="p">[</span><span class="mf">80.42</span><span class="p">,</span> <span class="mf">116.69</span><span class="p">,</span> <span class="mf">2.29</span><span class="p">,</span> <span class="mf">0.01</span><span class="p">,</span> <span class="mf">0.04</span><span class="p">,</span> <span class="mf">0.54</span><span class="p">]</span>
+<span class="c1"># Total salt concentration (g/L)</span>
+<span class="n">Cf_s</span> <span class="o">=</span> <span class="nb">sum</span><span class="p">(</span><span class="n">Cf_tcr_in</span><span class="p">)</span>
+
+<span class="c1"># CaSO4 concentration in feed solution (g/L)</span>
+<span class="n">Cf_caso4</span> <span class="o">=</span> <span class="n">Cf_tcr_in</span><span class="p">[</span><span class="mi">4</span><span class="p">]</span> <span class="o">*</span> <span class="n">MW_Caso4</span> <span class="o">/</span> <span class="n">MW_Ca</span>
+
+<span class="c1"># Feed flow rate</span>
+<span class="n">Qf</span> <span class="o">=</span> <span class="mi">1000</span> <span class="c1"># kg/h</span>
+
+<span class="c1"># input conditions</span>
+<span class="n">T_in</span> <span class="o">=</span> <span class="mi">40</span> <span class="c1"># °C</span>
+</pre></div>
+</div>
+<p>Note that if you want to add more components, you need to update the components list and include the concentration of the new component in the <em>Cf_tcr_in</em>.</p>
+<p>You can calculate the density of the feed solution:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">d_sol</span> <span class="o">=</span> <span class="n">density_calc</span><span class="p">(</span><span class="n">T_in</span><span class="p">,</span> <span class="n">Cf_s</span><span class="p">)</span> <span class="o">/</span> <span class="mi">1000</span> <span class="c1"># density of feed</span>
+</pre></div>
+</div>
+</section>
+<section id="set-operating-assumptions">
+<h3>1.3. Set operating assumptions<a class="headerlink" href="#set-operating-assumptions" title="Link to this heading"></a></h3>
+<p>You need to set operating assumptions related to temperatures such as the temperature in the last effect, the intake/outake cooling water temperature. Additionally, the moisture in the salt stream needs to be set.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Assumptions:</span>
+<span class="n">T_in</span> <span class="o">=</span> <span class="mi">40</span> <span class="c1"># (°C)</span>
+<span class="n">T_cw_f</span> <span class="o">=</span> <span class="mi">25</span> <span class="c1"># intake cooling water temperature (°C)</span>
+<span class="n">T_cw_o</span> <span class="o">=</span> <span class="mi">40</span> <span class="c1"># out cooling water temperature (°C)</span>
+<span class="n">T_top</span> <span class="o">=</span> <span class="mi">60</span> <span class="c1"># Operating temperature (°C)</span>
+
+<span class="n">salt_mois</span> <span class="o">=</span> <span class="mi">20</span> <span class="c1"># % moisture in salt stream (units: %)</span>
+</pre></div>
+</div>
+<p><strong>Thermodynamic data</strong></p>
+<p>The latent heat of motive steam and vapor is calculated based on steam tables.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Heat Transfer Constant</span>
+<span class="n">UA</span> <span class="o">=</span> <span class="mi">45990</span>
+<span class="n">LHV_v</span> <span class="o">=</span> <span class="mf">2199.7</span> <span class="c1"># 2107.92 # kJ/kg (gathered from steam table)</span>
+<span class="n">LHV_s</span> <span class="o">=</span> <span class="mf">2357.69</span> <span class="c1"># kJ/kg (gathered from steam table)</span>
+</pre></div>
+</div>
+<p>Finally, you need to set assumptions related to pumping like pressure drop (<em>dp</em>) and pump efficiency (<em>npump</em>).</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">dp</span> <span class="o">=</span> <span class="mf">0.1</span> <span class="c1"># pressure drop (units: bar)</span>
+<span class="n">dp_slurry</span> <span class="o">=</span> <span class="mf">3.5</span> <span class="c1"># pressure drop for slurry streams (units: bar)</span>
+<span class="n">dp_f</span> <span class="o">=</span> <span class="mf">3.5</span> <span class="c1"># pressure drop for feed (units: bar)</span>
+<span class="n">dp_w</span> <span class="o">=</span> <span class="mi">1</span> <span class="c1"># pressure drop for water streams (units: bar)</span>
+<span class="n">dp_cw</span> <span class="o">=</span> <span class="mi">2</span> <span class="c1"># pressure drop for cooling water (units: bar)</span>
+
+<span class="n">npump</span> <span class="o">=</span> <span class="mf">0.8</span> <span class="c1"># pump efficiency (units: -)</span>
+</pre></div>
+</div>
+</section>
+<section id="set-constants">
+<h3>1.4. Set constants<a class="headerlink" href="#set-constants" title="Link to this heading"></a></h3>
+<p>You need to set constant parameters like the specific heat capacity of water.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">Cp_f</span> <span class="o">=</span> <span class="mf">3.14</span> <span class="c1"># Feed specific heat capacity (units: KJ * kg * °C)</span>
+<span class="n">CP_cw</span> <span class="o">=</span> <span class="mf">4.187</span> <span class="c1"># Water specific heat capacity (units: KJ * kg * °C)</span>
+</pre></div>
+</div>
+<p>After setting all the required inputs, then you can create the functions’ objectives.</p>
+</section>
+</section>
+<section id="use-thermal-calc-class">
+<h2>2. Use thermal_calc class<a class="headerlink" href="#use-thermal-calc-class" title="Link to this heading"></a></h2>
+<p><code class="docutils literal notranslate"><span class="pre">thermal_calc</span></code> is a class used to represent Mass Balance for Thermal Crystallizer Unit. In particular, it calculates the evaporated mass and mass of recovered solid, the cooling water requirements and the energy requirements.
+<code class="docutils literal notranslate"><span class="pre">thermal_calc</span></code> takes as input the operating temperature (<em>T_op</em>), the inlet flow rate (<em>Qf</em>), the total ion concentration of solution (<em>Cf_s</em>), the concentration of CaSO4 in the solution (<em>Cf_caso4</em>), the inlet feed temperature (<em>T_in</em>), the list of concentration of ions in the solution (<em>Cf_in</em>), the salt moisture in slurry stream (<em>salt_mois</em>),</p>
+<blockquote>
+<div><p>the latent heat of vapor (<em>LHV_v</em>), the latent heat of steam (<em>LHV_s</em>), and the temperature of intake/outake cooling water (<em>T_cw_o</em>, <em>T_cw_f</em>).</p>
+</div></blockquote>
+<section id="overview">
+<h3>2.1. Overview<a class="headerlink" href="#overview" title="Link to this heading"></a></h3>
+<p>The following attributes are available within the <code class="docutils literal notranslate"><span class="pre">thermal_calc</span></code> class:</p>
+<ul class="simple">
+<li><p><cite>T_op</cite>: Operating temperature (°C)</p></li>
+<li><p><cite>Qf</cite>: Inlet flow rate (kg/hr)</p></li>
+<li><p><cite>Cf_s</cite>: Total ion concentration of solution (g/L)</p></li>
+<li><p><cite>Cf_caso4</cite>: Concentration of CaSO4 in the solution (g/L)</p></li>
+<li><p><cite>T_in</cite>: Inlet feed temperature (°C)</p></li>
+<li><p><cite>d_sol</cite>: Inlet feed density (kg/L)</p></li>
+<li><p><cite>Cf_in</cite>: List of concentration of ions in the solution (g/L)</p></li>
+<li><p><cite>nacl_sat_wt</cite>: Weight percent of NaCl at saturation</p></li>
+<li><p><cite>nacl_sol</cite>: NaCl in the solution (kg/h)</p></li>
+<li><p><cite>salt_solids</cite>: Salt solids (kg/h)</p></li>
+<li><p><cite>caso4_sol</cite>: CaSO4 in the solution (kg/h)</p></li>
+<li><p><cite>solid_mass</cite>: Solid mass (kg/h)</p></li>
+<li><p><cite>ev_mass</cite>: Evaporated mass (kg/h)</p></li>
+<li><p><cite>BPE</cite>: Boiling point elevation (°C)</p></li>
+<li><p><cite>heat_req</cite>: Heat required (kJ/h)</p></li>
+<li><p><cite>T_s</cite>: Steam temperature (°C)</p></li>
+<li><p><cite>steam_mass</cite>: Steam mass (kg/h)</p></li>
+<li><p><cite>cw_mass</cite>: Cooling water mass (kg/h)</p></li>
+</ul>
+<p>The <code class="docutils literal notranslate"><span class="pre">thermal_calc</span></code> class provides the following two methods:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># This method calculates the mass balance for thermal crystallization</span>
+<span class="n">mass_bal_cryst</span><span class="p">()</span>
+</pre></div>
+</div>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># This method calculates the heat balance for thermal crystallization</span>
+<span class="n">heat_bal_cryst</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>They are called upon initialization of the class instance.</p>
+</section>
+<section id="create-thermal-calc-objects">
+<h3>2.2. Create thermal_calc objects<a class="headerlink" href="#create-thermal-calc-objects" title="Link to this heading"></a></h3>
+<p><code class="docutils literal notranslate"><span class="pre">thermal_calc</span></code> takes as input the operating temperature (<em>T_op</em>), the inlet flow rate (<em>Qf</em>), the total ion concentration of solution (<em>Cf_s</em>), the concentration of CaSO4 in the solution (<em>Cf_caso4</em>), the inlet feed temperature (<em>T_in</em>), the list of concentration of ions in the solution (<em>Cf_in</em>), the salt moisture in slurry stream (<em>salt_mois</em>), the latent heat of vapor (<em>LHV_v</em>), the latent heat of steam (<em>LHV_s</em>), and the temperature of intake/outake cooling water (<em>T_cw_o</em>, <em>T_cw_f</em>).</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Create an instance of the thermal_calc class</span>
+<span class="n">th_cryst_dat</span> <span class="o">=</span> <span class="n">thermal_calc</span><span class="p">(</span><span class="n">T_op</span><span class="p">,</span> <span class="n">Qf</span><span class="p">,</span> <span class="n">Cf_s</span><span class="p">,</span> <span class="n">Cf_caso4</span><span class="p">,</span> <span class="n">T_in</span><span class="p">,</span> <span class="n">Cf_tcr_in</span><span class="p">,</span> <span class="n">salt_mois</span><span class="p">,</span> <span class="n">LHV_v</span><span class="p">,</span> <span class="n">LHV_s</span><span class="p">,</span> <span class="n">T_cw_o</span><span class="p">,</span> <span class="n">T_cw_f</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<section id="use-mass-bal-cryst-method">
+<h3>2.3. Use <code class="docutils literal notranslate"><span class="pre">mass_bal_cryst</span></code> method<a class="headerlink" href="#use-mass-bal-cryst-method" title="Link to this heading"></a></h3>
+<p>The method calculates the mass balance for thermal crystallization. In particular, it calculates the recovered salt flow rate (<em>solid_mass</em>) and the evaporation mass flow rate (<em>ev_mass</em>).</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">th_cryst_dat</span><span class="o">.</span><span class="n">mass_bal_cryst</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>It doesn’t take additional inputs.</p>
+<p><strong>2.3.1. Assigned the results to output parameters</strong></p>
+<p>After the mass calculation, you can assigned the results to output parameters:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Recovered salt flow rate (kg/h)</span>
+<span class="n">M_Nacl</span><span class="o">=</span><span class="n">th_cryst_dat</span><span class="o">.</span><span class="n">solid_mass</span>
+
+<span class="c1"># Evaporation mass flow rate (water recovery), (kg/h)</span>
+<span class="n">Q_evap_mass</span><span class="o">=</span><span class="n">th_cryst_dat</span><span class="o">.</span><span class="n">ev_mass</span>
+</pre></div>
+</div>
+</section>
+<section id="use-heat-bal-cryst-method">
+<h3>2.4. Use <code class="docutils literal notranslate"><span class="pre">heat_bal_cryst</span></code> method<a class="headerlink" href="#use-heat-bal-cryst-method" title="Link to this heading"></a></h3>
+<p>The method calculates the energy balance for thermal crystallization. In particular, it calculates the steam_mass (<em>steam_mass</em>), and the total distillate flow rate (<em>cw_mass</em>) and required heat (<em>heat_req</em>).</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">th_cryst_dat</span><span class="o">.</span><span class="n">heat_bal_cryst</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>It doesn’t take additional inputs.</p>
+<p><strong>2.4.1. Assigned the results to output parameters</strong></p>
+<p>After the mass calculation, you can assigned the results to output parameters:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1">#Cooling water requirements (kg/h)</span>
+<span class="n">Qcw_tcr</span><span class="o">=</span><span class="n">th_cryst_dat</span><span class="o">.</span><span class="n">cw_mass</span>
+
+<span class="c1">#Calculate energy consumption</span>
+<span class="n">heat_req</span><span class="o">=</span><span class="n">th_cryst_dat</span><span class="o">.</span><span class="n">heat_req</span>
+</pre></div>
+</div>
+</section>
+<section id="print-results">
+<h3>2.5. Print results<a class="headerlink" href="#print-results" title="Link to this heading"></a></h3>
+<p>You can print results from mass and energy calculations.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Mass flowrate of recovered salt is &quot;</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="nb">round</span><span class="p">(</span><span class="n">M_Nacl</span><span class="p">,</span><span class="mi">2</span><span class="p">))</span><span class="o">+</span><span class="s2">&quot;kg/hr&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Mass flowrate of recovered water is &quot;</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="nb">round</span><span class="p">(</span><span class="n">Q_evap_mass</span><span class="p">,</span><span class="mi">2</span><span class="p">))</span><span class="o">+</span><span class="s2">&quot;kg/hr&quot;</span><span class="p">)</span>
+
+<span class="c1">#Cooling water requirements (kg/h)</span>
+<span class="n">Qcw_tcr</span><span class="o">=</span><span class="n">th_cryst_dat</span><span class="o">.</span><span class="n">cw_mass</span>
+</pre></div>
+</div>
+<p>Mass flowrate of recovered salt is 0.22kg/hr
+Mass flowrate of recovered water is 999.78kg/hr</p>
+<p>Mass flowrate of required cooling water is 35016.66kg/hr</p>
+</section>
+</section>
+<section id="use-conc-cal-class">
+<h2>3. Use <code class="docutils literal notranslate"><span class="pre">conc_cal</span></code> class<a class="headerlink" href="#use-conc-cal-class" title="Link to this heading"></a></h2>
+<p>conc_cal is a class used to calculate the concentration of different ions in a solution. For this calculation, you need to use the solution flow rate (<em>Qf</em>), the mass of solid stream (<em>solid_mass</em>), the name of ion and its concentration in the stream (<em>C1, Cc1, C2, Cc2, C3, Cc3, C4, Cc4, C5, Cc5, C6, Cc6</em>).</p>
+<section id="oveview">
+<h3>3.1. Oveview<a class="headerlink" href="#oveview" title="Link to this heading"></a></h3>
+<p>The following attributes are available within the conc_cal class:</p>
+<ul class="simple">
+<li><p><cite>Qf</cite>: Flow rate (units: m³/h)</p></li>
+<li><p><cite>solid_mass</cite>: Mass of solid stream (units: kg)</p></li>
+<li><p><cite>C1</cite>, <cite>C2</cite>, <cite>C3</cite>, <cite>C4</cite>, <cite>C5</cite>, <cite>C6</cite>: Names of six different ions</p></li>
+<li><p><cite>Cc1</cite>, <cite>Cc2</cite>, <cite>Cc3</cite>, <cite>Cc4</cite>, <cite>Cc5</cite>, <cite>Cc6</cite>: Concentrations of six different ions (units: ppm)</p></li>
+<li><p><cite>d_sol</cite>: Density of the solution at 40°C (units: kg/m³)</p></li>
+</ul>
+<p>The conc_cal class provides the following method:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">conc_cal</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>This class consists of three methods that calculate the concentration of different salts in the solution (<em>conc_salt_comp</em>) and the the concentration of different salts in the outlet stream (<em>salt_conc</em>).</p>
+</section>
+<section id="create-conc-cal-objectives-and-call-functions">
+<h3>3.2. Create conc_cal objectives and call functions<a class="headerlink" href="#create-conc-cal-objectives-and-call-functions" title="Link to this heading"></a></h3>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Calculation of the concentration of different ions in the solution</span>
+   <span class="n">th_cryst_dat_2</span><span class="o">=</span><span class="n">conc_cal</span><span class="p">(</span><span class="n">Qf</span><span class="p">,</span> <span class="n">M_Nacl</span> <span class="p">,</span> <span class="s1">&#39;Na&#39;</span><span class="p">,</span><span class="n">Cf_tcr_in</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="s1">&#39;cl&#39;</span><span class="p">,</span><span class="n">Cf_tcr_in</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span><span class="s1">&#39;k&#39;</span><span class="p">,</span> <span class="n">Cf_tcr_in</span><span class="p">[</span><span class="mi">2</span><span class="p">],</span> <span class="s1">&#39;mg&#39;</span><span class="p">,</span> <span class="n">Cf_tcr_in</span><span class="p">[</span><span class="mi">3</span><span class="p">],</span> <span class="s1">&#39;ca&#39;</span><span class="p">,</span> <span class="n">Cf_tcr_in</span><span class="p">[</span><span class="mi">4</span><span class="p">],</span> <span class="s1">&#39;so4&#39;</span><span class="p">,</span> <span class="n">Cf_tcr_in</span><span class="p">[</span><span class="mi">5</span><span class="p">],</span> <span class="n">T_in</span><span class="p">)</span>
+   <span class="n">th_cryst_dat_2</span><span class="o">.</span><span class="n">molarity</span><span class="p">()</span>
+   <span class="n">th_cryst_dat_2</span><span class="o">.</span><span class="n">conc_salt_comp</span><span class="p">()</span>
+   <span class="n">th_cryst_dat_2</span><span class="o">.</span><span class="n">salt_conc</span><span class="p">()</span>
+</pre></div>
+</div>
+</section>
+<section id="assigned-the-results-to-output-parameters">
+<h3>3.2. Assigned the results to output parameters<a class="headerlink" href="#assigned-the-results-to-output-parameters" title="Link to this heading"></a></h3>
+<p>You can assigned the results to output parameters:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1">#Salt stream concentration (g/L)</span>
+<span class="n">Csalt_out</span><span class="o">=</span><span class="p">[</span><span class="n">th_cryst_dat_2</span><span class="o">.</span><span class="n">CNa</span><span class="p">,</span><span class="n">th_cryst_dat_2</span><span class="o">.</span><span class="n">CCl</span><span class="p">,</span> <span class="n">th_cryst_dat_2</span><span class="o">.</span><span class="n">CK</span><span class="p">,</span> <span class="n">th_cryst_dat_2</span><span class="o">.</span><span class="n">CMg</span><span class="p">,</span> <span class="n">th_cryst_dat_2</span><span class="o">.</span><span class="n">CCa</span><span class="p">,</span> <span class="n">th_cryst_dat_2</span><span class="o">.</span><span class="n">CSO4</span><span class="p">]</span>
+</pre></div>
+</div>
+</section>
+</section>
+<section id="use-calculate-energy-class">
+<h2>4. Use <code class="docutils literal notranslate"><span class="pre">calculate_energy</span></code> class<a class="headerlink" href="#use-calculate-energy-class" title="Link to this heading"></a></h2>
+<p><code class="docutils literal notranslate"><span class="pre">calculate_energy</span></code> is a class used to represent the calculation of energy consumption and the specific energy consumption for Thermal Crystallizer Unit. For this calculation, the flow rate of the feed solution (<em>Qf</em>), the distillate flow rate (<em>Q_evap_mass</em>), flow rate of cooling water (<em>Qcw</em>), the mass of recovered NaCl (<em>M_Nacl</em>),
+the required heat (<em>heat_req</em>) calculated in <code class="docutils literal notranslate"><span class="pre">thermal_calc</span></code>, density of the feed solution (<em>d_sol</em>) are used. In addition, the <code class="docutils literal notranslate"><span class="pre">calculate_energy</span></code> takes as input the expected pressure drop in cooling water stream, slurry stream and water stream (<em>dp_cw, dp_slurry, dp_w</em>) and the pump efficiency (<em>npump</em>).</p>
+<section id="id1">
+<h3>4.1. Oveview<a class="headerlink" href="#id1" title="Link to this heading"></a></h3>
+<p>The following attributes are available within the <em>calculate_energy</em> class:</p>
+<ul class="simple">
+<li><p><cite>Qf</cite>: Flow rate of the feed solution (m³/h).</p></li>
+<li><p><cite>Q_evap_mass</cite>: Distillate flow rate (m³/h).</p></li>
+<li><p><cite>Qcw</cite>: Flow rate of cooling water (m³/h).</p></li>
+<li><p><cite>d_sol</cite>: Density of the feed solution (kg/m³).</p></li>
+<li><p><cite>npump</cite>: Pump efficiency.</p></li>
+</ul>
+<p>The <code class="docutils literal notranslate"><span class="pre">calculate_energy</span></code> class provides the following method:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">calculate_energy_consumption</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>This method returns the the Specific energy consumption for electrical energy (<em>SEC_el</em>), Specific energy consumption for electrical energy per unit mass of evaporated water in kWh/kg (<em>SEC_el_prod</em>), Specific energy consumption for electrical energy per unit mass of NaCl produced in kWh/kg (<em>SEC_el_prod2</em>)</p>
+</section>
+<section id="create-nf-energy-objectives-calculate-energy-consumption-and-assign-the-results-to-output-parameters">
+<h3>4.2. Create nf_energy objectives, calculate Energy Consumption and assign the results to output parameters<a class="headerlink" href="#create-nf-energy-objectives-calculate-energy-consumption-and-assign-the-results-to-output-parameters" title="Link to this heading"></a></h3>
+<p>The following objective is created for energy consumption. Assumptions for pressure drop and pump efficiency need to be made.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">E_el_th_Cr</span><span class="p">,</span> <span class="n">E_th_th_Cr</span><span class="p">,</span> <span class="n">SEC_el_f</span><span class="p">,</span> <span class="n">SEC_el_NaCl</span><span class="p">,</span> <span class="n">SEC_el_w</span> <span class="o">=</span> <span class="n">calculate_energy</span><span class="p">(</span><span class="n">Qf</span><span class="p">,</span> <span class="n">Q_evap_mass</span><span class="p">,</span> <span class="n">Qcw_tcr</span><span class="p">,</span> <span class="n">M_Nacl</span><span class="p">,</span> <span class="n">heat_req</span><span class="p">,</span> <span class="n">d_sol</span><span class="p">,</span> <span class="n">dp_f</span><span class="p">,</span> <span class="n">dp_w</span><span class="p">,</span> <span class="n">dp_slurry</span><span class="p">,</span> <span class="n">dp_cw</span><span class="p">,</span> <span class="n">npump</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<section id="id2">
+<h3>4.3. Print results<a class="headerlink" href="#id2" title="Link to this heading"></a></h3>
+<p>You can print results from energy calculations. The specific energy consumption is also calculated so you can validate easier the results.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;SEC_el_prod is </span><span class="si">{</span><span class="n">SEC_el_w</span><span class="si">}</span><span class="s2"> KWh/m3 product&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;SEC_el_prod2 is </span><span class="si">{</span><span class="n">SEC_el_NaCl</span><span class="si">}</span><span class="s2"> KWh/kg of NaCl product&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;SEC_th_prod is &quot;</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span> <span class="nb">round</span><span class="p">((</span><span class="n">E_th_th_Cr</span><span class="o">/</span><span class="p">(</span><span class="n">Qf</span><span class="o">/</span><span class="mi">1000</span><span class="p">)),</span><span class="mi">2</span><span class="p">))</span><span class="o">+</span><span class="s2">&quot; KWh/m3 intake&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>SEC_el_prod is 5.02 KWh/m3 product</p>
+<p>SEC_el_prod2 is 23.06 KWh/kg of NaCl product</p>
+<p>SEC_th_prod is 628.34 KWh/m3 intake</p>
+</section>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="MF-PFR_Tutorial.html" class="btn btn-neutral float-left" title="Tutotrial: Multi-plug flow reactor (MF-PFR) unit" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="../File%20descr/Description.html" class="btn btn-neutral float-right" title="Files description" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2024, Rodoula Ktori.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

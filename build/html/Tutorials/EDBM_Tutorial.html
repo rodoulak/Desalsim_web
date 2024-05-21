@@ -1,0 +1,493 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Tutorial: Electrodialysis with Bipolar membranes (EDBM) unit &mdash; DesalSim: Desalination and Brine Treatment simulation model 1.0.4 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=80d5e7a1" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=19f00094" />
+
+  
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="../_static/jquery.js?v=5d32c60e"></script>
+        <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="../_static/documentation_options.js?v=71272d9f"></script>
+        <script src="../_static/doctools.js?v=9a2dae69"></script>
+        <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Tutotrial: Multi-effect distillation (MED) unit" href="MED_Tutorial.html" />
+    <link rel="prev" title="Example 1: Tutorial" href="Example_1_Tutorial.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../index.html" class="icon icon-home">
+            DesalSim: Desalination and Brine Treatment simulation model
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Tutorials:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="Desalsim_Tutorial.html">Desalsim Tutorial</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Economic_Tutorial.html">Tutorial for Economic model</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Example_1_Tutorial.html">Example 1: Tutorial</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Tutorial: Electrodialysis with Bipolar membranes (EDBM) unit</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#getting-started">1. Getting started</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#import-class">1.1. Import class</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#define-feed-characteristics">1.2. Define feed characteristics</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#set-operating-assumptions">1.3. Set operating assumptions</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#set-mmebrane-characteristics">1.4. Set Mmebrane characteristics</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#set-constants">1.5. Set constants</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#use-edbmcalc-class">2. Use EDBMCalc class</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#overview">2.1. Overview</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#create-edbmcalc-objects">2.2. Create EDBMCalc objects</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#use-flowrate-method">2.3. Use <code class="docutils literal notranslate"><span class="pre">flowrate</span></code> method</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#use-in-mass-flow-rates-method">2.4. Use <code class="docutils literal notranslate"><span class="pre">in_mass_flow_rates</span></code> method</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#use-acid-channel-method">2.5. Use <code class="docutils literal notranslate"><span class="pre">acid_channel</span></code> method</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#assigned-the-results-to-output-parameters">2.5.1. Assigned the results to output parameters</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#use-base-channel-method">2.6. Use <code class="docutils literal notranslate"><span class="pre">base_channel</span></code> method</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id1">2.6.1. Assigned the results to output parameters</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#use-salt-channel-method">2.7. Use <code class="docutils literal notranslate"><span class="pre">salt_channel</span></code> method</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id2">2.7.1. Assigned the results to output parameters</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#calculate-energy-consumption">2.8. Calculate energy consumption</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#print-results">2.9. Print results</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="MED_Tutorial.html">Tutotrial: Multi-effect distillation (MED) unit</a></li>
+<li class="toctree-l1"><a class="reference internal" href="NF_Tutorial.html">Tutotrial: Nanofiltration (NF) unit</a></li>
+<li class="toctree-l1"><a class="reference internal" href="MF-PFR_Tutorial.html">Tutotrial: Multi-plug flow reactor (MF-PFR) unit</a></li>
+<li class="toctree-l1"><a class="reference internal" href="TCr_Tutorial.html">Tutotrial: Thermal crystallizer (TCr) unit</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">File description:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../File%20descr/Description.html">Files description</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Content:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../Contributors.html">Contributors and Guidelines</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">DesalSim: Desalination and Brine Treatment simulation model</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">Tutorial: Electrodialysis with Bipolar membranes (EDBM) unit</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../_sources/Tutorials/EDBM_Tutorial.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="tutorial-electrodialysis-with-bipolar-membranes-edbm-unit">
+<h1>Tutorial: Electrodialysis with Bipolar membranes (EDBM) unit<a class="headerlink" href="#tutorial-electrodialysis-with-bipolar-membranes-edbm-unit" title="Link to this heading"></a></h1>
+<p>EDBM is a membrane-based technology that allows the production of acidic and alkaline solutions by applying an electric potential to the electrodes. In this work, EDBM aims to convert NaCl molecules of a brine solution to NaOH and HCl solutions.</p>
+<img alt="edbm" src="https://github.com/rodoulak/Desalination-and-Brine-Treatment-Simulation-/assets/150446818/2580e05b-73f2-4fa4-8d52-71762088fc17" />
+<p>In <strong>desalsim</strong> package, the EDBM unit is used to model the operation of a Electrodialysis with Bipolar membranes technology. Upon simulation, it calculates the flow rate of the acid, base, and salt solutions, their ion concentration, and the electricity requirements of the unit. The EDBM function consists of one class: <a href="#id3"><span class="problematic" id="id4">`EDBMCalc`_</span></a> that consists of various methods.
+In this tutorial, we will focus on how to use the class and their methods.</p>
+<p><strong>Table 1: Overview of Inputs and Outputs for Electrodialysis with Bipolar Membranes</strong></p>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Process</p></th>
+<th class="head"><p>Input</p></th>
+<th class="head"><p>Output</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td></td>
+<td><p>Feed flow rate [m3/h]</p></td>
+<td><p>Flow rate of acid [m3/h] and composition [g/L]</p></td>
+</tr>
+<tr class="row-odd"><td></td>
+<td><p>Ion concentration [g/L]</p></td>
+<td><p>Flow rate of base [m3/h] and composition [g/L]</p></td>
+</tr>
+<tr class="row-even"><td></td>
+<td><p>Electric density</p></td>
+<td><p>Flow rate of salt [m3/h] and composition [g/L]</p></td>
+</tr>
+<tr class="row-odd"><td></td>
+<td></td>
+<td><p>Electricity requirements [kWhel]</p></td>
+</tr>
+</tbody>
+</table>
+<p>The mathematical description of Electrodialysis with Bipolar membranes technology is given in <a class="reference external" href="https://github.com/rodoulak/Desalination-and-Brine-Treatment-Simulation-/tree/main/paper/Mathematical_description.pdf">Mathematical description</a>, see Section A.6.</p>
+<section id="getting-started">
+<h2>1. Getting started<a class="headerlink" href="#getting-started" title="Link to this heading"></a></h2>
+<section id="import-class">
+<h3>1.1. Import class<a class="headerlink" href="#import-class" title="Link to this heading"></a></h3>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">desalsim</span>
+</pre></div>
+</div>
+<p>Then import the class:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">desalsim.edbm_unit_f</span> <span class="kn">import</span> <span class="n">EDBMCalc</span>
+</pre></div>
+</div>
+<p>Additionally, functions for calculating density (<cite>density_calc.py</cite>) or constants (<cite>comparison.py</cite>) where the user can add constant values like MW, prices etc, need to be imported.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">desalsim.density_calc</span> <span class="kn">import</span> <span class="n">density_calc</span>
+<span class="kn">from</span> <span class="nn">desalsim</span> <span class="kn">import</span> <span class="n">constants</span>
+<span class="kn">from</span> <span class="nn">desalsim</span> <span class="kn">import</span> <span class="n">scaleup</span>
+</pre></div>
+</div>
+</section>
+<section id="define-feed-characteristics">
+<h3>1.2. Define feed characteristics<a class="headerlink" href="#define-feed-characteristics" title="Link to this heading"></a></h3>
+<p>You can initialize the feed solution by setting the flow rate, specifying the focus components and their concentration.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Feed concentration</span>
+<span class="n">components</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;Na&#39;</span><span class="p">,</span> <span class="s1">&#39;Cl&#39;</span><span class="p">,</span> <span class="s1">&#39;K&#39;</span><span class="p">,</span> <span class="s1">&#39;Mg&#39;</span><span class="p">,</span> <span class="s1">&#39;Ca&#39;</span><span class="p">,</span> <span class="s1">&#39;SO4&#39;</span><span class="p">,</span> <span class="s1">&#39;HCO3&#39;</span><span class="p">,</span> <span class="s1">&#39;H&#39;</span><span class="p">,</span> <span class="s1">&#39;OH&#39;</span><span class="p">]</span>
+<span class="n">Cin_edbm</span> <span class="o">=</span> <span class="p">[</span><span class="mf">13.44</span><span class="p">,</span> <span class="mf">20.725</span><span class="p">,</span> <span class="mf">1.146</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mf">0.18</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">10</span><span class="o">**</span><span class="p">(</span><span class="o">-</span><span class="n">ph_s</span><span class="p">),</span> <span class="mf">3.01551E-11</span><span class="p">]</span>
+
+<span class="c1"># Feed flow rate L/h</span>
+<span class="n">Q_in_edbm</span> <span class="o">=</span> <span class="mi">47000</span>
+
+<span class="c1"># Input conditions</span>
+<span class="n">ph_s</span> <span class="o">=</span> <span class="mf">4.71</span>  <span class="c1"># pH salt channel (units: -)</span>
+<span class="n">ph_b</span> <span class="o">=</span> <span class="mi">7</span>  <span class="c1"># pH base channel (units: -)</span>
+<span class="n">ph_a</span> <span class="o">=</span> <span class="mi">7</span>  <span class="c1"># pH acid channel (units: -)</span>
+
+<span class="c1"># Feed concentration for base and acid channels</span>
+<span class="n">C_b_in</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">10</span><span class="o">**</span><span class="p">(</span><span class="o">-</span><span class="n">ph_b</span><span class="p">),</span> <span class="mi">10</span><span class="o">**</span><span class="p">(</span><span class="o">-</span><span class="p">(</span><span class="mi">14</span><span class="o">-</span><span class="n">ph_b</span><span class="p">))]</span>
+<span class="n">C_a_in</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">10</span><span class="o">**</span><span class="p">(</span><span class="o">-</span><span class="n">ph_a</span><span class="p">),</span> <span class="mi">10</span><span class="o">**</span><span class="p">(</span><span class="o">-</span><span class="p">(</span><span class="mi">14</span><span class="o">-</span><span class="n">ph_a</span><span class="p">))]</span>
+
+<span class="c1"># Temperature</span>
+<span class="n">T</span> <span class="o">=</span> <span class="mi">20</span> <span class="o">+</span> <span class="mf">273.15</span>  <span class="c1"># K</span>
+</pre></div>
+</div>
+<p>Note that if you want to add more components, you need to update the components list and include the concentration of the new component in the <em>Cin_edbm</em>.</p>
+<p>You can calculate the density of the feed solution and the water quantity in inflow:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">d_in</span> <span class="o">=</span> <span class="n">density_calc</span><span class="p">(</span><span class="mi">25</span><span class="p">,</span> <span class="nb">sum</span><span class="p">(</span><span class="n">Cin_edbm</span><span class="p">))</span> <span class="o">/</span> <span class="mi">1000</span>
+<span class="n">d_s</span> <span class="o">=</span> <span class="n">d_in</span>
+
+<span class="c1"># Calculate water quantity in inflow</span>
+<span class="n">Mw_in</span> <span class="o">=</span> <span class="n">Q_in_edbm</span> <span class="o">/</span> <span class="n">d_in</span>
+</pre></div>
+</div>
+</section>
+<section id="set-operating-assumptions">
+<h3>1.3. Set operating assumptions<a class="headerlink" href="#set-operating-assumptions" title="Link to this heading"></a></h3>
+<p>You need to set operating assumptions such as the electrical current density.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Assumptions:</span>
+<span class="c1"># The electrical current density</span>
+<span class="n">I_d</span> <span class="o">=</span> <span class="mi">400</span>  <span class="c1"># Am2</span>
+<span class="c1"># Set number of triplets</span>
+<span class="n">N_trip</span> <span class="o">=</span> <span class="mi">50</span> <span class="o">*</span> <span class="mi">47</span>  <span class="c1"># Number of triplets based on the inlet flow rate</span>
+<span class="c1"># Set membrane area based on the feed flow rate, m2</span>
+<span class="n">A</span> <span class="o">=</span> <span class="mf">0.4</span>  <span class="c1"># range: 0.1-1</span>
+</pre></div>
+</div>
+<p>Finally, you need to set assumptions related to pumping like pressure drop (<em>dp</em>) and pump efficiency (<em>npump</em>).</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">npump</span> <span class="o">=</span> <span class="mf">0.8</span>  <span class="c1"># pump efficiency (units: -)</span>
+<span class="n">dp</span> <span class="o">=</span> <span class="mi">1</span>  <span class="c1"># pressure drop (units: bar)</span>
+</pre></div>
+</div>
+</section>
+<section id="set-mmebrane-characteristics">
+<h3>1.4. Set Mmebrane characteristics<a class="headerlink" href="#set-mmebrane-characteristics" title="Link to this heading"></a></h3>
+<p>You need to set Membrane characteristics:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Membrane characteristics</span>
+<span class="n">Cm_bp_H</span> <span class="o">=</span> <span class="mf">0.0000001</span>  <span class="c1"># mol/l</span>
+<span class="n">Cm_bp_OH</span> <span class="o">=</span> <span class="mf">0.0000001</span>  <span class="c1"># mol/l</span>
+</pre></div>
+</div>
+</section>
+<section id="set-constants">
+<h3>1.5. Set constants<a class="headerlink" href="#set-constants" title="Link to this heading"></a></h3>
+<p>You need to set constant parameters:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">F</span> <span class="o">=</span> <span class="mf">96485.3</span>  <span class="c1"># Coulombs/mol</span>
+<span class="n">R_const</span> <span class="o">=</span> <span class="mf">8.314462618</span>  <span class="c1"># kg⋅m2⋅s−2⋅K−1⋅mol−1</span>
+<span class="c1"># R_int = 0.28  # ohm cm2</span>
+<span class="n">R_int</span> <span class="o">=</span> <span class="mi">45</span>  <span class="c1"># ohm cm2</span>
+<span class="n">z</span> <span class="o">=</span> <span class="mi">1</span>
+</pre></div>
+</div>
+<p>After setting all the required inputs, then you can create the functions’ objectives.</p>
+</section>
+</section>
+<section id="use-edbmcalc-class">
+<h2>2. Use EDBMCalc class<a class="headerlink" href="#use-edbmcalc-class" title="Link to this heading"></a></h2>
+<p>EDBMCalc is a class used to represent mass and energy balance for EDBM Unit. In particular, it calculates the flowrate in each channel, the outlet concentration in each channel, the external Voltage and power needed.
+EDBMCalc takes as input the feed flow rate (<em>Qin</em>), the membrane area (<em>A</em>), the electrical current density (<em>I_d</em>), the Number of triplets based on the inlet flow rate (<em>N</em>), the initial concentrations of various ions in the salt channel (<em>Ci_s_in</em>), base channel (<em>Ci_b_in</em>), and acid channel (<em>Ci_a_in</em>) and the feed temperature (<em>T</em>).</p>
+<section id="overview">
+<h3>2.1. Overview<a class="headerlink" href="#overview" title="Link to this heading"></a></h3>
+<p>The following attributes are available within the EDBMCalc class:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">CNa_in</span></code>, <code class="docutils literal notranslate"><span class="pre">CCl_in</span></code>, <code class="docutils literal notranslate"><span class="pre">CK_in</span></code>, <code class="docutils literal notranslate"><span class="pre">CMg_in</span></code>, <code class="docutils literal notranslate"><span class="pre">CCa_in</span></code>, <code class="docutils literal notranslate"><span class="pre">CSO4_in</span></code>: Initial concentrations of various ions (g/l).</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">CNa_out</span></code>, <code class="docutils literal notranslate"><span class="pre">CCl_out</span></code>, <code class="docutils literal notranslate"><span class="pre">CK_out</span></code>, <code class="docutils literal notranslate"><span class="pre">CMg_out</span></code>, <code class="docutils literal notranslate"><span class="pre">CCa_out</span></code>, <code class="docutils literal notranslate"><span class="pre">CSO4_out</span></code>: Outlet concentrations of various ions (g/l).</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">Ci_s_in</span></code>: Initial concentrations of various ions in the salt channel (mol/l).</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">Ci_a_in</span></code>: Initial concentrations of various ions in the acid channel (mol/l).</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">Ci_b_in</span></code>: Initial concentrations of various ions in the base channel (mol/l).</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">EMF</span></code>: Electromotive force (V).</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">KW_s_in</span></code>: Inlet ionic water product in the salt channel.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">KW_a_in</span></code>: Inlet ionic water product in the acid channel.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">KW_b_in</span></code>: Inlet ionic water product in the base channel.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">M_h2o_a_in</span></code>: Initial mass flow rate of water in the acid channel (kg/h).</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">M_h2o_b_in</span></code>: Initial mass flow rate of water in the base channel (kg/h).</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">M_h2o_s_in</span></code>: Initial mass flow rate of water in the salt channel (kg/h).</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">N_trip</span></code>: Number of triplets of a channel.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">P</span></code>: Gross power needed (W).</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">PM</span></code>: Molecular weight.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">Q</span></code>: Flow rate (l/h).</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">V_ext</span></code>: Voltage needed (V).</p></li>
+</ul>
+<p>The EDBMCalc class provides the following methods:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Calculates the flowrate in each channel</span>
+<span class="n">flowrate</span><span class="p">()</span>
+<span class="c1"># Calculates the inlet mass flow rates of each ion, kg/h</span>
+<span class="n">in_mass_flow_rates</span><span class="p">(</span><span class="n">ph_s</span><span class="p">)</span>
+<span class="c1"># Performs mass balance calculations for Acid channel</span>
+<span class="n">acid_channel</span><span class="p">()</span>
+<span class="c1"># Performs mass balance calculations for Base channel</span>
+<span class="n">base_channel</span><span class="p">()</span>
+<span class="c1"># Performs mass balance calculations for Salt channel</span>
+<span class="n">salt_channel</span><span class="p">(</span><span class="n">Cm_bp_H</span><span class="p">,</span> <span class="n">Cm_bp_OH</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<section id="create-edbmcalc-objects">
+<h3>2.2. Create EDBMCalc objects<a class="headerlink" href="#create-edbmcalc-objects" title="Link to this heading"></a></h3>
+<p>EDBMCalc takes as input the feed flow rate (<em>Qin</em>), the membrane area (<em>A</em>), the electrical current density (<em>I_d</em>), the Number of triplets based on the inlet flow rate (<em>N</em>),
+the initial concentrations of various ions in the salt channel (<em>Ci_s_in</em>), base channel (<em>Ci_b_in</em>), and acid channel (<em>Ci_a_in</em>) and and the feed temperature (<em>T</em>).</p>
+<p>Create an instance of the EDBMCalc class with the defined parameters:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Create an instance of the EDBMCalc class with the defined parameters</span>
+<span class="n">edbm_dat</span> <span class="o">=</span> <span class="n">EDBMCalc</span><span class="p">(</span><span class="n">Q_in_edbm</span><span class="p">,</span> <span class="n">A</span><span class="p">,</span> <span class="n">I_d</span><span class="p">,</span> <span class="n">N_trip</span><span class="p">,</span> <span class="n">Cin_edbm</span><span class="p">,</span> <span class="n">C_b_in</span><span class="p">,</span> <span class="n">C_a_in</span><span class="p">,</span> <span class="n">T</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<section id="use-flowrate-method">
+<h3>2.3. Use <code class="docutils literal notranslate"><span class="pre">flowrate</span></code> method<a class="headerlink" href="#use-flowrate-method" title="Link to this heading"></a></h3>
+<p>This method calculates the flowrate in each channel (<code class="docutils literal notranslate"><span class="pre">Q1_s_in</span></code>, <code class="docutils literal notranslate"><span class="pre">Q1_a_in</span></code>, <code class="docutils literal notranslate"><span class="pre">Q1_b_in</span></code>).</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">flowrate</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>It doesn’t take additional inputs.</p>
+</section>
+<section id="use-in-mass-flow-rates-method">
+<h3>2.4. Use <code class="docutils literal notranslate"><span class="pre">in_mass_flow_rates</span></code> method<a class="headerlink" href="#use-in-mass-flow-rates-method" title="Link to this heading"></a></h3>
+<p>This method calculates the inlet mass flow rates. In particular, it calculates the inlet mass flow rates of each ion in the three channels (<code class="docutils literal notranslate"><span class="pre">M_s_in</span></code>, <code class="docutils literal notranslate"><span class="pre">M_a_in</span></code>, <code class="docutils literal notranslate"><span class="pre">M_b_in</span></code>), the mass of water in the initial streams in the three channels (<code class="docutils literal notranslate"><span class="pre">M_h2o_s_in</span></code>, <code class="docutils literal notranslate"><span class="pre">M_h2o_a_in</span></code>, <code class="docutils literal notranslate"><span class="pre">M_h2o_b_in</span></code>). Additionally, it calculates the inlet ionic water product in each channel (<code class="docutils literal notranslate"><span class="pre">KW_s_in</span></code>, <code class="docutils literal notranslate"><span class="pre">KW_a_in</span></code>, <code class="docutils literal notranslate"><span class="pre">KW_b_in</span></code>).</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">in_mass_flow_rates</span><span class="p">(</span><span class="n">ph_s</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>It takes the initial pH in the salt channel as input. The results are used in the following calculations.</p>
+</section>
+<section id="use-acid-channel-method">
+<h3>2.5. Use <code class="docutils literal notranslate"><span class="pre">acid_channel</span></code> method<a class="headerlink" href="#use-acid-channel-method" title="Link to this heading"></a></h3>
+<p>It calculates the mass balance calculations for Acid channel. In particular, it calculates the outlet mass flow rate for all ionic species in the channel (<code class="docutils literal notranslate"><span class="pre">M_a_out</span></code>) and water (<code class="docutils literal notranslate"><span class="pre">M_h2o_a_out</span></code>), the total outlet mass flow rate (<code class="docutils literal notranslate"><span class="pre">M_a_out_t</span></code>), volumetric outlet flow rate (<code class="docutils literal notranslate"><span class="pre">Q1_a_out</span></code>), and the outlet concentration of single ions in the channel (<code class="docutils literal notranslate"><span class="pre">Ci_a_out</span></code>).</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">acid_channel</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>It doesn’t take additional inputs.</p>
+</section>
+<section id="assigned-the-results-to-output-parameters">
+<h3>2.5.1. Assigned the results to output parameters<a class="headerlink" href="#assigned-the-results-to-output-parameters" title="Link to this heading"></a></h3>
+<p>You can assign the results to output parameters:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">Ca_out</span> <span class="o">=</span> <span class="n">edbm_dat</span><span class="o">.</span><span class="n">Ci_a_out</span>
+<span class="n">Ca_out</span> <span class="o">=</span> <span class="n">edbm_dat</span><span class="o">.</span><span class="n">Ci_a_out</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="mi">6</span><span class="p">]</span>
+<span class="n">Ca_out_g</span> <span class="o">=</span> <span class="p">[</span><span class="n">Ca_out</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">*</span> <span class="n">MW_Na</span><span class="p">,</span> <span class="n">Ca_out</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">*</span> <span class="n">MW_Cl</span><span class="p">,</span> <span class="n">Ca_out</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="o">*</span> <span class="n">MW_K</span><span class="p">,</span> <span class="n">Ca_out</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span> <span class="o">*</span> <span class="n">MW_Mg</span><span class="p">,</span> <span class="n">Ca_out</span><span class="p">[</span><span class="mi">4</span><span class="p">]</span> <span class="o">*</span> <span class="n">MW_Ca</span><span class="p">,</span> <span class="n">Ca_out</span><span class="p">[</span><span class="mi">5</span><span class="p">]</span> <span class="o">*</span> <span class="n">MW_SO4</span><span class="p">]</span>
+
+<span class="c1"># Mass flow rate</span>
+<span class="n">M_a_out</span> <span class="o">=</span> <span class="n">edbm_dat</span><span class="o">.</span><span class="n">M_a_out_t</span> <span class="o">*</span> <span class="n">N_trip</span>
+
+<span class="c1"># Volumetric flow rate</span>
+<span class="n">Q_a_out</span> <span class="o">=</span> <span class="n">edbm_dat</span><span class="o">.</span><span class="n">Q1_a_out</span> <span class="o">*</span> <span class="n">N_trip</span>
+
+<span class="c1"># Conversion to solid</span>
+<span class="n">M_HCl_out</span> <span class="o">=</span> <span class="n">Q_a_out</span> <span class="o">*</span> <span class="n">constants</span><span class="o">.</span><span class="n">MW_HCl</span> <span class="o">/</span> <span class="mi">1000</span>  <span class="c1"># kg/hr</span>
+</pre></div>
+</div>
+</section>
+<section id="use-base-channel-method">
+<h3>2.6. Use <code class="docutils literal notranslate"><span class="pre">base_channel</span></code> method<a class="headerlink" href="#use-base-channel-method" title="Link to this heading"></a></h3>
+<p>It calculates the mass balance calculations for Base channel. In particular, it calculates the outlet mass flow rate for all ionic species in the channel (<code class="docutils literal notranslate"><span class="pre">M_b_out</span></code>) and water (<code class="docutils literal notranslate"><span class="pre">M_h2o_b_out</span></code>), the total outlet mass flow rate (<code class="docutils literal notranslate"><span class="pre">M_b_out_t</span></code>), volumetric outlet flow rate (<code class="docutils literal notranslate"><span class="pre">Q1_b_out</span></code>), and the outlet concentration of single ions in the channel (<code class="docutils literal notranslate"><span class="pre">Ci_b_out</span></code>).</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">base_channel</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>It doesn’t take additional inputs.</p>
+</section>
+<section id="id1">
+<h3>2.6.1. Assigned the results to output parameters<a class="headerlink" href="#id1" title="Link to this heading"></a></h3>
+<p>You can assign the results to output parameters:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Base channel</span>
+<span class="c1"># Concentration in base channel</span>
+<span class="n">Cb_out</span> <span class="o">=</span> <span class="n">edbm_dat</span><span class="o">.</span><span class="n">Ci_b_out</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="mi">6</span><span class="p">]</span>
+<span class="n">Cb_out_g</span> <span class="o">=</span> <span class="p">[</span><span class="n">Cb_out</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">*</span> <span class="n">MW_Na</span><span class="p">,</span> <span class="n">Cb_out</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">*</span> <span class="n">MW_Cl</span><span class="p">,</span> <span class="n">Cb_out</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="o">*</span> <span class="n">MW_K</span><span class="p">,</span> <span class="n">Cb_out</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span> <span class="o">*</span> <span class="n">MW_Mg</span><span class="p">,</span> <span class="n">Cb_out</span><span class="p">[</span><span class="mi">4</span><span class="p">]</span> <span class="o">*</span> <span class="n">MW_Ca</span><span class="p">,</span> <span class="n">Cb_out</span><span class="p">[</span><span class="mi">5</span><span class="p">]</span> <span class="o">*</span> <span class="n">MW_SO4</span><span class="p">]</span>
+
+<span class="c1"># Mass flow rate</span>
+<span class="n">M_b_out</span> <span class="o">=</span> <span class="n">edbm_dat</span><span class="o">.</span><span class="n">M_b_out_t</span> <span class="o">*</span> <span class="n">N_trip</span>
+
+<span class="c1"># Volumetric flow rate</span>
+<span class="n">Q_b_out</span> <span class="o">=</span> <span class="n">edbm_dat</span><span class="o">.</span><span class="n">Q1_b_out</span> <span class="o">*</span> <span class="n">N_trip</span>
+
+<span class="c1"># Conversion to solid</span>
+<span class="n">M_NaOH_out</span> <span class="o">=</span> <span class="n">Q_b_out</span> <span class="o">*</span> <span class="n">edbm_dat</span><span class="o">.</span><span class="n">Ci_b_out</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">*</span> <span class="n">constants</span><span class="o">.</span><span class="n">MW_NaOH</span> <span class="o">/</span> <span class="mi">1000</span>  <span class="c1"># kg/hr</span>
+</pre></div>
+</div>
+</section>
+<section id="use-salt-channel-method">
+<h3>2.7. Use <code class="docutils literal notranslate"><span class="pre">salt_channel</span></code> method<a class="headerlink" href="#use-salt-channel-method" title="Link to this heading"></a></h3>
+<p>It calculates the mass balance calculations for Salt channel and the Voltage (<cite>V_ext</cite>) and Power (<cite>P</cite>) needed. In particular, it calculates the outlet mass flow rate for all ionic species in channel (<cite>M_s_out</cite>) and water (<cite>M_h2o_s_out</cite>), the total outlet mass flow rate (<cite>M_s_out_t</cite>), volumetric outlet flow rate (<cite>Q1_s_out</cite>) and the outlet concentration of single ions in channel (<cite>Ci_s_out</cite>).</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">salt_channel</span><span class="p">(</span><span class="n">Cm_bp_H</span><span class="p">,</span> <span class="n">Cm_bp_OH</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>It takes additional inputs Cm_bp_H, Cm_bp_OH, membrane characteristics.</p>
+</section>
+<section id="id2">
+<h3>2.7.1. Assigned the results to output parameters<a class="headerlink" href="#id2" title="Link to this heading"></a></h3>
+<p>You can assigned the results to output parameters:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="s2">&quot;Salt channel &quot;</span>
+    <span class="c1"># Concentration in salt channel</span>
+    <span class="n">Cbrine_out_t</span> <span class="o">=</span> <span class="nb">sum</span><span class="p">(</span><span class="n">edbm_dat</span><span class="o">.</span><span class="n">Ci_s_out</span><span class="p">)</span>
+    <span class="n">Cbrine_out</span> <span class="o">=</span> <span class="n">edbm_dat</span><span class="o">.</span><span class="n">Ci_s_out</span>  <span class="c1"># mol/l</span>
+    <span class="n">Cbrine_out_g</span> <span class="o">=</span> <span class="p">[</span>
+        <span class="n">Cbrine_out</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">*</span> <span class="n">MW_Na</span><span class="p">,</span> <span class="n">Cbrine_out</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">*</span> <span class="n">MW_Cl</span><span class="p">,</span> <span class="n">Cbrine_out</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="o">*</span> <span class="n">MW_K</span><span class="p">,</span>
+        <span class="n">Cbrine_out</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span> <span class="o">*</span> <span class="n">MW_Mg</span><span class="p">,</span> <span class="n">Cbrine_out</span><span class="p">[</span><span class="mi">4</span><span class="p">]</span> <span class="o">*</span> <span class="n">MW_Ca</span><span class="p">,</span> <span class="n">Cbrine_out</span><span class="p">[</span><span class="mi">5</span><span class="p">]</span> <span class="o">*</span> <span class="n">MW_SO4</span>
+    <span class="p">]</span>  <span class="c1"># g/l</span>
+
+    <span class="c1"># Mass flow rate</span>
+    <span class="n">M_s_out</span> <span class="o">=</span> <span class="n">edbm_dat</span><span class="o">.</span><span class="n">M_s_out_t</span> <span class="o">*</span> <span class="n">N_trip</span>
+
+    <span class="c1"># Volumetric flow rate</span>
+    <span class="n">Q_s_out</span> <span class="o">=</span> <span class="n">edbm_dat</span><span class="o">.</span><span class="n">Q1_s_out</span> <span class="o">*</span> <span class="n">N_trip</span>
+</pre></div>
+</div>
+</section>
+<section id="calculate-energy-consumption">
+<h3>2.8. Calculate energy consumption<a class="headerlink" href="#calculate-energy-consumption" title="Link to this heading"></a></h3>
+<p>You can calculate the total energy requirements for the EDBM unit. For this, you can use the voltage needed (<cite>V_ext</cite>) and the energy for pumping (<cite>Ppump</cite>).</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Energy consumption</span>
+<span class="n">V_ext</span> <span class="o">=</span> <span class="n">edbm_dat</span><span class="o">.</span><span class="n">V_ext</span>  <span class="c1"># External</span>
+
+<span class="c1"># Calculate energy consumption for pumping</span>
+<span class="n">Ppump</span> <span class="o">=</span> <span class="p">(</span><span class="n">edbm_dat</span><span class="o">.</span><span class="n">Q1_s_in</span> <span class="o">*</span> <span class="n">N_trip</span> <span class="o">*</span> <span class="n">dp</span> <span class="o">+</span> <span class="n">edbm_dat</span><span class="o">.</span><span class="n">Q1_a_in</span> <span class="o">*</span> <span class="n">N_trip</span> <span class="o">*</span> <span class="n">dp</span> <span class="o">+</span> <span class="n">edbm_dat</span><span class="o">.</span><span class="n">Q1_b_in</span> <span class="o">*</span> <span class="n">N_trip</span> <span class="o">*</span> <span class="n">dp</span><span class="p">)</span> <span class="o">/</span> <span class="mi">1000</span> <span class="o">/</span> <span class="mi">3600</span> <span class="o">*</span> <span class="mf">1e5</span> <span class="o">/</span> <span class="n">npump</span>  <span class="c1"># units: W -&gt; l to m3 so /1000; bar to J 1e5N/m2*1J/m ; hr to 3660s</span>
+
+<span class="c1"># Total energy consumption</span>
+<span class="n">E_el_Edbm</span> <span class="o">=</span> <span class="n">V_ext</span> <span class="o">*</span> <span class="n">I_d</span> <span class="o">*</span> <span class="n">A</span> <span class="o">/</span> <span class="mi">1000</span> <span class="o">+</span> <span class="n">Ppump</span> <span class="o">/</span> <span class="mi">1000</span>
+</pre></div>
+</div>
+<p>Additionally, the current efficiency (<cite>CE</cite>) can be calculated. In this work, ideal phenomena are assumed so it is expected to be close to 100%.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Calculate current efficiency</span>
+<span class="n">Cb_in</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+<span class="n">CE</span> <span class="o">=</span> <span class="p">(</span><span class="n">Q_b_out</span><span class="p">)</span> <span class="o">*</span> <span class="p">(</span><span class="n">Cb_out</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">-</span> <span class="n">Cb_in</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span> <span class="o">*</span> <span class="n">F</span> <span class="o">/</span> <span class="p">(</span><span class="mi">3600</span> <span class="o">*</span> <span class="n">N_trip</span> <span class="o">*</span> <span class="n">I_d</span> <span class="o">*</span> <span class="n">A</span><span class="p">)</span> <span class="o">*</span> <span class="mi">100</span>  <span class="c1"># %</span>
+</pre></div>
+</div>
+<p>Finally, the specific energy consumption (kWh/kg of NaOH) can be calculated:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Specific energy consumption (kWh/kg of NaOH)</span>
+<span class="n">SEC</span> <span class="o">=</span> <span class="p">(</span><span class="n">V_ext</span> <span class="o">*</span> <span class="n">I_d</span> <span class="o">*</span> <span class="n">A</span><span class="p">)</span> <span class="o">/</span> <span class="p">(</span><span class="n">Q_b_out</span> <span class="o">*</span> <span class="p">(</span><span class="n">edbm_dat</span><span class="o">.</span><span class="n">Ci_b_out</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">-</span> <span class="n">edbm_dat</span><span class="o">.</span><span class="n">Ci_b_in</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span> <span class="o">*</span> <span class="n">constants</span><span class="o">.</span><span class="n">MW_NaOH</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<section id="print-results">
+<h3>2.9. Print results<a class="headerlink" href="#print-results" title="Link to this heading"></a></h3>
+<p>You can print results from the calculations:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="s2">&quot;Salt channel &quot;</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Salt channel: Mass flow rate out is &quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="nb">round</span><span class="p">(</span><span class="n">M_s_out</span><span class="p">,</span> <span class="mi">2</span><span class="p">))</span> <span class="o">+</span> <span class="s2">&quot;kg/hr&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Salt channel: Volumetric flow rate out is &quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="nb">round</span><span class="p">(</span><span class="n">Q_s_out</span><span class="p">,</span> <span class="mi">2</span><span class="p">))</span> <span class="o">+</span> <span class="s2">&quot;l/hr&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Na concentration:&quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="nb">round</span><span class="p">(</span><span class="n">Cbrine_out</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="mi">2</span><span class="p">))</span> <span class="o">+</span> <span class="s2">&quot;M and &quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="nb">round</span><span class="p">(</span><span class="n">Cbrine_out_g</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="mi">2</span><span class="p">))</span> <span class="o">+</span> <span class="s2">&quot;g/l&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Cl concentration:&quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="nb">round</span><span class="p">(</span><span class="n">Cbrine_out</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="mi">2</span><span class="p">))</span> <span class="o">+</span> <span class="s2">&quot;M and &quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="nb">round</span><span class="p">(</span><span class="n">Cbrine_out_g</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="mi">2</span><span class="p">))</span> <span class="o">+</span> <span class="s2">&quot;g/l&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;-----------------------------------------&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Salt channel: Mass flow rate out is 74395.17kg/hr
+Salt channel: Volumetric flow rate out is 46487.68l/hr
+Na concentration:0.29M and 6.65g/l
+Cl concentration:0.29M and 10.26g/l</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="s2">&quot;Base channel &quot;</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Base channel: Mass flow rate out is &quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="nb">round</span><span class="p">(</span><span class="n">M_b_out</span><span class="p">,</span> <span class="mi">2</span><span class="p">))</span> <span class="o">+</span> <span class="s2">&quot;kg/hr&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Base channel: Volumetric flow rate out is &quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="nb">round</span><span class="p">(</span><span class="n">Q_b_out</span><span class="p">,</span> <span class="mi">2</span><span class="p">))</span> <span class="o">+</span> <span class="s2">&quot;l/hr&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Na concentration &quot;</span> <span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="nb">round</span><span class="p">(</span><span class="n">Cb_out</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span><span class="mi">2</span><span class="p">))</span><span class="o">+</span><span class="s2">&quot;M and &quot;</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="nb">round</span><span class="p">(</span><span class="n">Cb_out_g</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span><span class="mi">2</span><span class="p">))</span><span class="o">+</span><span class="s2">&quot;g/l&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;-----------------------------------------&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Base channel: Mass flow rate out is 35245.92kg/hr
+Base channel: Volumetric flow rate out is 34954.86l/hr
+Na concentration 0.4M and 9.23g/l</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="s2">&quot;Acid channel&quot;</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Acid channel: Mass flow rate out is &quot;</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="nb">round</span><span class="p">(</span><span class="n">M_a_out</span><span class="p">,</span><span class="mi">2</span><span class="p">))</span><span class="o">+</span><span class="s2">&quot;kg/hr&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Acid channel: Volumetric flow rate out is &quot;</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="nb">round</span><span class="p">(</span><span class="n">Q_a_out</span><span class="p">,</span><span class="mi">2</span><span class="p">))</span><span class="o">+</span><span class="s2">&quot;l/hr&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Cl concentration &quot;</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="nb">round</span><span class="p">(</span><span class="n">Ca_out</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span><span class="mi">2</span><span class="p">))</span><span class="o">+</span><span class="s2">&quot;M and &quot;</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="nb">round</span><span class="p">(</span><span class="n">Ca_out_g</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span><span class="mi">2</span><span class="p">))</span><span class="o">+</span><span class="s2">&quot;g/l&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;-----------------------------------------&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Acid channel: Mass flow rate out is 34943.55kg/hr
+Acid channel: Volumetric flow rate out is 34943.55l/hr
+Cl concentration 0.4M and 14.23g/l</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Energy consumption</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Current efficiency is &quot;</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="nb">round</span><span class="p">(</span><span class="n">CE</span><span class="p">,</span><span class="mi">2</span><span class="p">))</span><span class="o">+</span><span class="s2">&quot;%&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;-----------------------------------------&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Total electrical consumption for EDBM is &quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="nb">round</span><span class="p">(</span><span class="n">E_el_Edbm</span><span class="p">,</span><span class="mi">2</span><span class="p">))</span><span class="o">+</span> <span class="s2">&quot; KW&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Specific energy consumption is &quot;</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="nb">round</span><span class="p">(</span><span class="n">SEC</span><span class="p">,</span><span class="mi">2</span><span class="p">))</span><span class="o">+</span><span class="s2">&quot;kwh/kg NaOH&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Current efficiency is 100.0%</p>
+<p>Total electrical consumption for EDBM is 942.6 KW</p>
+<p>Specific energy consumption is 1.67kwh/kg NaOH</p>
+</section>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="Example_1_Tutorial.html" class="btn btn-neutral float-left" title="Example 1: Tutorial" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="MED_Tutorial.html" class="btn btn-neutral float-right" title="Tutotrial: Multi-effect distillation (MED) unit" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2024, Rodoula Ktori.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

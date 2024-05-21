@@ -1,0 +1,431 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Tutotrial: Multi-effect distillation (MED) unit &mdash; DesalSim: Desalination and Brine Treatment simulation model 1.0.4 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=80d5e7a1" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=19f00094" />
+
+  
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="../_static/jquery.js?v=5d32c60e"></script>
+        <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="../_static/documentation_options.js?v=71272d9f"></script>
+        <script src="../_static/doctools.js?v=9a2dae69"></script>
+        <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Tutotrial: Nanofiltration (NF) unit" href="NF_Tutorial.html" />
+    <link rel="prev" title="Tutorial: Electrodialysis with Bipolar membranes (EDBM) unit" href="EDBM_Tutorial.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../index.html" class="icon icon-home">
+            DesalSim: Desalination and Brine Treatment simulation model
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Tutorials:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="Desalsim_Tutorial.html">Desalsim Tutorial</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Economic_Tutorial.html">Tutorial for Economic model</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Example_1_Tutorial.html">Example 1: Tutorial</a></li>
+<li class="toctree-l1"><a class="reference internal" href="EDBM_Tutorial.html">Tutorial: Electrodialysis with Bipolar membranes (EDBM) unit</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Tutotrial: Multi-effect distillation (MED) unit</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#getting-started">1. Getting started</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#import-class">1.1. Import class</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#define-feed-characteristics">1.2. Define feed characteristics</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#set-operating-assumptions">1.3. Set operating assumptions</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#set-constants">1.4. Set constants</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#use-medcalculator-class">2. Use MEDCalculator class</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#overview">2.1. Overview</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#create-medcalculator-objects">2.2. Create MEDCalculator objects</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#use-salinity-calc-method">2.3. Use <code class="docutils literal notranslate"><span class="pre">salinity_calc</span></code> method</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#use-mass-balance-med-method">2.4. Use <code class="docutils literal notranslate"><span class="pre">mass_balance_med</span></code> method</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#use-temperature-calc-method">2.5. Use <code class="docutils literal notranslate"><span class="pre">temperature_calc</span></code> method</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#use-performance-parameters-method">2.6. Use <code class="docutils literal notranslate"><span class="pre">performance_parameters</span></code> method</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#use-output-concentration-method">2.7. Use <code class="docutils literal notranslate"><span class="pre">output_concentration</span></code> method</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#print-results">2.8. Print results</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="NF_Tutorial.html">Tutotrial: Nanofiltration (NF) unit</a></li>
+<li class="toctree-l1"><a class="reference internal" href="MF-PFR_Tutorial.html">Tutotrial: Multi-plug flow reactor (MF-PFR) unit</a></li>
+<li class="toctree-l1"><a class="reference internal" href="TCr_Tutorial.html">Tutotrial: Thermal crystallizer (TCr) unit</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">File description:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../File%20descr/Description.html">Files description</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Content:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../Contributors.html">Contributors and Guidelines</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">DesalSim: Desalination and Brine Treatment simulation model</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">Tutotrial: Multi-effect distillation (MED) unit</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../_sources/Tutorials/MED_Tutorial.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="tutotrial-multi-effect-distillation-med-unit">
+<h1>Tutotrial: Multi-effect distillation (MED) unit<a class="headerlink" href="#tutotrial-multi-effect-distillation-med-unit" title="Link to this heading"></a></h1>
+<p>MED is a thermal based process that is used to desalinate water. In this work, MED aims to recover high quality water and concentrate further the brine stream.</p>
+<figure class="align-default">
+<a class="reference internal image-reference" href="https://github.com/rodoulak/Desalination-and-Brine-Treatment-Simulation-/assets/150446818/54c49681-d70f-4cf4-ab5f-4a5d7d8791b7"><img alt="Image" src="https://github.com/rodoulak/Desalination-and-Brine-Treatment-Simulation-/assets/150446818/54c49681-d70f-4cf4-ab5f-4a5d7d8791b7" style="width: 600px;" /></a>
+</figure>
+<div style="text-align: justify;"><p>In <strong>desalsim</strong> package, the MED unit is used to model the operation of a Multi-effect distillation technology. Upon simulation, it will generate the influent/effluent mass flows and their concentrations, the cooling water, and the energy requirements.
+The MED function consists of one class: <a class="reference external" href="#use-medalculator-class">MEDCalculator</a> that constsis.
+In this tutorial, we will focus on how to use the the class and their methods.  <strong>Table 1</strong> gives an overview of the main inputs and outputs for each process unit of Multi-effect distillation.</p>
+<table class="docutils align-default" id="id3">
+<caption><span class="caption-text">Table 1. Overview of Inputs and Outputs of Multi-effect distillation</span><a class="headerlink" href="#id3" title="Link to this table"></a></caption>
+<colgroup>
+<col style="width: 33.0%" />
+<col style="width: 33.0%" />
+<col style="width: 34.0%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Process</p></th>
+<th class="head"><p>Input</p></th>
+<th class="head"><p>Output</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Multi-effect distillation</p></td>
+<td><p>Feed flow rate [m3/h]</p></td>
+<td><p>Flow rate of water [m3/h]</p></td>
+</tr>
+<tr class="row-odd"><td></td>
+<td><p>Ion concentration [g/L]</p></td>
+<td><p>Effluent flow rate and composition [g/L]</p></td>
+</tr>
+<tr class="row-even"><td></td>
+<td><p>Feed temperature [°C]</p></td>
+<td><p>Electrical [kWhel] and thermal [kWhth] requirements</p></td>
+</tr>
+<tr class="row-odd"><td></td>
+<td><p>Steam temperature [°C]</p></td>
+<td><p>Cooling water flow rate [m3/h]</p></td>
+</tr>
+</tbody>
+</table>
+<p>The mathematical description of Multi-effect distillation technology is given in [Mathematical description](<a class="reference external" href="https://github.com/rodoulak/Desalination-and-Brine-Treatment-Simulation-/tree/main/paper/Mathematical_description.pdf">https://github.com/rodoulak/Desalination-and-Brine-Treatment-Simulation-/tree/main/paper/Mathematical_description.pdf</a>), see Section A.2.</p>
+<section id="getting-started">
+<h2>1. Getting started<a class="headerlink" href="#getting-started" title="Link to this heading"></a></h2>
+<section id="import-class">
+<h3>1.1. Import class<a class="headerlink" href="#import-class" title="Link to this heading"></a></h3>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">desalsim</span>
+</pre></div>
+</div>
+<p>Then import the class:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">desalsim.med_unit_f</span> <span class="kn">import</span> <span class="n">MEDCalculator</span>
+</pre></div>
+</div>
+<p>Additionally, function for calculating density (<code class="docutils literal notranslate"><span class="pre">density_calc.py</span></code>) need to be imported.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">desalsim.density_calc</span> <span class="kn">import</span> <span class="n">density_calc</span>
+</pre></div>
+</div>
+</section>
+<section id="define-feed-characteristics">
+<h3>1.2. Define feed characteristics<a class="headerlink" href="#define-feed-characteristics" title="Link to this heading"></a></h3>
+<p>You can initialize the feed solution by setting the flow rate, specifying the focus components and their concentration.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1">#Feed concentration</span>
+<span class="n">components</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;Na&#39;</span><span class="p">,</span> <span class="s1">&#39;Cl&#39;</span><span class="p">,</span> <span class="s1">&#39;K&#39;</span><span class="p">,</span> <span class="s1">&#39;Mg&#39;</span><span class="p">,</span> <span class="s1">&#39;Ca&#39;</span><span class="p">,</span> <span class="s1">&#39;SO4&#39;</span><span class="p">]</span>
+<span class="n">Cin_med</span> <span class="o">=</span> <span class="p">[</span><span class="mf">10.36</span><span class="p">,</span> <span class="mf">15.39</span><span class="p">,</span> <span class="mf">0.36</span><span class="p">,</span> <span class="mf">0.028</span><span class="p">,</span> <span class="mf">0.02</span><span class="p">,</span> <span class="mf">0.07</span><span class="p">]</span>
+
+<span class="c1">#Feed flow rate</span>
+<span class="n">Qf_med</span> <span class="o">=</span><span class="mi">1000</span> <span class="c1">#l/hr</span>
+
+<span class="c1">#input conditions</span>
+<span class="n">T</span><span class="o">=</span><span class="mi">20</span>
+</pre></div>
+</div>
+<p>Note that if you want to add more components, you need to update the components list and include the concentration of the new component in the <em>Ciin_med</em>.</p>
+<p>You can calculate the density of the feed solution and the mass flow rate:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">d</span><span class="o">=</span><span class="n">density_calc</span><span class="p">(</span><span class="n">T</span><span class="p">,</span> <span class="nb">sum</span><span class="p">(</span><span class="n">Cin_med</span><span class="p">))</span>
+
+<span class="c1"># Mass flow rate (units: kg/hr)</span>
+<span class="n">Mf_med</span><span class="o">=</span><span class="n">Qf_med</span><span class="o">*</span><span class="n">d</span><span class="o">/</span><span class="mi">1000</span>
+</pre></div>
+</div>
+</section>
+<section id="set-operating-assumptions">
+<h3>1.3. Set operating assumptions<a class="headerlink" href="#set-operating-assumptions" title="Link to this heading"></a></h3>
+<p>You need to set operating assumptions related to temperatures such as the temperature in the last effect, the intake/outake cooling water temperature etc.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Assumptions:</span>
+<span class="n">T_in</span><span class="o">=</span><span class="mi">40</span> <span class="c1">#(oC)</span>
+<span class="n">T_N</span><span class="o">=</span><span class="mi">45</span> <span class="c1">#Temperature in the last effect (oC)</span>
+<span class="n">T_cw_in</span><span class="o">=</span><span class="mi">25</span> <span class="c1">#intake cooling water temperature (oC)</span>
+<span class="n">T_cw_out</span><span class="o">=</span><span class="mi">35</span> <span class="c1">#out cooling water temperature (oC)</span>
+<span class="n">T_s</span><span class="o">=</span><span class="mi">70</span> <span class="c1">#steam temperature oC</span>
+<span class="n">DT_loss</span><span class="o">=</span><span class="mi">1</span> <span class="c1">#temperature difference (oC)</span>
+<span class="n">T3</span><span class="o">=</span><span class="mi">69</span>
+</pre></div>
+</div>
+<p><strong>Calculate latent heat of motive steam</strong></p>
+<p>The latent heat of motive steam is calculated based on the set steam temperature and steam tables.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1">#latent heat of motive steam:</span>
+<span class="k">if</span> <span class="n">T_s</span><span class="o">&lt;=</span><span class="mi">55</span><span class="p">:</span>
+    <span class="n">lh_s</span><span class="o">=</span><span class="mi">2370</span>
+<span class="k">elif</span> <span class="n">T_s</span><span class="o">&gt;</span><span class="mi">55</span> <span class="ow">and</span> <span class="n">T_s</span><span class="o">&lt;=</span><span class="mi">60</span><span class="p">:</span>
+    <span class="n">lh_s</span><span class="o">=</span><span class="mi">2358</span>
+<span class="k">elif</span> <span class="p">(</span><span class="n">T_s</span><span class="o">&gt;</span><span class="mi">60</span><span class="p">)</span> <span class="ow">and</span> <span class="p">(</span><span class="n">T_s</span><span class="o">&lt;=</span><span class="mi">65</span><span class="p">):</span>
+    <span class="n">lh_s</span><span class="o">=</span><span class="mi">2345</span>
+<span class="k">elif</span> <span class="p">(</span><span class="n">T_s</span><span class="o">&gt;</span><span class="mi">65</span><span class="p">)</span> <span class="ow">and</span> <span class="p">(</span><span class="n">T_s</span><span class="o">&lt;=</span><span class="mi">70</span><span class="p">):</span>
+    <span class="n">lh_s</span><span class="o">=</span><span class="mi">2333</span>
+<span class="k">elif</span> <span class="p">(</span><span class="n">T_s</span><span class="o">&gt;</span><span class="mi">70</span><span class="p">)</span> <span class="ow">and</span> <span class="p">(</span><span class="n">T_s</span><span class="o">&lt;=</span><span class="mi">75</span><span class="p">):</span>
+    <span class="n">lh_s</span><span class="o">=</span><span class="mi">2321</span>
+</pre></div>
+</div>
+<p>Additionally, you need to define the aimed brine vonventration leaving effect n (<em>Cb_out</em>) and the brine circulation flow rate (<em>Xr</em>), and the number of effects (<em>N</em>).</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">Cb_out</span><span class="o">=</span><span class="mi">200</span> <span class="c1">#Brine Concentration leaving effect n (unit: g/l)</span>
+<span class="n">Xr</span><span class="o">=</span><span class="mf">5.5</span> <span class="c1"># brine circulation flow rate (units: -)</span>
+<span class="n">N</span><span class="o">=</span><span class="mi">2</span> <span class="c1">#Number of effects (-)</span>
+</pre></div>
+</div>
+<p>Finally, you need to set assumptions related to pumping like pressure drop (<em>dp</em>) and pump efficiency (<em>npump</em>).</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">dp</span><span class="o">=</span><span class="mf">0.1</span>  <span class="c1"># pressure drop (units: bar)</span>
+<span class="n">dp_slurry</span><span class="o">=</span><span class="mi">1</span> <span class="c1"># pressure drop (units: bar)</span>
+<span class="n">npump</span><span class="o">=</span><span class="mf">0.8</span> <span class="c1">#pump efficiency (units: -)</span>
+</pre></div>
+</div>
+</section>
+<section id="set-constants">
+<h3>1.4. Set constants<a class="headerlink" href="#set-constants" title="Link to this heading"></a></h3>
+<p>You need to set constant parameters like the specific heat capacity of water:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">Cp_w</span><span class="o">=</span><span class="mi">4182</span> <span class="c1"># specific heat capacity of water (j/kgC)</span>
+<span class="n">cp_sol</span><span class="o">=</span><span class="mi">4184</span> <span class="c1"># specific heat capacity of solution (j/kgC)</span>
+</pre></div>
+</div>
+<p>After setting all the required inputs, then you can create the functions’ objectives.</p>
+</section>
+</section>
+<section id="use-medcalculator-class">
+<span id="use-medalculator-class"></span><h2>2. Use MEDCalculator class<a class="headerlink" href="#use-medcalculator-class" title="Link to this heading"></a></h2>
+<div style="text-align: justify;"><p>MEDCalculator is a class used to represent Mass Balance for MED Unit. In particular, it calculates the permeate and concentrate flow rates, and their ion concentrations.
+MEDCalculator takes as input the names of components (<em>comp</em>), the ion concentration in the feed (<em>C_in</em>), the rejection rates of the ions (<em>rjr_values</em>), the % of water recovery (<em>Wrec</em>) and the feed flow rate (<em>Qf</em>).</p>
+<section id="overview">
+<h3>2.1. Overview<a class="headerlink" href="#overview" title="Link to this heading"></a></h3>
+<p>The following attributes are available within the MEDCalculator class:</p>
+<ul class="simple">
+<li><p><cite>Qf</cite>: (float) Flow rate (m^3/s).</p></li>
+<li><p><cite>CNa_in, CCl_in, CK_in, CMg_in, CCa_in, CSO4_in</cite> : (float) Initial concentrations of various ions (g/l).</p></li>
+</ul>
+<p>The MEDCalculator class provides the following method:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">calculate_perm</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>This method calculates the permeate and concentrate flow rates, as well as their corresponding ion concentrations based on the provided attributes. It is automatically called upon initialization of the class instance.</p>
+</section>
+<section id="create-medcalculator-objects">
+<h3>2.2. Create MEDCalculator objects<a class="headerlink" href="#create-medcalculator-objects" title="Link to this heading"></a></h3>
+<div style="text-align: justify;"><dl class="simple">
+<dt>MEDCalculator takes as input the feed volumetric flow rate (<em>Qf_med</em>) and mass flow rate (<em>Mf_med</em>), the concentration in the feed for the components (<em>CNa_in, CCl_in, CK_in, CMg_in, CCa_in, CSO4_in</em>) and the</dt><dd><p>Cin_med[0], Cin_med[1], Cin_med[2], Cin_med[3], Cin_med[4], Cin_med[5], and the inlet temperature (<em>T_in</em>).</p>
+</dd>
+</dl>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Create an instance of the MEDCalculator class</span>
+<span class="n">med_dat</span> <span class="o">=</span> <span class="n">MEDCalculator</span><span class="p">(</span><span class="n">Qf_med</span><span class="p">,</span> <span class="n">Mf_med</span><span class="p">,</span> <span class="n">Cin_med</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">Cin_med</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">Cin_med</span><span class="p">[</span><span class="mi">2</span><span class="p">],</span> <span class="n">Cin_med</span><span class="p">[</span><span class="mi">3</span><span class="p">],</span> <span class="n">Cin_med</span><span class="p">[</span><span class="mi">4</span><span class="p">],</span> <span class="n">Cin_med</span><span class="p">[</span><span class="mi">5</span><span class="p">],</span> <span class="n">T_in</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<section id="use-salinity-calc-method">
+<h3>2.3. Use <code class="docutils literal notranslate"><span class="pre">salinity_calc</span></code> method<a class="headerlink" href="#use-salinity-calc-method" title="Link to this heading"></a></h3>
+<p>This method calculates the inflow salinity.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">med_dat</span><span class="o">.</span><span class="n">salinity_calc</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>It doesn’t take additional inputs.</p>
+</section>
+<section id="use-mass-balance-med-method">
+<h3>2.4. Use <code class="docutils literal notranslate"><span class="pre">mass_balance_med</span></code> method<a class="headerlink" href="#use-mass-balance-med-method" title="Link to this heading"></a></h3>
+<p>This method performs mass balance calculations. In particular, it calculates the brine flow rate of leaving effect n (<em>Bn</em>, <em>Qb</em>), and the total distillate flow rate (<em>Mdist</em>, <em>Qdist</em>).</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">med_dat</span><span class="o">.</span><span class="n">mass_balance_med</span><span class="p">(</span><span class="n">Cb_out</span><span class="p">)</span>
+</pre></div>
+</div>
+<p><strong>2.4.1. Assigned the results to output parameters</strong></p>
+<p>After the mass calculation, you can assigned the results to output parameters:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1">#Brine flow rate</span>
+<span class="n">Qout_med</span><span class="o">=</span><span class="n">med_dat</span><span class="o">.</span><span class="n">Qb</span>
+
+<span class="c1">#Distillate water flow rate</span>
+<span class="n">Qprod_med</span><span class="o">=</span><span class="n">med_dat</span><span class="o">.</span><span class="n">Qdist</span>
+
+<span class="c1">#Calculate circulation flow rate</span>
+<span class="n">Qr</span><span class="o">=</span><span class="n">Xr</span><span class="o">*</span><span class="n">Qf_med</span>
+</pre></div>
+</div>
+</section>
+<section id="use-temperature-calc-method">
+<h3>2.5. Use <code class="docutils literal notranslate"><span class="pre">temperature_calc</span></code> method<a class="headerlink" href="#use-temperature-calc-method" title="Link to this heading"></a></h3>
+<p>This method calculate temperature-related parameters and it takes as input the temperature difference (<em>DT_loss</em>), temperature in the last effect (<em>T_N</em>), and steam temperature (<a href="#id1"><span class="problematic" id="id2">*</span></a>T_s).</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">med</span><span class="o">*</span><span class="n">dat</span><span class="o">.</span><span class="n">temperature_calc</span><span class="p">(</span><span class="n">DT_loss</span><span class="p">,</span> <span class="n">T_N</span><span class="p">,</span> <span class="n">T_s</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<section id="use-performance-parameters-method">
+<h3>2.6. Use <code class="docutils literal notranslate"><span class="pre">performance_parameters</span></code> method<a class="headerlink" href="#use-performance-parameters-method" title="Link to this heading"></a></h3>
+<div style="text-align: justify;"><p>It calculates the performance parameters <em>Gain Output Ratio (GOR)</em>, <em>Condenser thermal load (Qc)</em>, <em>Cooling water flow rate (Qw)</em>, <em>Performance ratio (PR)</em>, <em>Condenser thermal load (Qsen)</em>, <em>Total thermal load</em>.
+It takes as input the latent heat of motive steam (<em>lh_s</em>) and the intake cooling water temperature (<em>T_cw_in</em>).</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">med_dat</span><span class="o">.</span><span class="n">performance_parameters</span><span class="p">(</span><span class="n">lh_s</span><span class="p">,</span>  <span class="n">T_cw_in</span><span class="p">)</span>
+</pre></div>
+</div>
+<p><strong>2.6.1. Assigned the results to output parameters</strong></p>
+<p>You can assigned the results to output parameters:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Calculate required cooling water</span>
+<span class="n">Qcw</span> <span class="o">=</span> <span class="n">med_dat</span><span class="o">.</span><span class="n">QCW</span> <span class="o">*</span> <span class="mi">3600</span> <span class="c1">#units: kg/hr</span>
+
+<span class="c1"># Calculate thermal energy consumption</span>
+<span class="n">E_th_med</span> <span class="o">=</span> <span class="n">med_dat</span><span class="o">.</span><span class="n">Q_Tot</span>
+</pre></div>
+</div>
+<p>Then the Energy consumption of the technology and the specific energy consumption can be calculated:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Calculate energy consumption</span>
+<span class="c1"># Electrical energy consumption</span>
+<span class="n">E_el_med</span> <span class="o">=</span> <span class="p">((</span><span class="n">Qf_med</span> <span class="o">*</span> <span class="mf">3.5</span> <span class="o">+</span> <span class="n">med_dat</span><span class="o">.</span><span class="n">QCW</span> <span class="o">*</span> <span class="mi">3600</span> <span class="o">*</span> <span class="mi">2</span> <span class="o">+</span> <span class="p">(</span><span class="n">Qr</span> <span class="o">+</span> <span class="n">med_dat</span><span class="o">.</span><span class="n">Qb</span><span class="p">)</span> <span class="o">*</span> <span class="mf">3.5</span> <span class="o">+</span> <span class="n">med_dat</span><span class="o">.</span><span class="n">Qdist</span> <span class="o">*</span> <span class="mi">1</span><span class="p">)</span> <span class="o">/</span> <span class="p">(</span><span class="mi">1000</span> <span class="o">*</span> <span class="n">npump</span><span class="p">))</span> <span class="o">*</span> <span class="mf">1e5</span> <span class="o">/</span> <span class="mi">3600</span> <span class="o">/</span> <span class="mi">1000</span>  <span class="c1"># kWh</span>
+
+<span class="c1"># Specific energy consumption (electrical) per m3 feed</span>
+<span class="n">SEC_el</span> <span class="o">=</span> <span class="n">E_el_med</span> <span class="o">/</span> <span class="p">(</span><span class="n">Qf_med</span> <span class="o">/</span> <span class="n">d</span><span class="p">)</span>  <span class="c1"># kWh/m3 feed</span>
+
+<span class="c1"># Specific energy consumption (electrical) per m3 product (distilled water)</span>
+<span class="n">SEC_el_prod</span> <span class="o">=</span> <span class="n">E_el_med</span> <span class="o">/</span> <span class="p">(</span><span class="n">med_dat</span><span class="o">.</span><span class="n">Qdist</span> <span class="o">/</span> <span class="mi">1000</span><span class="p">)</span>  <span class="c1"># kWh/m3 dist water</span>
+
+<span class="c1"># Total thermal energy consumption</span>
+<span class="n">E_th_med</span> <span class="o">=</span> <span class="n">med_dat</span><span class="o">.</span><span class="n">Q_Tot</span>
+<span class="c1"># Specific thermal energy consumption  per m3 feed (kWh_th/m3)</span>
+<span class="n">SEC_th</span> <span class="o">=</span> <span class="n">E_th_med</span> <span class="o">/</span> <span class="p">(</span><span class="n">Qf_med</span> <span class="o">/</span> <span class="n">d</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<section id="use-output-concentration-method">
+<h3>2.7. Use <code class="docutils literal notranslate"><span class="pre">output_concentration</span></code> method<a class="headerlink" href="#use-output-concentration-method" title="Link to this heading"></a></h3>
+<p>It calculates the ion concentration in the output, g/l.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">med_dat</span><span class="o">.</span><span class="n">output_concentration</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>It doesn’t take additional inputs.</p>
+<p><strong>2.7.1. Assigned the results to output parameters</strong></p>
+<p>You can assigned the results to output parameters:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1">#Concentration of brine stream</span>
+<span class="n">Cconc_med</span> <span class="o">=</span> <span class="p">[</span><span class="n">med_dat</span><span class="o">.</span><span class="n">CNa_out</span><span class="p">,</span> <span class="n">med_dat</span><span class="o">.</span><span class="n">CCl_out</span><span class="p">,</span> <span class="n">med_dat</span><span class="o">.</span><span class="n">CK_out</span><span class="p">,</span> <span class="n">med_dat</span><span class="o">.</span><span class="n">CMg_out</span><span class="p">,</span> <span class="n">med_dat</span><span class="o">.</span><span class="n">CCa_out</span><span class="p">,</span> <span class="n">med_dat</span><span class="o">.</span><span class="n">CSO4_out</span><span class="p">]</span>
+</pre></div>
+</div>
+<p>and calculate the density for brine stream</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Calculate density for output concentration</span>
+<span class="n">d_b</span> <span class="o">=</span> <span class="n">density_calc</span><span class="p">(</span><span class="mi">45</span><span class="p">,</span> <span class="nb">sum</span><span class="p">(</span><span class="n">Cconc_med</span><span class="p">))</span>
+</pre></div>
+</div>
+</section>
+<section id="print-results">
+<h3>2.8. Print results<a class="headerlink" href="#print-results" title="Link to this heading"></a></h3>
+<p>You can print results from mass calculations</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Flow rates and concentration</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Brine flow rate: &quot;</span><span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="nb">round</span><span class="p">(</span><span class="n">Qout_med</span><span class="p">,</span><span class="mi">2</span><span class="p">))</span><span class="o">+</span><span class="s2">&quot;kg/hr&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Total distillate flow rate: &quot;</span><span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="nb">round</span><span class="p">(</span><span class="n">Qprod_med</span><span class="p">,</span><span class="mi">2</span><span class="p">))</span><span class="o">+</span><span class="s2">&quot;kg/hr&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Sum of output concentrations: &quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="nb">round</span><span class="p">(</span><span class="nb">sum</span><span class="p">(</span><span class="n">Cconc_med</span><span class="p">),</span><span class="mi">2</span><span class="p">))</span><span class="o">+</span><span class="s2">&quot;g/l&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;-----------------------------------------&quot;</span><span class="p">)</span>
+
+<span class="c1"># Calculate energy consumption</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Electrical energy consumption: &quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="nb">round</span><span class="p">(</span><span class="n">E_el_med</span><span class="p">,</span><span class="mi">2</span><span class="p">))</span> <span class="o">+</span> <span class="s2">&quot; kWh&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Specific energy consumption (electrical) per m3 feed: &quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="nb">round</span><span class="p">(</span><span class="n">SEC_el</span><span class="p">,</span><span class="mi">2</span><span class="p">))</span> <span class="o">+</span> <span class="s2">&quot; kWh/m3&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Specific energy consumption (electrical) per m3 product (distilled water): &quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="nb">round</span><span class="p">(</span><span class="n">SEC_el_prod</span><span class="p">,</span><span class="mi">2</span><span class="p">))</span> <span class="o">+</span> <span class="s2">&quot; kWh/m3&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;-----------------------------------------&quot;</span><span class="p">)</span>
+
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Total thermal energy consumption: &quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="nb">round</span><span class="p">(</span><span class="n">E_th_med</span><span class="p">,</span><span class="mi">2</span><span class="p">))</span> <span class="o">+</span> <span class="s2">&quot; kW&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Specific energy consumption (thermal) per m3 feed: &quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="nb">round</span><span class="p">(</span><span class="n">SEC_th</span><span class="p">,</span><span class="mi">2</span><span class="p">))</span> <span class="o">+</span> <span class="s2">&quot; kWh_th/m3&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;-----------------------------------------&quot;</span><span class="p">)</span>
+
+<span class="c1">#Calculate required cooling water</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Cooling water flow rate: &quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="nb">round</span><span class="p">(</span><span class="n">Qcw</span><span class="p">,</span><span class="mi">2</span><span class="p">))</span> <span class="o">+</span> <span class="s2">&quot; kg/hr&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;-----------------------------------------&quot;</span><span class="p">)</span>
+
+<span class="c1"># Chemical consumption</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Total Chemical Consumption: &quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="nb">round</span><span class="p">(</span><span class="n">Cchem</span><span class="p">,</span><span class="mi">2</span><span class="p">))</span><span class="o">+</span><span class="s2">&quot;kg/hr&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Brine flow rate: 131.99kg/hr</p>
+<p>Total distillate flow rate: 886.12kg/hr</p>
+<p>Sum of output concentrations: 202.3g/l</p>
+<p>Electrical energy consumption: 1.97 kWh</p>
+<p>Specific energy consumption (electrical) per m3 feed: 2.0 kWh/m3</p>
+<p>Specific energy consumption (electrical) per m3 product (distilled water): 2.22 kWh/m3</p>
+<p>Total thermal energy consumption: 318.96 kW</p>
+<p>Specific energy consumption (thermal) per m3 feed: 324.73 kWh_th/m3</p>
+<p>Cooling water flow rate: 16267.76 kg/hr</p>
+<p>Total Chemical Consumption: 0kg/hr</p>
+</section>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="EDBM_Tutorial.html" class="btn btn-neutral float-left" title="Tutorial: Electrodialysis with Bipolar membranes (EDBM) unit" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="NF_Tutorial.html" class="btn btn-neutral float-right" title="Tutotrial: Nanofiltration (NF) unit" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2024, Rodoula Ktori.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

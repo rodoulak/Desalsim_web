@@ -1,0 +1,770 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Example 1: Tutorial &mdash; DesalSim: Desalination and Brine Treatment simulation model 1.0.4 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=80d5e7a1" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=19f00094" />
+
+  
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="../_static/jquery.js?v=5d32c60e"></script>
+        <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="../_static/documentation_options.js?v=71272d9f"></script>
+        <script src="../_static/doctools.js?v=9a2dae69"></script>
+        <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+        <script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Tutorial: Electrodialysis with Bipolar membranes (EDBM) unit" href="EDBM_Tutorial.html" />
+    <link rel="prev" title="Tutorial for Economic model" href="Economic_Tutorial.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../index.html" class="icon icon-home">
+            DesalSim: Desalination and Brine Treatment simulation model
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Tutorials:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="Desalsim_Tutorial.html">Desalsim Tutorial</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Economic_Tutorial.html">Tutorial for Economic model</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Example 1: Tutorial</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#introduction">1. Introduction</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#installation">2. Installation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#running-the-simulation-models">3. Running the Simulation models</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#create-treatment-chain">3.1. Create treatment chain</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id1">3.1.1. Define feed characteristics</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#use-process-unit-model">3.2. Use process unit model</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#nanofiltration">3.2.1. Nanofiltration</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#multi-plug-flow-reactor">3.2.2.  Multi-plug flow reactor</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#other-units">3.2.2.  Other units</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#results-evaluation">4. Results evaluation</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#formulate-performance-indicators">4.2. Formulate performance indicators</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#technical-indicators">4.2.1. Technical indicators</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#economic-indicators">4.2.2. Economic indicators</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#environmental-indicators">4.2.3. Environmental indicators</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#export-results-to-excel-file">4.2.4. Export results to excel file</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#visualization">4.3. Visualization</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="EDBM_Tutorial.html">Tutorial: Electrodialysis with Bipolar membranes (EDBM) unit</a></li>
+<li class="toctree-l1"><a class="reference internal" href="MED_Tutorial.html">Tutotrial: Multi-effect distillation (MED) unit</a></li>
+<li class="toctree-l1"><a class="reference internal" href="NF_Tutorial.html">Tutotrial: Nanofiltration (NF) unit</a></li>
+<li class="toctree-l1"><a class="reference internal" href="MF-PFR_Tutorial.html">Tutotrial: Multi-plug flow reactor (MF-PFR) unit</a></li>
+<li class="toctree-l1"><a class="reference internal" href="TCr_Tutorial.html">Tutotrial: Thermal crystallizer (TCr) unit</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">File description:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../File%20descr/Description.html">Files description</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Content:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../Contributors.html">Contributors and Guidelines</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">DesalSim: Desalination and Brine Treatment simulation model</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">Example 1: Tutorial</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../_sources/Tutorials/Example_1_Tutorial.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="example-1-tutorial">
+<h1>Example 1: Tutorial<a class="headerlink" href="#example-1-tutorial" title="Link to this heading"></a></h1>
+<section id="introduction">
+<h2>1. Introduction<a class="headerlink" href="#introduction" title="Link to this heading"></a></h2>
+<div style="text-align: justify;"><p>Welcome to our comprehensive tutorial on running simulation models and evaluating the
+performance of treatment chains for water purification processes. In this tutorial,
+we provide step-by-step instructions on how to <a class="reference external" href="#create-treatment-chain">create treatment chains</a>,
+<a class="reference external" href="#define-feed-characteristics">define feed characteristics</a>, <a class="reference external" href="#use-process-unit-model">use process unit models</a>, and <a class="reference external" href="#results-evaluation">analyze the results obtained from the simulation</a>, using <strong>Example 1</strong> as a case study.
+Each section guides you through setting up the simulation environment, running the models, and interpreting the results. Additionally, we discuss technical, economic, and environmental indicators to evaluate the performance of the treatment chain.</p>
+<p><strong>Example description</strong></p>
+<div style="text-align: justify;"><p><strong>Figure 1</strong> presents the process flow diagram of example 1 which consists of four technologies: Nanofiltration (NF), Multiple Feed Plug Flow Reactor (MF-PFR), Electrodialysis (ED), Electrodialysis With Bipolar Membranes (EDBM). The treatment chain represents an MLD system aiming to maximize valuable resources recovery from brine, such as Mg(OH)<sub>2</sub>, Ca(OH)<sub>2</sub>, HCl, and NaOH. The seawater stream or concentrate stream from a Reverse Osmosis plant (RO) first goes to the NF unit. The NF unit is separated into two different streams: one that is high in monovalent ions and one that is high in multi-valent ions. The latter stream from NF, high in monovalent ions, is directed to ED, in which the NaCl stream is concentrated further, and a dilute stream is also recovered. The former is directed to a treatment line comprising selective MF-PFR and EDBM units. In particular, the retentate is sent to the MF-PFR, in which magnesium and calcium are recovered in the form of hydroxide precipitates via a chemical reaction between the NF retentate and an alkaline reactant. Then, the brine stream is free from Mg<sup>2+</sup>and Ca<sup>2+</sup>mixed with the ED concentrate stream. The mixed solution (NaCl rich) is fed to EDBM. EDBM unit recovers, and the saline solution (low concentration) can be recycled back into the treatment chain.</p>
+<figure class="align-default">
+<a class="reference internal image-reference" href="https://github.com/rodoulak/Desalination-and-Brine-Treatment-Simulation-/assets/150446818/55cc6b6f-dde8-4b12-ae61-fa23665c288e"><img alt="Image" src="https://github.com/rodoulak/Desalination-and-Brine-Treatment-Simulation-/assets/150446818/55cc6b6f-dde8-4b12-ae61-fa23665c288e" style="width: 600px;" /></a>
+</figure>
+</section>
+<section id="installation">
+<h2>2. Installation<a class="headerlink" href="#installation" title="Link to this heading"></a></h2>
+<p>The easiest way is through pip, in command-line interface:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">pip</span> <span class="n">install</span> <span class="n">desalsim</span>
+</pre></div>
+</div>
+<p>If you want to install the latest GitHub verstion:</p>
+<ul class="simple">
+<li><p>Download the repository to your local machine:</p></li>
+</ul>
+<p><code class="docutils literal notranslate"><span class="pre">`</span>
+<span class="pre">https://github.com/rodoulak/Desalination-and-Brine-Treatment-Simulation-</span>
+<span class="pre">`</span></code></p>
+<ul class="simple">
+<li><p>Install the required dependencies:</p></li>
+</ul>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">pip</span> <span class="n">install</span> <span class="o">-</span><span class="n">r</span> <span class="n">requirements</span><span class="o">.</span><span class="n">txt</span>
+</pre></div>
+</div>
+</section>
+<section id="running-the-simulation-models">
+<h2>3. Running the Simulation models<a class="headerlink" href="#running-the-simulation-models" title="Link to this heading"></a></h2>
+<section id="create-treatment-chain">
+<h3>3.1. Create treatment chain<a class="headerlink" href="#create-treatment-chain" title="Link to this heading"></a></h3>
+<p>To create the treatment chain, the required units have to be imported.
+For <strong>Example 1</strong> which consists of four technologies:</p>
+<ul class="simple">
+<li><p>Nanofiltration (NF),</p></li>
+<li><p>Multiple Feed Plug Flow Reactor (MF-PFR),</p></li>
+<li><p>Electrodialysis (ED),</p></li>
+<li><p>Electrodialysis With Bipolar Membranes (EDBM)</p></li>
+</ul>
+<p>First, you need to import the desalim package:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">desalsim</span>
+</pre></div>
+</div>
+<p>Then the required functions for each unit. For example for Nanofiltration unit:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">desalsim.nanofiltration_unit_f</span> <span class="kn">import</span> <span class="n">OsmoticPressure</span>
+<span class="kn">from</span> <span class="nn">desalsim.nanofiltration_unit_f</span> <span class="kn">import</span> <span class="n">NFMass</span>
+<span class="kn">from</span> <span class="nn">desalsim.nanofiltration_unit_f</span> <span class="kn">import</span> <span class="n">NfEnergy</span>
+</pre></div>
+</div>
+<div style="text-align: justify;"><p>Similarly for the other process units. Additionally, function for calculating density (<code class="docutils literal notranslate"><span class="pre">density_calc.py</span></code>) or constants (<code class="docutils literal notranslate"><span class="pre">comparison.py</span></code>) where user can add constant values like MW, prices etc, need to be imported.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">desalsim.density_calc</span> <span class="kn">import</span> <span class="n">density_calc</span>
+<span class="kn">import</span> <span class="nn">desalsim.constants</span>
+<span class="kn">import</span> <span class="nn">desalsim.scaleup</span>
+</pre></div>
+</div>
+</section>
+<section id="id1">
+<h3>3.1.1. Define feed characteristics<a class="headerlink" href="#id1" title="Link to this heading"></a></h3>
+<p>You can initialize the feed solution by setting the flow rate, specifying the focus components and their concentration.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span>    <span class="c1"># Feed concentration</span>
+<span class="n">components</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;Na&#39;</span><span class="p">,</span> <span class="s1">&#39;Cl&#39;</span><span class="p">,</span> <span class="s1">&#39;K&#39;</span><span class="p">,</span> <span class="s1">&#39;Mg&#39;</span><span class="p">,</span> <span class="s1">&#39;Ca&#39;</span><span class="p">,</span> <span class="s1">&#39;SO4&#39;</span><span class="p">]</span>
+<span class="n">Ci_in</span> <span class="o">=</span> <span class="p">[</span><span class="mf">12.33</span><span class="p">,</span> <span class="mf">21.67</span><span class="p">,</span> <span class="mf">0.45</span><span class="p">,</span> <span class="mf">1.39</span><span class="p">,</span> <span class="mf">0.45</span><span class="p">,</span> <span class="mf">3.28</span><span class="p">]</span>
+<span class="n">z_values</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="o">-</span><span class="mi">2</span><span class="p">]</span>
+
+    <span class="c1"># Feed flowrate</span>
+<span class="n">Qsw</span> <span class="o">=</span> <span class="mi">3000</span> <span class="o">/</span> <span class="mi">24</span> <span class="o">*</span> <span class="n">d_in</span> <span class="c1">#m3/d</span>
+</pre></div>
+</div>
+<p>Note that if you want to add more components, you need to update the components list and include the concentration of the new component in the <em>Ci_in</em></p>
+<p>You can calculate the density of the feed solution:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">mg_in</span> <span class="o">=</span> <span class="nb">sum</span><span class="p">(</span><span class="n">Ci_in</span><span class="p">)</span>
+<span class="n">T</span><span class="o">=</span><span class="mi">20</span><span class="o">+</span><span class="mi">273</span> <span class="c1">#Operating temperature (units: K)</span>
+
+    <span class="c1"># Feed flow density</span>
+<span class="n">d_in</span> <span class="o">=</span> <span class="n">density_calc</span><span class="p">(</span><span class="n">T</span><span class="o">-</span><span class="mi">273</span><span class="p">,</span> <span class="n">mg_in</span><span class="p">)</span>  <span class="c1"># kg/m3</span>
+</pre></div>
+</div>
+</section>
+<section id="use-process-unit-model">
+<h3>3.2. Use process unit model<a class="headerlink" href="#use-process-unit-model" title="Link to this heading"></a></h3>
+</section>
+<section id="nanofiltration">
+<h3>3.2.1. Nanofiltration<a class="headerlink" href="#nanofiltration" title="Link to this heading"></a></h3>
+<p>To run simulation model for Nanofiltration unit, you need to implement the following steps.</p>
+<p><strong>Table 1</strong> gives an overview of the main inputs and outputs for each process unit of Nanofiltration.</p>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Process</p></th>
+<th class="head"><p>Input</p></th>
+<th class="head"><p>Output</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Nanofiltration</p></td>
+<td><p>Feed flow rate [m³/h]</p></td>
+<td><p>Permeate flow rate and composition [g/L]</p></td>
+</tr>
+<tr class="row-odd"><td></td>
+<td><p>Ion concentration [g/L]</p></td>
+<td><p>Concentrate flow rate and composition [g/L]</p></td>
+</tr>
+<tr class="row-even"><td></td>
+<td><p>Water recovery [%]</p></td>
+<td><p>Electrical requirements [kWhel]</p></td>
+</tr>
+<tr class="row-odd"><td></td>
+<td><p>Ion rejection [-]</p></td>
+<td><p>Osmotic pressure [bar]</p></td>
+</tr>
+</tbody>
+</table>
+<p><strong>Setting Membrane Characteristics</strong></p>
+<p>You can set membrane characteristics, ion rejection rates and Water recovery.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span>    <span class="c1"># Ions rejection rates based on membrane characteristics (units: -)</span>
+<span class="n">rjr_values</span> <span class="o">=</span> <span class="p">[</span><span class="mf">0.16</span><span class="p">,</span> <span class="mf">0.29</span><span class="p">,</span> <span class="mf">0.21</span><span class="p">,</span> <span class="mf">0.98</span><span class="p">,</span> <span class="mf">0.95</span><span class="p">,</span> <span class="mf">0.98</span><span class="p">]</span>
+    <span class="c1"># Water recovery based on membrane characteristics (units: -)</span>
+<span class="n">Wrec</span> <span class="o">=</span> <span class="mf">0.7</span>
+</pre></div>
+</div>
+<p><strong>Create NFMass Objects</strong></p>
+<div style="text-align: justify;"><p>After setting all the required inputs, then you can create the functions’ objectives.
+NFMass is a class used to represent Mass Balance for Nanofiltration Unit. In particular, it calculates the permeate and concentrate flow rates, and their ion concentrations.
+NFMass takes as input the names of components (<em>comp</em>), the ion concentration in the feed (<em>C_in</em>), the rejection rates of the ions (<em>rjr_values</em>), the % of water recovery (<em>Wrec</em>) and the feed flow rate (<em>Qf</em>).</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span>    <span class="c1"># Function to create NFMass objects for different components</span>
+<span class="k">def</span> <span class="nf">create_nfmass_objects</span><span class="p">(</span><span class="n">components</span><span class="p">,</span> <span class="n">C_in</span><span class="p">,</span> <span class="n">rjr_values</span><span class="p">,</span> <span class="n">Wrec</span><span class="p">,</span> <span class="n">Qf</span><span class="p">):</span>
+    <span class="k">return</span> <span class="p">[</span><span class="n">NFMass</span><span class="p">(</span><span class="n">comp</span><span class="p">,</span> <span class="n">Ci</span><span class="p">,</span> <span class="n">rjr</span><span class="p">,</span> <span class="n">Wrec</span><span class="p">,</span> <span class="n">Qf</span><span class="p">)</span> <span class="k">for</span> <span class="n">comp</span><span class="p">,</span> <span class="n">Ci</span><span class="p">,</span> <span class="n">rjr</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">components</span><span class="p">,</span> <span class="n">C_in</span><span class="p">,</span> <span class="n">rjr_values</span><span class="p">)]</span>
+
+    <span class="c1"># Create NFMass objects for different components</span>
+<span class="n">nfmass_objects</span> <span class="o">=</span> <span class="n">create_nfmass_objects</span><span class="p">(</span><span class="n">components</span><span class="p">,</span> <span class="n">Ci_in</span><span class="p">,</span> <span class="n">rjr_values</span><span class="p">,</span> <span class="n">Wrec</span><span class="p">,</span> <span class="n">Qf_nf</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Assigned the results to output parameters</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span>    <span class="c1"># Components concentrattion in concentrate stream</span>
+<span class="n">Cconc</span> <span class="o">=</span> <span class="p">[</span><span class="n">nf_mass</span><span class="o">.</span><span class="n">Cconci</span> <span class="k">for</span> <span class="n">nf_mass</span> <span class="ow">in</span> <span class="n">nfmass_objects</span><span class="p">]</span>
+    <span class="c1"># Components concentrattion in permeate stream</span>
+<span class="n">Cperm</span> <span class="o">=</span> <span class="p">[</span><span class="n">nf_mass</span><span class="o">.</span><span class="n">Cpermi</span> <span class="k">for</span> <span class="n">nf_mass</span> <span class="ow">in</span> <span class="n">nfmass_objects</span><span class="p">]</span>
+    <span class="c1"># Permeate stream mass flow rate</span>
+<span class="n">Qperm</span> <span class="o">=</span> <span class="n">nfmass_objects</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">Qperm</span>  <span class="c1"># kg/hr</span>
+    <span class="c1"># Concentrate stream mass flow rate</span>
+<span class="n">Qconc</span> <span class="o">=</span> <span class="n">nfmass_objects</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">Qconc</span>  <span class="c1"># kg/hr</span>
+</pre></div>
+</div>
+<p>You can print results from mass calculations</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Permeate stream flow rate is &quot;</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="nb">round</span><span class="p">(</span><span class="n">Qperm</span><span class="p">,</span><span class="mi">2</span><span class="p">))</span><span class="o">+</span><span class="s2">&quot;kg/hr&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Permeate stream total concentration is &quot;</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="nb">round</span><span class="p">(</span><span class="nb">sum</span><span class="p">(</span><span class="n">Cperm</span><span class="p">),</span><span class="mi">2</span><span class="p">))</span><span class="o">+</span><span class="s2">&quot;g/l&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Concentrate stream flow rate is &quot;</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="nb">round</span><span class="p">(</span><span class="n">Qconc</span><span class="p">,</span><span class="mi">2</span><span class="p">))</span><span class="o">+</span><span class="s2">&quot;kg/hr&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Concentrate stream total concentration is &quot;</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="nb">round</span><span class="p">(</span><span class="nb">sum</span><span class="p">(</span><span class="n">Cconc</span><span class="p">),</span><span class="mi">2</span><span class="p">))</span><span class="o">+</span><span class="s2">&quot;g/l&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Permeate stream flow rate is 89974.58kg/hr</p>
+<p>Permeate stream total concentration is 26.21g/l</p>
+<p>Concentrate stream flow rate is 38560.54kg/hr</p>
+<p>Concentrate stream total concentration is 70.73g/l</p>
+<p><strong>Calculate Osmotic Pressure</strong></p>
+<div style="text-align: justify;"><p>For the calculation of the energy consumption, first the Osmotic pressure for the three streams (feed, concentrate, permeate) need to be calculated. For this calculation, you need to use the ion concentration of the stream (<em>Ci_in</em>, <em>Cperm</em>, <em>Cconc</em>) the ionelectric charge (<em>z_values</em>), and the stream temperature (<em>T</em>).</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span>    <span class="c1"># Calculate Osmotic Pressure</span>
+<span class="n">P_osmo_f</span> <span class="o">=</span> <span class="n">OsmoticPressure</span><span class="p">(</span><span class="n">Ci_in</span><span class="p">,</span> <span class="n">z_values</span><span class="p">,</span> <span class="n">T</span><span class="p">)</span><span class="o">.</span><span class="n">osmotic_pressure_calculation</span><span class="p">()</span>
+<span class="n">P_osmo_p</span> <span class="o">=</span> <span class="n">OsmoticPressure</span><span class="p">(</span><span class="n">Cperm</span><span class="p">,</span> <span class="n">z_values</span><span class="p">,</span> <span class="n">T</span><span class="p">)</span><span class="o">.</span><span class="n">osmotic_pressure_calculation</span><span class="p">()</span>
+<span class="n">P_osmo_c</span> <span class="o">=</span> <span class="n">OsmoticPressure</span><span class="p">(</span><span class="n">Cconc</span><span class="p">,</span> <span class="n">z_values</span><span class="p">,</span> <span class="n">T</span><span class="p">)</span><span class="o">.</span><span class="n">osmotic_pressure_calculation</span><span class="p">()</span>
+</pre></div>
+</div>
+<p><strong>Calculate Energy Consumption</strong></p>
+<p>The following objective is created for energy consumption. Assumptions for pressure drop and pump efficiency need to be made.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">nf_energy</span><span class="o">=</span><span class="n">NfEnergy</span><span class="p">(</span><span class="n">P_osmo_c</span><span class="p">,</span> <span class="n">P_osmo_f</span><span class="p">,</span> <span class="n">P_osmo_p</span><span class="p">,</span> <span class="n">dp</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">d_p</span><span class="p">,</span> <span class="n">Qperm</span><span class="p">,</span> <span class="n">Qf_nf</span><span class="p">,</span> <span class="n">d_in</span><span class="p">,</span><span class="n">n</span><span class="o">=</span><span class="mf">0.8</span><span class="p">)</span> <span class="c1"># dp: pressure drop (units: bar) and n: pump efficiency (units: -)</span>
+<span class="n">result</span><span class="o">=</span><span class="n">nf_energy</span><span class="o">.</span><span class="n">calculate_energy_consumption</span><span class="p">()</span>
+<span class="n">E_el_nf</span> <span class="o">=</span> <span class="n">nf_energy</span><span class="o">.</span><span class="n">E_el_nf</span>
+</pre></div>
+</div>
+<p>You can print results from energy calculations. The specific energy consumption is also calculated so you can validate easier the results.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">for</span> <span class="n">key</span><span class="p">,</span> <span class="n">value</span> <span class="ow">in</span> <span class="n">result</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">key</span><span class="si">}</span><span class="s2">: </span><span class="si">{</span><span class="n">value</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Applied pressure (Bar): 24.45</p>
+<p>Power for pump (KW): 60.01</p>
+<p>E_el_nf (KW): 75.02</p>
+<p>Specific Energy Consumption (KWh/m3 of permeate): 0.85</p>
+</section>
+<section id="multi-plug-flow-reactor">
+<h3>3.2.2.  Multi-plug flow reactor<a class="headerlink" href="#multi-plug-flow-reactor" title="Link to this heading"></a></h3>
+<p>To run simulation model for Multi-plug flow reactor (MFPFR) unit, you need to implement the following steps.</p>
+<p><strong>Table 2</strong> gives an overview of the main inputs and outputs for each process unit of Multi-plug flow reactor.</p>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Process</p></th>
+<th class="head"><p>Input</p></th>
+<th class="head"><p>Output</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Multi-plug flow reactor</p></td>
+<td><p>Feed flow rate [m³/h]</p></td>
+<td><p>Alkaline solution flow rate [L/h]</p></td>
+</tr>
+<tr class="row-odd"><td></td>
+<td><p>Ion concentration [g/L]</p></td>
+<td><p>Flow rate of Mg(OH)₂ [kg/h]</p></td>
+</tr>
+<tr class="row-even"><td></td>
+<td><p>Concentration of the alkaline solution [M]</p></td>
+<td><p>Flow rate of Ca(OH)₂ [kg/h]</p></td>
+</tr>
+<tr class="row-odd"><td></td>
+<td><p>Concentration of the acid solution [M]</p></td>
+<td><p>Acid solution flow rate [L/h]</p></td>
+</tr>
+<tr class="row-even"><td></td>
+<td><p>Products characteristics e.g. solubility…</p></td>
+<td><p>Effluent flow rate [m³/h] and composition [g/L]</p></td>
+</tr>
+<tr class="row-odd"><td></td>
+<td></td>
+<td><p>Electricity requirements [kWhel]</p></td>
+</tr>
+</tbody>
+</table>
+<p><strong>Setting input flow rate and ion concentration</strong></p>
+<p>First, the results from the previous process unit (in this case, Nanofiltration) need to be assigned as input parameters for the next process (MFPFR).</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span>    <span class="c1"># The feed ion concentration is concentration of NFconcentrate stream.</span>
+<span class="n">Cin_mfpfr</span> <span class="o">=</span> <span class="n">Cconc</span>  <span class="c1"># Concentrations of [Na, Cl, K, Mg, Ca, SO4]</span>
+    <span class="c1"># Flow rate in l/hr</span>
+<span class="n">Qin_mfpfr</span> <span class="o">=</span> <span class="n">Qconc</span>
+    <span class="c1"># Calculate the density of the input</span>
+<span class="n">d_in</span> <span class="o">=</span> <span class="n">density_calc</span><span class="p">(</span><span class="mi">25</span><span class="p">,</span> <span class="nb">sum</span><span class="p">(</span><span class="n">Cin_mfpfr</span><span class="p">))</span> <span class="o">/</span> <span class="mi">1000</span>
+</pre></div>
+</div>
+<p><strong>Setting other input parameters</strong></p>
+<div style="text-align: justify;"><p>Then the required input for MFPFR unit need to be added from user. First, the concentration of the alkaline solution (NaOH) and acid solution (HCl) are import. Note that different chemicals and concentrations can be used for the percicipation and the pH neutralization.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span>    <span class="c1"># Concentration of NaOH solution for step 1 and step 2 in MOL/L</span>
+<span class="n">C_NaOH</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">]</span>
+    <span class="c1"># Concentration of HCl in MOL/L</span>
+<span class="n">HCl_conc</span><span class="o">=</span><span class="mi">1</span>
+</pre></div>
+</div>
+<p>Then the conversion rate of Mg in every step has to be assumed. The assumption relies on experimental data.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span>    <span class="c1"># Conversion rate for step 1 and step 2</span>
+<span class="n">conv</span> <span class="o">=</span> <span class="p">[</span><span class="mi">95</span><span class="p">,</span> <span class="mi">93</span><span class="p">]</span>
+</pre></div>
+</div>
+<p>Finally, the products characteristics need to be set.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span>    <span class="c1"># Product solublity of Mg(OH)2</span>
+<span class="n">kps_MgOH</span><span class="o">=</span><span class="mf">5.61</span><span class="o">*</span><span class="mf">0.000000000001</span>
+    <span class="c1"># Product solublity of Ca(OH)2</span>
+<span class="n">kps_CaOH</span><span class="o">=</span><span class="mf">5.5</span><span class="o">*</span><span class="mf">0.000001</span>
+    <span class="c1"># Mg(OH)2 density (units: kg/l)</span>
+<span class="n">d_mgoh_2</span><span class="o">=</span><span class="mf">2.34</span>
+    <span class="c1"># Ca(OH)2 density (units: kg/l)</span>
+<span class="n">d_caoh_2</span><span class="o">=</span><span class="mf">2.211</span>
+</pre></div>
+</div>
+<p><strong>Create MFPFRCALC Objects</strong></p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span>    <span class="c1"># Create an instance of the inputpar class with the defined parameters</span>
+<span class="n">mfpfr_dat</span> <span class="o">=</span> <span class="n">MFPFRCALC</span><span class="p">(</span><span class="n">Qin_mfpfr</span><span class="p">,</span> <span class="n">Cin_mfpfr</span><span class="p">,</span> <span class="o">*</span><span class="n">C_NaOH</span><span class="p">,</span> <span class="o">*</span><span class="n">conv</span><span class="p">)</span>
+</pre></div>
+</div>
+<p><strong>Calculations for precipitation steps</strong></p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span>    <span class="c1"># Call the calc_step1 and calc_step2 methods to calculate the necessary values</span>
+<span class="n">mfpfr_dat</span><span class="o">.</span><span class="n">calc_step1</span><span class="p">(</span><span class="n">kps_MgOH</span><span class="p">,</span> <span class="n">d_mgoh_2</span><span class="p">)</span>
+<span class="n">mfpfr_dat</span><span class="o">.</span><span class="n">calc_step2</span><span class="p">(</span><span class="n">d_mgoh_2</span><span class="p">,</span> <span class="n">d_caoh_2</span> <span class="p">)</span>
+<span class="n">ph_2</span><span class="o">=</span><span class="n">mfpfr_dat</span><span class="o">.</span><span class="n">ph_2</span>
+</pre></div>
+</div>
+<p>Get total outlet flowtate after the second step of precipitation.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span>    <span class="c1"># Outlet flow rate</span>
+<span class="n">Qout_2</span> <span class="o">=</span> <span class="n">mfpfr_dat</span><span class="o">.</span><span class="n">Qout_2</span>
+</pre></div>
+</div>
+<p>Get the total mass of the recovered products from each precipitation step.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span>    <span class="c1"># Get the masses of Mg(OH)2 in the first step</span>
+<span class="n">M_MgOH2_1</span> <span class="o">=</span> <span class="n">mfpfr_dat</span><span class="o">.</span><span class="n">M_MgOH2_1</span>
+
+    <span class="c1"># Get the masses of Mg(OH)2 and Ca(OH)2 in the second step</span>
+<span class="n">M_CaOH2</span> <span class="o">=</span> <span class="n">mfpfr_dat</span><span class="o">.</span><span class="n">M_CaOH2_2</span>
+<span class="n">M_MgOH2</span> <span class="o">=</span> <span class="n">mfpfr_dat</span><span class="o">.</span><span class="n">M_MgOH2_2</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Mg(OH)2 mass flow rate is &quot;</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="nb">round</span><span class="p">(</span><span class="n">M_MgOH2_1</span><span class="p">,</span><span class="mi">2</span><span class="p">))</span><span class="o">+</span><span class="s2">&quot;kg/hr&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Ca(OH)2 mass flow rate is &quot;</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="nb">round</span><span class="p">(</span><span class="n">M_CaOH2</span><span class="p">,</span><span class="mi">2</span><span class="p">))</span><span class="o">+</span><span class="s2">&quot;kg/hr&quot;</span><span class="p">)</span>
+
+<span class="n">Mg</span><span class="p">(</span><span class="n">OH</span><span class="p">)</span><span class="mi">2</span> <span class="n">mass</span> <span class="n">flow</span> <span class="n">rate</span> <span class="ow">is</span> <span class="mf">401.57</span><span class="n">kg</span><span class="o">/</span><span class="n">hr</span>
+<span class="n">Ca</span><span class="p">(</span><span class="n">OH</span><span class="p">)</span><span class="mi">2</span> <span class="n">mass</span> <span class="n">flow</span> <span class="n">rate</span> <span class="ow">is</span> <span class="mf">95.96</span><span class="n">kg</span><span class="o">/</span><span class="n">hr</span>
+</pre></div>
+</div>
+<p><strong>Calculate outlet concentration</strong></p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span>    <span class="c1"># Create a list of the outlet concentrations in mol/l</span>
+<span class="n">Cout_all_m</span> <span class="o">=</span> <span class="p">[</span><span class="n">mfpfr_dat</span><span class="o">.</span><span class="n">CNa_out_2</span><span class="p">,</span> <span class="n">mfpfr_dat</span><span class="o">.</span><span class="n">CCl_out_2</span><span class="p">,</span> <span class="n">mfpfr_dat</span><span class="o">.</span><span class="n">CK_out_2</span><span class="p">,</span> <span class="n">mfpfr_dat</span><span class="o">.</span><span class="n">CMg_out_2</span><span class="p">,</span> <span class="n">mfpfr_dat</span><span class="o">.</span><span class="n">CCa_out_2</span><span class="p">,</span> <span class="n">mfpfr_dat</span><span class="o">.</span><span class="n">CSO4_out_2</span><span class="p">]</span>
+
+    <span class="c1"># Calculate the outlet concentrations in g/l</span>
+<span class="n">MW</span> <span class="o">=</span> <span class="p">[</span><span class="n">MW_Na</span><span class="p">,</span> <span class="n">MW_Ca</span><span class="p">,</span> <span class="n">MW_Cl</span><span class="p">,</span> <span class="n">MW_K</span><span class="p">,</span> <span class="n">MW_Mg</span><span class="p">,</span> <span class="n">MW_SO4</span><span class="p">]</span>
+<span class="n">Cout_mfpfr_g</span> <span class="o">=</span> <span class="p">[</span><span class="n">Cout_all_m</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">*</span> <span class="n">MW</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">Cout_all_m</span><span class="p">))]</span> <span class="c1"># g/l</span>
+</pre></div>
+</div>
+<p><strong>Calculate NaOH consumption</strong></p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span>    <span class="c1"># Calculate the chemical consumption of NaOH</span>
+<span class="n">QNAOH</span> <span class="o">=</span> <span class="n">mfpfr_dat</span><span class="o">.</span><span class="n">QNaOH_1</span> <span class="o">+</span> <span class="n">mfpfr_dat</span><span class="o">.</span><span class="n">QNaOH_2_add</span> <span class="o">+</span> <span class="n">mfpfr_dat</span><span class="o">.</span><span class="n">QNaOH_2_st</span> <span class="c1"># convert to kg</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;NaOH flow rate is </span><span class="si">{</span><span class="nb">round</span><span class="p">(</span><span class="n">QNAOH</span><span class="p">,</span><span class="mi">2</span><span class="p">)</span><span class="si">}</span><span class="s2"> l/hr&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>NaOH flow rate is 21918.92 l/hr</p>
+<p><strong>Calculate amount of HCl for pH neutralization and the final outlet concentration from MF-PFR unit after pH neutralization</strong></p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span>    <span class="c1"># Create an instance of the HCladdition class</span>
+<span class="n">unit</span> <span class="o">=</span> <span class="n">HClAddition</span><span class="p">(</span><span class="n">Qout_2</span><span class="p">,</span> <span class="n">Cout_all_m</span><span class="p">,</span> <span class="n">MW_Cl</span><span class="p">,</span> <span class="n">ph_2</span><span class="p">,</span> <span class="n">HCl_conc</span><span class="p">)</span>
+
+    <span class="c1"># Call the calculate_HCladdition method</span>
+<span class="n">QHCl</span><span class="p">,</span> <span class="n">Cout_mfpfr_g</span> <span class="o">=</span> <span class="n">unit</span><span class="o">.</span><span class="n">calculate_HCl_addition</span><span class="p">(</span><span class="n">Cout_mfpfr_g</span><span class="p">)</span>
+
+    <span class="c1"># Print the volume of HCl added</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;HCl flow rate is </span><span class="si">{</span><span class="nb">round</span><span class="p">(</span><span class="n">QHCl</span><span class="p">,</span><span class="mi">2</span><span class="p">)</span><span class="si">}</span><span class="s2"> l/hr&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>HCl flow rate is 6025.53 l/hr</p>
+<p><strong>Calculate final outlet flow rate from MF-PFR unit</strong></p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span>    <span class="c1"># Volumetric flow rate</span>
+<span class="n">Qout_f</span><span class="o">=</span><span class="n">Qout_2</span><span class="o">+</span><span class="n">QHCl</span> <span class="c1">#l/h</span>
+<span class="c1"># Density calculation</span>
+<span class="n">d_out_s</span><span class="o">=</span><span class="n">density_calc</span><span class="p">(</span><span class="mi">25</span><span class="p">,</span><span class="nb">round</span><span class="p">(</span><span class="nb">sum</span><span class="p">(</span><span class="n">Cout_mfpfr_g</span><span class="p">),</span><span class="mi">2</span><span class="p">))</span><span class="o">/</span><span class="mi">1000</span> <span class="c1">#kg/m3</span>
+
+    <span class="c1"># Mass flow rate</span>
+<span class="n">M_mfpfr_out</span><span class="o">=</span><span class="n">Qout_f</span><span class="o">*</span><span class="n">d_out_s</span> <span class="c1">#kg/h</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Total effluent flow rate is &quot;</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="nb">round</span><span class="p">(</span><span class="n">M_mfpfr_out</span><span class="p">,</span><span class="mi">2</span><span class="p">))</span><span class="o">+</span><span class="s2">&quot;kg/hr&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Total effluent flow rate is &quot;</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="nb">round</span><span class="p">(</span><span class="n">Qout_f</span><span class="p">,</span><span class="mi">2</span><span class="p">))</span><span class="o">+</span><span class="s2">&quot;kg/hr&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Total effluent flow rate is 68505.96kg/hr
+Total effluent flow rate is 66280.95kg/hr</p>
+<p><strong>Calculate Energy consumption</strong></p>
+<p>First, create an instance of the inputpar class with the defined parameters.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span>    <span class="c1"># Create an instance of the inputpar class with the defined parameters</span>
+<span class="n">Epump_1</span><span class="p">,</span> <span class="n">Epump_2</span><span class="o">=</span><span class="n">energycons</span><span class="o">.</span><span class="n">energycalc</span><span class="p">(</span><span class="n">mfpfr_dat</span><span class="o">.</span><span class="n">Qout_2</span><span class="p">,</span> <span class="n">QNAOH</span><span class="p">,</span> <span class="n">Qin_mfpfr</span><span class="p">,</span> <span class="n">mfpfr_dat</span><span class="o">.</span><span class="n">QNaOH_1</span><span class="p">,</span> <span class="n">mfpfr_dat</span><span class="o">.</span><span class="n">QNaOH_2_add</span><span class="p">,</span> <span class="n">mfpfr_dat</span><span class="o">.</span><span class="n">QNaOH_2_st</span><span class="p">,</span> <span class="n">dp</span><span class="p">,</span> <span class="n">npump</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Calculate the total pumping energy including the HCl stream.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span>    <span class="c1"># Electricity consumption for pumping , KWh</span>
+<span class="n">E_el_mfpf</span><span class="o">=</span><span class="p">(</span><span class="n">Epump_1</span><span class="o">+</span><span class="n">Epump_2</span><span class="o">+</span><span class="p">(</span><span class="n">QHCl</span><span class="o">*</span><span class="n">dp_HCl</span><span class="p">)</span><span class="o">*</span><span class="mf">1e5</span><span class="o">/</span><span class="mi">3600</span><span class="o">/</span><span class="p">(</span><span class="mi">1000</span><span class="o">*</span><span class="n">npump</span><span class="p">))</span><span class="o">/</span><span class="mi">1000</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Total electricity energy consumption is &quot;</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="nb">round</span><span class="p">(</span><span class="n">E_el_mfpf</span><span class="p">,</span><span class="mi">2</span><span class="p">))</span><span class="o">+</span> <span class="s2">&quot; KW&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Note that you can add a calculation for filtration unit and then sum the energy requirements.
+Specific energy consumption can also be calculated:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span>    <span class="c1"># Specific energy consumption per kg of Mg(OH)2, KWh/kg of Mg(OH)2</span>
+<span class="n">SEC_el_prod</span><span class="o">=</span><span class="p">(</span><span class="n">E_el_mfpf</span><span class="p">)</span><span class="o">/</span><span class="p">(</span><span class="n">M_MgOH2</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Specific energy consumption per product is &quot;</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="nb">round</span><span class="p">(</span><span class="n">SEC_el_prod</span><span class="p">,</span><span class="mi">2</span><span class="p">))</span><span class="o">+</span><span class="s2">&quot; KWh/kg product &quot;</span><span class="p">)</span>
+
+    <span class="c1"># Specific energy consumption per feed, KWh/m3 of feed</span>
+<span class="n">SEC_el_feed</span><span class="o">=</span><span class="p">(</span><span class="n">E_el_mfpf</span><span class="p">)</span><span class="o">/</span><span class="p">(</span><span class="n">Qin_mfpfr</span><span class="o">/</span><span class="mi">1000</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Specific energy consumption per brine intake is &quot;</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="nb">round</span><span class="p">(</span><span class="n">SEC_el_feed</span><span class="p">,</span><span class="mi">2</span><span class="p">))</span><span class="o">+</span><span class="s2">&quot; KWh/m3 of feed &quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Specific energy consumption per product is 2.88 KWh/kg product
+Specific energy consumption per brine intake is 1.49 KWh/m3 of feed</p>
+</section>
+<section id="other-units">
+<h3>3.2.2.  Other units<a class="headerlink" href="#other-units" title="Link to this heading"></a></h3>
+<p>You need to follow similar steps for the other two processes.
+<strong>Table 3</strong> gives an overview of the main inputs and outputs for each process unit of Electrodialysis with bipolar membranes and Electrodialysis.</p>
+<table class="docutils align-default" id="id2">
+<caption><span class="caption-text">Overview of Inputs and Outputs</span><a class="headerlink" href="#id2" title="Link to this table"></a></caption>
+<colgroup>
+<col style="width: 30.0%" />
+<col style="width: 30.0%" />
+<col style="width: 40.0%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Process</p></th>
+<th class="head"><p>Input</p></th>
+<th class="head"><p>Output</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Electrodialysis with bipolar membrane (EDBM)</p></td>
+<td><p>Feed flow rate [m³/h]</p></td>
+<td><p>Flow rate of acid [m³/h] and composition [g/L]</p></td>
+</tr>
+<tr class="row-odd"><td></td>
+<td><p>Ion concentration [g/L]</p></td>
+<td><p>Flow rate of base [m³/h] and composition [g/L]</p></td>
+</tr>
+<tr class="row-even"><td></td>
+<td><p>Current density [A/m²]</p></td>
+<td><p>Flow rate of salt [m³/h] and composition [g/L]</p></td>
+</tr>
+<tr class="row-odd"><td></td>
+<td><p>Number of triplets and Membrane area and other characteristics</p></td>
+<td><p>Electricity requirements [kWhel]</p></td>
+</tr>
+<tr class="row-even"><td><p>Electrodialysis (ED)</p></td>
+<td><p>Feed flow rate [m³/h]</p></td>
+<td><p>Flow rate of diluted stream [m³/h] and composition [g/L]</p></td>
+</tr>
+<tr class="row-odd"><td></td>
+<td><p>Ion concentration [g/L]</p></td>
+<td><p>Flow rate of concentrate stream [m³/h] and composition [g/L]</p></td>
+</tr>
+<tr class="row-even"><td></td>
+<td><p>Current density [A/m²]</p></td>
+<td><p>Electricity requirements [kWhel]</p></td>
+</tr>
+</tbody>
+</table>
+<p><em>Note that the feed flow rate and concentration of the units are the effluent flow rate and ions concentration of the unit before in the treatment chain.</em>
+.. raw:: html</p>
+<blockquote>
+<div><p>&lt;div style=”text-align: justify;”&gt;</p>
+</div></blockquote>
+<p>In this treatment chain, Electrodialysis with bipolar membrane has two streams as feed for the salt channel. The two streams are mixed. For this the following calculations are required to calculate the new flow rate and concentration after the mixing.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span>    <span class="c1"># Feed flow rate L/h</span>
+<span class="n">Q_in_edbm</span><span class="o">=</span><span class="n">M_mfpfr_out</span><span class="o">+</span><span class="n">Mc</span> <span class="c1"># Where M_mfpfr_out is the effluent from MF-PFR and Mc the effluent from ED</span>
+
+    <span class="c1"># Feed concentration g/L</span>
+<span class="n">Cin_edbm</span><span class="o">=</span><span class="nb">sum</span><span class="p">(</span><span class="n">Cout_mfpfr_g</span><span class="p">)</span><span class="o">*</span><span class="n">M_mfpfr_out</span><span class="o">/</span><span class="n">Q_in_edbm</span><span class="o">+</span><span class="n">Sc_o</span><span class="o">*</span><span class="n">Mc</span><span class="o">/</span><span class="n">Q_in_edbm</span> <span class="c1"># Where Cout_mfpfr_g is the effluent from MF-PFR and Sc_o the effluent from ED</span>
+<span class="n">C_in_mix</span><span class="o">=</span><span class="p">[]</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">Cconc</span><span class="p">)):</span>
+    <span class="n">C_in_mix</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">Cout_mfpfr_g</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">*</span><span class="n">M_mfpfr_out</span><span class="o">/</span><span class="n">Q_in_edbm</span><span class="o">+</span><span class="n">Sc_out</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">*</span><span class="n">Mc</span><span class="o">/</span><span class="n">Q_in_edbm</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+</section>
+<section id="results-evaluation">
+<h2>4. Results evaluation<a class="headerlink" href="#results-evaluation" title="Link to this heading"></a></h2>
+<p>After the simulation of the treatment chain, the performance of the process units needs to be evaluated individually and overall as a system.
+4.1. Summarise results
+————</p>
+<p>The following code can be used to summarise the most important results from each process unit. Note that more results can be added.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">indic</span><span class="p">:</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">tech</span><span class="p">,</span> <span class="n">Qout</span><span class="p">,</span> <span class="n">Qin</span><span class="p">,</span> <span class="n">Qprod_1</span><span class="p">,</span> <span class="n">prod_1_name</span><span class="p">,</span> <span class="n">Qprod_2</span><span class="p">,</span> <span class="n">prod_2_name</span><span class="p">,</span> <span class="n">E_el</span><span class="p">,</span> <span class="n">E_th</span><span class="p">,</span> <span class="n">Cin</span><span class="p">,</span> <span class="n">Cout</span><span class="p">,</span> <span class="n">chem1</span><span class="p">,</span><span class="n">chem2</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">tech</span><span class="o">=</span><span class="n">tech</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">Qout</span><span class="o">=</span><span class="n">Qout</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">Qin</span><span class="o">=</span><span class="n">Qin</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">E_el</span><span class="o">=</span><span class="n">E_el</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">E_th</span><span class="o">=</span><span class="n">E_th</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">Cin</span><span class="o">=</span><span class="n">Cin</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">Cout</span><span class="o">=</span><span class="n">Cout</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">Qprod_1</span><span class="o">=</span><span class="n">Qprod_1</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">Qprod_2</span><span class="o">=</span><span class="n">Qprod_2</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">prod_1_name</span><span class="o">=</span><span class="n">prod_1_name</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">prod_2_name</span><span class="o">=</span><span class="n">prod_2_name</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">chem</span><span class="o">=</span><span class="n">chem1</span><span class="o">+</span><span class="n">chem2</span>
+
+
+    <span class="k">def</span> <span class="nf">techn_indi</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">prod_1_name</span><span class="o">==</span><span class="s2">&quot;water&quot;</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">Water_rr</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">Qprod_1</span><span class="o">/</span><span class="bp">self</span><span class="o">.</span><span class="n">Qin</span><span class="o">*</span><span class="mi">100</span> <span class="c1"># %</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">Qwater</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">Qprod_1</span>
+        <span class="k">elif</span> <span class="bp">self</span><span class="o">.</span><span class="n">prod_2_name</span><span class="o">==</span><span class="s2">&quot;water&quot;</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">Water_rr</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">Qprod_2</span><span class="o">/</span><span class="bp">self</span><span class="o">.</span><span class="n">Qin</span><span class="o">*</span><span class="mi">100</span> <span class="c1"># %</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">Qwater</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">Qprod_2</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">Qwater</span><span class="o">=</span><span class="mi">0</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">Water_rr</span><span class="o">=</span><span class="mi">0</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;no water production by &quot;</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">tech</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Let’s use Nanofiltration unit as example, here is how it can be used:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">tec1</span><span class="o">=</span><span class="n">indic</span><span class="p">(</span><span class="s2">&quot;NF&quot;</span><span class="p">,</span> <span class="n">Qconc</span><span class="p">,</span> <span class="n">Qf_nf</span><span class="p">,</span> <span class="n">Qperm</span><span class="p">,</span> <span class="s2">&quot;none&quot;</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="s2">&quot;none&quot;</span><span class="p">,</span> <span class="n">E_el_nf</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">Ci_in</span><span class="p">,</span> <span class="n">Cconc</span><span class="p">,</span> <span class="n">QHCl_nf</span><span class="p">,</span> <span class="n">Qantsc_nf</span><span class="p">)</span>
+<span class="n">tec1</span><span class="o">.</span><span class="n">techn_indi</span><span class="p">()</span>
+</pre></div>
+</div>
+<p><strong>Create lists with important results</strong>
+After collecting all the important results, they can summarise in lists:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span>    <span class="c1"># List results</span>
+<span class="n">tec_names</span><span class="o">=</span><span class="p">[</span><span class="n">tec1</span><span class="o">.</span><span class="n">tech</span><span class="p">,</span><span class="n">tec2</span><span class="o">.</span><span class="n">tech</span><span class="p">,</span> <span class="n">tec3</span><span class="o">.</span><span class="n">tech</span><span class="p">,</span>  <span class="n">tec4</span><span class="o">.</span><span class="n">tech</span><span class="p">]</span>
+<span class="n">E_el_all</span><span class="o">=</span><span class="p">[</span><span class="n">tec1</span><span class="o">.</span><span class="n">E_el</span><span class="p">,</span><span class="n">tec2</span><span class="o">.</span><span class="n">E_el</span><span class="p">,</span> <span class="n">tec3</span><span class="o">.</span><span class="n">E_el</span><span class="p">,</span> <span class="n">tec4</span><span class="o">.</span><span class="n">E_el</span><span class="p">]</span>
+<span class="n">E_th_all</span><span class="o">=</span><span class="p">[</span><span class="n">tec1</span><span class="o">.</span><span class="n">E_th</span><span class="p">,</span><span class="n">tec2</span><span class="o">.</span><span class="n">E_th</span><span class="p">,</span> <span class="n">tec3</span><span class="o">.</span><span class="n">E_th</span><span class="p">,</span>  <span class="n">tec4</span><span class="o">.</span><span class="n">E_th</span><span class="p">]</span>
+<span class="n">Cout_all</span><span class="o">=</span><span class="p">[</span><span class="n">tec1</span><span class="o">.</span><span class="n">Cout</span><span class="p">,</span><span class="n">tec2</span><span class="o">.</span><span class="n">Cout</span><span class="p">,</span> <span class="n">tec3</span><span class="o">.</span><span class="n">Cout</span><span class="p">,</span>  <span class="n">tec4</span><span class="o">.</span><span class="n">Cout</span><span class="p">]</span>
+<span class="n">Qout_all</span><span class="o">=</span><span class="p">[</span><span class="n">tec1</span><span class="o">.</span><span class="n">Qout</span><span class="p">,</span> <span class="n">tec2</span><span class="o">.</span><span class="n">Qout</span><span class="p">,</span> <span class="n">tec3</span><span class="o">.</span><span class="n">Qout</span><span class="p">,</span>  <span class="n">tec4</span><span class="o">.</span><span class="n">Qout</span><span class="p">]</span>
+<span class="n">Qchem_all</span><span class="o">=</span><span class="p">[</span><span class="n">tec1</span><span class="o">.</span><span class="n">chem</span><span class="p">,</span><span class="n">tec2</span><span class="o">.</span><span class="n">chem</span><span class="p">,</span><span class="n">tec3</span><span class="o">.</span><span class="n">chem</span><span class="p">,</span> <span class="n">tec4</span><span class="o">.</span><span class="n">chem</span><span class="p">]</span>
+</pre></div>
+</div>
+<section id="formulate-performance-indicators">
+<h3>4.2. Formulate performance indicators<a class="headerlink" href="#formulate-performance-indicators" title="Link to this heading"></a></h3>
+<p>In Example 1, technical, economic and environmental indicators are used to evaluate the treatment chain.</p>
+</section>
+<section id="technical-indicators">
+<h3>4.2.1. Technical indicators<a class="headerlink" href="#technical-indicators" title="Link to this heading"></a></h3>
+<p>For instance, a technical indicator is the efficiency of the system in terms of <strong>Water recovery (%)</strong>.</p>
+<div class="math notranslate nohighlight">
+\[\text{Water recovery} = \frac{\sum\limits_{i=1}^{n} Qw_i}{Qsw} \times 100\]</div>
+<p>Where i is the number of technologies.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span>    <span class="c1"># Calculate the toal quantity of water production</span>
+<span class="n">Qw_tot</span><span class="o">=</span><span class="n">tec1</span><span class="o">.</span><span class="n">Qwater</span><span class="o">+</span><span class="n">tec2</span><span class="o">.</span><span class="n">Qwater</span><span class="o">+</span> <span class="n">tec3</span><span class="o">.</span><span class="n">Qwater</span><span class="o">+</span> <span class="n">tec4</span><span class="o">.</span><span class="n">Qwater</span>
+
+    <span class="c1"># Calculate water recovery (%)</span>
+<span class="n">rec</span><span class="o">=</span><span class="n">Qw_tot</span><span class="o">/</span><span class="n">Qsw</span><span class="o">*</span><span class="mi">100</span> <span class="c1">#%</span>
+</pre></div>
+</div>
+<p>Another technical indicator is the <strong>Specific energy consumption</strong>.</p>
+<div class="math notranslate nohighlight">
+\[\text{SEC} = \frac{\sum\limits_{i=1}^{n} E_{\text{el}}}{Qw_{\text{tot}}}\]</div>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span>    <span class="c1"># Energy performance: Calculate specific electrical energy consumption #kwh/kg of desalinated water</span>
+<span class="n">SEC</span><span class="o">=</span><span class="nb">sum</span><span class="p">(</span><span class="n">E_el_all</span><span class="p">)</span><span class="o">/</span><span class="n">Qw_tot</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;specific electrical consumption is &quot;</span> <span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="n">SEC</span><span class="p">)</span><span class="o">+</span> <span class="s2">&quot; Kwh/kg of desalinated water&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<section id="economic-indicators">
+<h3>4.2.2. Economic indicators<a class="headerlink" href="#economic-indicators" title="Link to this heading"></a></h3>
+<p>For the economic analysis, the total amount of <strong>Revenues</strong> from selling products is used to evaluate the economic performance of the treatment chain.</p>
+<div class="math notranslate nohighlight">
+\[\text{revenues} = \sum_{i=1}^{n} Q_{\text{product}_i} \times \text{Selling price of product}_i\]</div>
+<p><strong>Set input parameters</strong>
+First, the updated market prices of the recovered products need to be set.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span>    <span class="c1"># Quantity of recovered products</span>
+<span class="n">prd</span><span class="o">=</span><span class="p">[</span><span class="n">Qw_tot</span><span class="p">,</span> <span class="n">M_MgOH2_1</span><span class="p">,</span> <span class="n">Q_b_out</span><span class="p">,</span> <span class="n">Q_a_out</span><span class="p">]</span>
+
+    <span class="c1"># Specify products</span>
+<span class="n">prd_name</span><span class="o">=</span> <span class="p">[</span><span class="s2">&quot;Water&quot;</span><span class="p">,</span>  <span class="s2">&quot;Mg(OH)2&quot;</span><span class="p">,</span> <span class="s2">&quot;NaOH&quot;</span><span class="p">,</span> <span class="s2">&quot;HCl&quot;</span><span class="p">]</span>
+
+    <span class="c1"># Market prices</span>
+<span class="n">hcl_pr</span><span class="o">=</span><span class="mf">5.78</span> <span class="c1">#euro/l 1M solution</span>
+<span class="n">w_pr</span><span class="o">=</span><span class="mf">0.001</span> <span class="c1">#euro/kg</span>
+<span class="n">mgoh2_pr</span><span class="o">=</span><span class="mf">1.0</span> <span class="c1">#euro/kg</span>
+<span class="n">naoh_pr</span><span class="o">=</span><span class="mf">7.2</span> <span class="c1">#euro/L 1M NaOH solution</span>
+</pre></div>
+</div>
+<p><strong>Revenue calculation</strong></p>
+<p>After the set of input parameters, the <strong>Revenues</strong> of the treatment chain are calculated:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span>    <span class="c1"># Initialize lists</span>
+<span class="n">reve_t</span><span class="o">=</span><span class="mi">0</span>
+<span class="n">reve_list</span><span class="o">=</span><span class="p">[]</span>
+    <span class="c1"># Revenue calculation</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">prd</span><span class="p">)):</span>
+    <span class="n">rev_calc</span><span class="o">=</span><span class="n">revenue</span><span class="p">(</span><span class="n">prd</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">prd_name</span><span class="p">[</span><span class="n">i</span><span class="p">])</span>
+    <span class="n">rev_calc</span><span class="o">.</span><span class="n">rev</span><span class="p">(</span><span class="n">hr</span><span class="p">,</span> <span class="n">w_pr</span><span class="p">,</span> <span class="n">nacl_pr</span><span class="p">,</span> <span class="n">mgoh2_pr</span><span class="p">,</span><span class="n">na2so4_pr</span><span class="p">,</span> <span class="n">naoh_pr</span><span class="p">,</span> <span class="n">hcl_pr</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Revenues from selling product &quot;</span> <span class="o">+</span> <span class="n">prd_name</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">+</span><span class="s2">&quot; are &quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="nb">round</span><span class="p">(</span><span class="n">rev_calc</span><span class="o">.</span><span class="n">rev_prd</span><span class="p">,</span><span class="mi">2</span><span class="p">))</span><span class="o">+</span><span class="s2">&quot; Euro/year&quot;</span><span class="p">)</span>
+    <span class="n">reve_t</span> <span class="o">=</span> <span class="n">reve_t</span><span class="o">+</span><span class="n">rev_calc</span><span class="o">.</span><span class="n">rev_prd</span>
+    <span class="n">reve_list</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">rev_calc</span><span class="o">.</span><span class="n">rev_prd</span><span class="p">)</span>
+</pre></div>
+</div>
+<p><strong>Note that a detailed description of the economic model and more economic indicators can be found in Economic_Tutorial.</strong></p>
+</section>
+<section id="environmental-indicators">
+<h3>4.2.3. Environmental indicators<a class="headerlink" href="#environmental-indicators" title="Link to this heading"></a></h3>
+<p>A simple indicator to evaluate the environmental performance of the treatment chain is the <strong>Carbon dioxide emissions</strong>.</p>
+<div class="math notranslate nohighlight">
+\[\text{Emissions} = \sum_{i=1}^{n} E_i \times \text{CO2}\text{el}  + \sum_{i=1}^{n} E_{\text{th}} \times \text{CO2}\text{st}\]</div>
+<p><strong>Set input parameters</strong>
+First, the emissions factor from electrical and thermal energy consumption must be set based on the case study’s location and fuel.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Emission factor for electricity consumption</span>
+<span class="n">CO2_el</span><span class="o">=</span><span class="mf">0.275</span> <span class="c1"># kg/kwh</span>
+<span class="c1"># Emission factor for thermal energy consumption</span>
+<span class="n">CO2_st</span><span class="o">=</span><span class="mf">0.255</span> <span class="c1"># kg/kwh</span>
+</pre></div>
+</div>
+<p><strong>Carbon dioxide emissions</strong></p>
+<p>After the set of input parameters, the <strong>Carbon dioxide emissions</strong> of the treatment chain are calculated:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Calculate Carbon dioxide emission</span>
+<span class="n">emis</span><span class="o">=</span><span class="p">(</span><span class="nb">sum</span><span class="p">(</span><span class="n">E_el_all</span><span class="p">)</span><span class="o">*</span><span class="n">CO2_el</span><span class="p">)</span><span class="o">+</span><span class="p">(</span><span class="nb">sum</span><span class="p">(</span><span class="n">E_th_all</span><span class="p">)</span><span class="o">*</span><span class="n">CO2_st</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<section id="export-results-to-excel-file">
+<h3>4.2.4. Export results to excel file<a class="headerlink" href="#export-results-to-excel-file" title="Link to this heading"></a></h3>
+<p>After running the process and economic models, the calculation of indicators and results can be exported to Excel.</p>
+<p>Here is an example:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Results to excel</span>
+<span class="c1"># Create dataframes</span>
+<span class="n">dfel</span><span class="o">=</span><span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">E_el_all</span> <span class="p">,</span><span class="n">tec_names</span><span class="p">)</span>
+<span class="n">dfeth</span><span class="o">=</span><span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">E_th_all</span><span class="p">,</span> <span class="n">tec_names</span><span class="p">)</span>
+<span class="n">dfind</span><span class="o">=</span><span class="p">(</span><span class="n">Qw_tot</span><span class="p">,</span> <span class="n">abs_Qw</span><span class="p">,</span> <span class="n">rec</span><span class="p">,</span> <span class="n">Tot_el</span><span class="p">,</span> <span class="n">Tot_th</span><span class="p">,</span> <span class="n">emis_t</span><span class="p">,</span> <span class="n">Q_w_in</span><span class="p">,</span>  <span class="n">OPEX</span><span class="p">,</span> <span class="n">CAPEX</span><span class="p">)</span>
+<span class="n">dfprod</span><span class="o">=</span><span class="p">(</span><span class="n">Qw_tot</span><span class="p">,</span> <span class="n">M_MgOH2_1</span><span class="p">,</span> <span class="n">M_CaOH2</span><span class="p">,</span>  <span class="n">M_b_out</span><span class="p">,</span> <span class="n">M_a_out</span><span class="p">)</span>
+
+<span class="n">dfprodn</span><span class="o">=</span><span class="p">(</span><span class="s2">&quot;Water (kg/hr)&quot;</span><span class="p">,</span>  <span class="s2">&quot;Mg(OH)2(kg/hr)&quot;</span><span class="p">,</span> <span class="s2">&quot;Ca(OH)2(kg/hr)&quot;</span><span class="p">,</span>  <span class="s2">&quot;1M NaOH (kg/hr)&quot;</span><span class="p">,</span><span class="s2">&quot;1M HCl(kg/hr)&quot;</span><span class="p">)</span>
+<span class="n">ind</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="s2">&quot;Water production&quot;</span><span class="p">,</span> <span class="s2">&quot;absolute water production&quot;</span><span class="p">,</span> <span class="s2">&quot;water recovery&quot;</span><span class="p">,</span><span class="s2">&quot;Total electrical consumption&quot;</span><span class="p">,</span> <span class="s2">&quot;Total thermal energy consumption&quot;</span><span class="p">,</span> <span class="s2">&quot;Carbon dioxide emission kg co2/year&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;Water footprint&quot;</span><span class="p">,</span><span class="s2">&quot;OPEX&quot;</span><span class="p">,</span> <span class="s2">&quot;CAPEX&quot;</span><span class="p">])</span>
+<span class="n">units</span><span class="o">=</span><span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">([</span><span class="s2">&quot;kg/hr&quot;</span><span class="p">,</span> <span class="s2">&quot;kg/hr&quot;</span><span class="p">,</span> <span class="s2">&quot;%&quot;</span><span class="p">,</span><span class="s2">&quot;KWh&quot;</span><span class="p">,</span> <span class="s2">&quot;KWh&quot;</span><span class="p">,</span><span class="s2">&quot; kg co2/year&quot;</span><span class="p">,</span><span class="s2">&quot;kg/hr&quot;</span><span class="p">,</span><span class="s2">&quot;€/year&quot;</span><span class="p">,</span> <span class="s2">&quot;€&quot;</span><span class="p">])</span>
+<span class="n">dfind_t</span><span class="o">=</span><span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="n">dfind</span><span class="p">,</span> <span class="n">index</span><span class="o">=</span><span class="n">ind</span><span class="p">)</span>
+<span class="n">dfprodn</span><span class="o">=</span><span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="n">dfprod</span><span class="p">,</span> <span class="n">index</span><span class="o">=</span><span class="n">dfprodn</span><span class="p">)</span>
+
+<span class="c1"># Write results in excel document</span>
+<span class="k">with</span> <span class="n">pd</span><span class="o">.</span><span class="n">ExcelWriter</span><span class="p">(</span><span class="s1">&#39;results_example.xlsx&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">writer</span><span class="p">:</span>
+    <span class="n">dfel</span><span class="o">.</span><span class="n">to_excel</span><span class="p">(</span><span class="n">writer</span><span class="p">,</span><span class="n">sheet_name</span><span class="o">=</span><span class="s2">&quot;example&quot;</span><span class="p">,</span> <span class="n">startcol</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">startrow</span><span class="o">=</span><span class="mi">14</span><span class="p">,</span> <span class="n">header</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+    <span class="n">dfeth</span><span class="o">.</span><span class="n">to_excel</span><span class="p">(</span><span class="n">writer</span><span class="p">,</span><span class="n">sheet_name</span><span class="o">=</span><span class="s2">&quot;example&quot;</span><span class="p">,</span> <span class="n">startcol</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">startrow</span><span class="o">=</span><span class="mi">14</span><span class="p">,</span> <span class="n">header</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+    <span class="n">dfprodn</span><span class="o">.</span><span class="n">to_excel</span><span class="p">(</span><span class="n">writer</span><span class="p">,</span><span class="n">sheet_name</span><span class="o">=</span><span class="s2">&quot;example&quot;</span><span class="p">,</span> <span class="n">startcol</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">startrow</span><span class="o">=</span><span class="mi">23</span><span class="p">,</span> <span class="n">header</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+    <span class="n">dfind_t</span><span class="o">.</span><span class="n">to_excel</span><span class="p">(</span><span class="n">writer</span><span class="p">,</span><span class="n">sheet_name</span><span class="o">=</span><span class="s2">&quot;indicators&quot;</span><span class="p">)</span>
+    <span class="n">units</span><span class="o">.</span><span class="n">to_excel</span><span class="p">(</span><span class="n">writer</span><span class="p">,</span><span class="n">sheet_name</span><span class="o">=</span><span class="s2">&quot;indicators&quot;</span><span class="p">,</span><span class="n">startcol</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">startrow</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">header</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Additionally, table with flowrates and concentrations can be developed (see ‘exmple_1.py) and printed in Excel.</p>
+</section>
+<section id="visualization">
+<h3>4.3. Visualization<a class="headerlink" href="#visualization" title="Link to this heading"></a></h3>
+<p>For the visualization of the treatment chain, a <strong>Sankey</strong> diagram is created. For this diagram, the mass flow rates are needed.</p>
+<p>First, you need to import:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1">#sankey diagram</span>
+<span class="kn">import</span> <span class="nn">plotly.graph_objects</span> <span class="k">as</span> <span class="nn">go</span>
+<span class="kn">from</span> <span class="nn">plotly.offline</span> <span class="kn">import</span> <span class="n">plot</span>
+</pre></div>
+</div>
+<p>Then you can create the figure as below:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Figure 1: Sankey diagram for Example: Mass flow rates</span>
+<span class="n">fig</span> <span class="o">=</span> <span class="n">go</span><span class="o">.</span><span class="n">Figure</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="p">[</span><span class="n">go</span><span class="o">.</span><span class="n">Sankey</span><span class="p">(</span>
+    <span class="n">node</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span>
+    <span class="n">pad</span> <span class="o">=</span> <span class="mi">15</span><span class="p">,</span>
+    <span class="n">thickness</span> <span class="o">=</span> <span class="mi">20</span><span class="p">,</span>
+    <span class="n">line</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span><span class="n">color</span> <span class="o">=</span> <span class="s2">&quot;black&quot;</span><span class="p">,</span> <span class="n">width</span> <span class="o">=</span> <span class="mf">0.5</span><span class="p">),</span>
+    <span class="n">label</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;Seawater&quot;</span><span class="p">,</span> <span class="s2">&quot;Water&quot;</span><span class="p">,</span> <span class="s2">&quot;NaCl&quot;</span><span class="p">,</span>  <span class="s2">&quot;NF&quot;</span><span class="p">,</span> <span class="s2">&quot;ED&quot;</span><span class="p">,</span> <span class="s2">&quot;MF-PFR&quot;</span><span class="p">,</span> <span class="s2">&quot;EDBM&quot;</span><span class="p">,</span> <span class="s2">&quot;HCl&quot;</span><span class="p">,</span> <span class="s2">&quot;NaOH&quot;</span><span class="p">,</span> <span class="s2">&quot;Mg(OH)</span><span class="se">\u2082</span><span class="s2">&quot;</span><span class="p">,</span> <span class="s2">&quot;Ca(OH)</span><span class="se">\u2082</span><span class="s2">&quot;</span><span class="p">,</span> <span class="s2">&quot;Utilities&quot;</span><span class="p">,</span> <span class="s2">&quot;Saline solution&quot;</span><span class="p">],</span>
+    <span class="n">color</span> <span class="o">=</span> <span class="s2">&quot;blue&quot;</span>
+    <span class="p">),</span>
+    <span class="n">link</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span>
+    <span class="n">source</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="mi">5</span><span class="p">,</span><span class="mi">5</span><span class="p">,</span><span class="mi">5</span><span class="p">,</span><span class="mi">6</span><span class="p">,</span><span class="mi">6</span><span class="p">,</span><span class="mi">6</span><span class="p">,</span><span class="mi">11</span><span class="p">,</span><span class="mi">11</span><span class="p">],</span>
+    <span class="n">target</span> <span class="o">=</span> <span class="p">[</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="mi">5</span><span class="p">,</span><span class="mi">6</span><span class="p">,</span><span class="mi">12</span><span class="p">,</span><span class="mi">6</span><span class="p">,</span><span class="mi">9</span><span class="p">,</span><span class="mi">10</span><span class="p">,</span><span class="mi">7</span><span class="p">,</span><span class="mi">8</span><span class="p">,</span><span class="mi">12</span><span class="p">,</span><span class="mi">5</span><span class="p">,</span><span class="mi">6</span><span class="p">],</span>
+    <span class="n">value</span> <span class="o">=</span> <span class="p">[</span><span class="n">Qsw</span><span class="p">,</span> <span class="n">Qperm</span><span class="p">,</span> <span class="n">Qconc</span><span class="p">,</span><span class="n">Mc</span><span class="p">,</span> <span class="n">Md</span><span class="p">,</span><span class="n">M_mfpfr_out</span><span class="p">,</span> <span class="n">M_MgOH2_1</span><span class="p">,</span><span class="n">M_CaOH2</span><span class="p">,</span><span class="n">Q_a_out</span><span class="p">,</span> <span class="n">Q_b_out</span><span class="p">,</span><span class="n">Q_s_out</span><span class="p">,</span> <span class="n">QNAOH</span><span class="o">+</span><span class="n">QHCl</span><span class="p">,</span> <span class="n">Q_w_in</span> <span class="p">]</span>
+<span class="p">))])</span>
+<span class="n">color_for_nodes</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;lightsteelblue&quot;</span><span class="p">,</span><span class="s2">&quot;darkcyan&quot;</span><span class="p">,</span><span class="s2">&quot;maroon&quot;</span><span class="p">,</span> <span class="s2">&quot;midnightblue&quot;</span><span class="p">,</span> <span class="s2">&quot;midnightblue&quot;</span><span class="p">,</span> <span class="s2">&quot;midnightblue&quot;</span><span class="p">,</span> <span class="s2">&quot;maroon&quot;</span><span class="p">]</span>
+<span class="n">fig</span><span class="o">.</span><span class="n">update_traces</span><span class="p">(</span><span class="n">node_color</span> <span class="o">=</span> <span class="n">color_for_nodes</span><span class="p">)</span>
+<span class="n">fig</span><span class="o">.</span><span class="n">update_layout</span><span class="p">(</span><span class="n">title_text</span><span class="o">=</span><span class="s2">&quot;Sankey diagram for Example: Mass flow rates &quot;</span><span class="p">,</span> <span class="n">font_size</span><span class="o">=</span><span class="mi">15</span><span class="p">)</span>
+<span class="n">fig</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+<span class="n">plot</span><span class="p">(</span><span class="n">fig</span><span class="p">)</span>
+</pre></div>
+</div>
+<figure class="align-default">
+<a class="reference internal image-reference" href="https://github.com/rodoulak/Desalination-and-Brine-Treatment-Simulation-/assets/150446818/09d80c5b-3398-4618-8d5c-3b0d2db7ad07"><img alt="Image" src="https://github.com/rodoulak/Desalination-and-Brine-Treatment-Simulation-/assets/150446818/09d80c5b-3398-4618-8d5c-3b0d2db7ad07" style="width: 600px;" /></a>
+</figure>
+</section>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="Economic_Tutorial.html" class="btn btn-neutral float-left" title="Tutorial for Economic model" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="EDBM_Tutorial.html" class="btn btn-neutral float-right" title="Tutorial: Electrodialysis with Bipolar membranes (EDBM) unit" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2024, Rodoula Ktori.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>
