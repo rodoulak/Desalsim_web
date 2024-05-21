@@ -56,7 +56,7 @@ Horizon 2020 research and innovation programme under grant agreement No 869474 (
 Developed by TU Delft. 
 
 .. figure:: https://github.com/rodoulak/Desalsim_web/assets/150446818/d824528c-1710-4c61-adca-340c051fd1e7
-   :width: 400px
+   :width: 200px
    :alt: Image
 
 
