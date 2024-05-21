@@ -1,0 +1,472 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Tutorial for Economic model &mdash; DesalSim: Desalination and Brine Treatment simulation model 1.0.4 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=80d5e7a1" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=19f00094" />
+
+  
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="../_static/jquery.js?v=5d32c60e"></script>
+        <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="../_static/documentation_options.js?v=71272d9f"></script>
+        <script src="../_static/doctools.js?v=9a2dae69"></script>
+        <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+        <script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Example 1: Tutorial" href="Example_1_Tutorial.html" />
+    <link rel="prev" title="Desalsim Tutorial" href="Desalsim_Tutorial.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../index.html" class="icon icon-home">
+            DesalSim: Desalination and Brine Treatment simulation model
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Tutorials:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="Desalsim_Tutorial.html">Desalsim Tutorial</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Tutorial for Economic model</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#introduction">1. Introduction</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#running-economic-model">2. Running Economic model</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#import-economic-model-functions">2.1. Import economic model functions</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#set-constant-values">2.2. Set constant values</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#set-input-data">2.3. Set input data</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#import-results-from-technical-model">2.4. Import results from technical model</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#equipment-cost">2.5. Equipment cost</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#calculate-capital-costs-capex">2.6. Calculate Capital costs (CAPEX)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#calculate-annual-capital-costs">2.6.1 Calculate annual capital costs</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#calculate-operating-costs-opex">2.7. Calculate Operating costs (OPEX)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#calculate-revenues">2.8. Calculate Revenues</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#results-evaluation">3. Results evaluation</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="Example_1_Tutorial.html">Example 1: Tutorial</a></li>
+<li class="toctree-l1"><a class="reference internal" href="EDBM_Tutorial.html">Tutorial: Electrodialysis with Bipolar membranes (EDBM) unit</a></li>
+<li class="toctree-l1"><a class="reference internal" href="MED_Tutorial.html">Tutotrial: Multi-effect distillation (MED) unit</a></li>
+<li class="toctree-l1"><a class="reference internal" href="NF_Tutorial.html">Tutotrial: Nanofiltration (NF) unit</a></li>
+<li class="toctree-l1"><a class="reference internal" href="MF-PFR_Tutorial.html">Tutotrial: Multi-plug flow reactor (MF-PFR) unit</a></li>
+<li class="toctree-l1"><a class="reference internal" href="TCr_Tutorial.html">Tutotrial: Thermal crystallizer (TCr) unit</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">File description:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../File%20descr/Description.html">Files description</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">DesalSim: Desalination and Brine Treatment simulation model</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">Tutorial for Economic model</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../_sources/Tutorials/Economic_Tutorial.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="tutorial-for-economic-model">
+<h1>Tutorial for Economic model<a class="headerlink" href="#tutorial-for-economic-model" title="Link to this heading"></a></h1>
+<section id="introduction">
+<h2>1. Introduction<a class="headerlink" href="#introduction" title="Link to this heading"></a></h2>
+<p>Welcome to our comprehensive tutorial on running economic models. The economic model (<code class="docutils literal notranslate"><span class="pre">economic_f.py</span></code>) can be used to perform economic assessments of the treatment chain or of individual units to identify economic hotspots. The economic assessment will help researchers, engineers, and decision-makers improve the system’s performance and select the most economically feasible integration of technologies.</p>
+<p>In this tutorial, we provide step-by-step instructions on how to use economic models and analyse the results obtained using <strong>Example 1</strong> as a case study (see <strong>Figure 1</strong>).</p>
+<figure class="align-default" id="id1">
+<a class="reference internal image-reference" href="https://github.com/rodoulak/Desalination-and-Brine-Treatment-Simulation-/assets/150446818/55cc6b6f-dde8-4b12-ae61-fa23665c288e"><img alt="Image" src="https://github.com/rodoulak/Desalination-and-Brine-Treatment-Simulation-/assets/150446818/55cc6b6f-dde8-4b12-ae61-fa23665c288e" style="width: 600px;" /></a>
+<figcaption>
+<p><span class="caption-text"><strong>Figure 1</strong>. Process flow diagram of example 1.</span><a class="headerlink" href="#id1" title="Link to this image"></a></p>
+</figcaption>
+</figure>
+</section>
+<section id="running-economic-model">
+<h2>2. Running Economic model<a class="headerlink" href="#running-economic-model" title="Link to this heading"></a></h2>
+<p><strong>Table 1</strong> gives an overview of the main inputs and outputs of the economic model (<code class="docutils literal notranslate"><span class="pre">economic_f.py</span></code>).</p>
+<table class="docutils align-default" id="id2">
+<caption><span class="caption-text">Table 1. Overview of Inputs and Outputs of economic models.</span><a class="headerlink" href="#id2" title="Link to this table"></a></caption>
+<colgroup>
+<col style="width: 50.0%" />
+<col style="width: 50.0%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Input</p></th>
+<th class="head"><p>Output</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Selling price for products [€/ton] or [€/m³]</p></td>
+<td><p>Operating cost (OPEX) [€/year]</p></td>
+</tr>
+<tr class="row-odd"><td><p>Prices for energy [€/KWh], input chemicals [€/m³], cooling water [€/m³]</p></td>
+<td><p>Investment cost (CAPEX) [€]</p></td>
+</tr>
+<tr class="row-even"><td><p>Operating hours, lifetime</p></td>
+<td><p>Revenues from selling products [€/year]</p></td>
+</tr>
+<tr class="row-odd"><td><p>Interest rate, Inflation rate</p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p>Equipment cost [€]</p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p>Assumptions on CAPEX and OPEX calculations</p></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<section id="import-economic-model-functions">
+<h3>2.1. Import economic model functions<a class="headerlink" href="#import-economic-model-functions" title="Link to this heading"></a></h3>
+<p>First, import the required functions from <code class="docutils literal notranslate"><span class="pre">economic_f.py</span></code>.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">desalsim.economic_f</span> <span class="kn">import</span> <span class="n">econom</span>
+<span class="kn">from</span> <span class="nn">desalsim.economic_f</span> <span class="kn">import</span> <span class="n">revenue</span>
+</pre></div>
+</div>
+</section>
+<section id="set-constant-values">
+<h3>2.2. Set constant values<a class="headerlink" href="#set-constant-values" title="Link to this heading"></a></h3>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Operating hours per year</span>
+<span class="n">hr</span> <span class="o">=</span> <span class="mi">24</span> <span class="o">*</span> <span class="mi">300</span>  <span class="c1"># hours/year</span>
+<span class="c1"># Plant&#39;s lifetime</span>
+<span class="n">lf</span> <span class="o">=</span> <span class="mi">20</span>  <span class="c1"># years</span>
+<span class="c1"># Interest rate</span>
+<span class="n">r</span> <span class="o">=</span> <span class="mf">0.06</span>  <span class="c1"># (-)</span>
+<span class="c1"># Inflation rate</span>
+<span class="n">inf</span> <span class="o">=</span> <span class="mf">0.02</span>  <span class="c1"># (-)</span>
+</pre></div>
+</div>
+<p>Import <code class="docutils literal notranslate"><span class="pre">constants.py</span></code> for more constant parameters like molecular weights (MW) etc.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">constants</span>
+</pre></div>
+</div>
+</section>
+<section id="set-input-data">
+<h3>2.3. Set input data<a class="headerlink" href="#set-input-data" title="Link to this heading"></a></h3>
+<p>The market prices for utilities (electricity, chemicals, steam, cooling water, etc.) need to be set. Use updated market values.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Market prices</span>
+<span class="c1"># Electricity price</span>
+<span class="n">el_pr</span> <span class="o">=</span> <span class="mf">0.253</span>  <span class="c1"># euro/kwh</span>
+<span class="c1"># Steam price</span>
+<span class="n">s_pr</span> <span class="o">=</span> <span class="mi">0</span>  <span class="c1"># euro/kwh</span>
+<span class="c1"># Chemicals prices</span>
+<span class="n">hcl_pr</span> <span class="o">=</span> <span class="mf">5.78</span>  <span class="c1"># euro/l 1M solution</span>
+<span class="n">naoh_pr</span> <span class="o">=</span> <span class="mf">5.2</span>  <span class="c1"># euro/L 1M NaOH solution</span>
+<span class="n">antisc_pr</span> <span class="o">=</span> <span class="mf">0.002</span>  <span class="c1"># euro/ml</span>
+<span class="c1"># Cooling water price</span>
+<span class="n">cw_pr</span> <span class="o">=</span> <span class="mf">0.000118</span>  <span class="c1"># euro/kg</span>
+</pre></div>
+</div>
+<p>The market prices for focused products need to be set. Use updated market values.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Market prices</span>
+<span class="c1"># Chemicals prices</span>
+<span class="n">hcl_pr</span> <span class="o">=</span> <span class="mf">5.78</span>  <span class="c1"># euro/l 1M solution</span>
+<span class="n">naoh_pr</span> <span class="o">=</span> <span class="mf">5.2</span>  <span class="c1"># euro/L 1M NaOH solution</span>
+<span class="c1"># Industrial water</span>
+<span class="n">w_pr</span> <span class="o">=</span> <span class="mf">0.001</span>  <span class="c1"># euro/kg</span>
+<span class="c1"># Salts prices</span>
+<span class="n">mgoh2_pr</span> <span class="o">=</span> <span class="mi">1</span>  <span class="c1"># euro/kg</span>
+<span class="n">caoh2_pr</span> <span class="o">=</span> <span class="mf">0.125</span>  <span class="c1"># euro/kg</span>
+</pre></div>
+</div>
+</section>
+<section id="import-results-from-technical-model">
+<h3>2.4. Import results from technical model<a class="headerlink" href="#import-results-from-technical-model" title="Link to this heading"></a></h3>
+<p>Import results from the technical models:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">example_1</span>
+</pre></div>
+</div>
+<p>Then create lists with the results:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">el_conc</span> <span class="o">=</span> <span class="n">E_el_all</span>
+<span class="n">s_conc</span> <span class="o">=</span> <span class="n">E_th_all</span>
+<span class="n">chem1_conc</span> <span class="o">=</span> <span class="p">[</span><span class="n">Qantsc_nf</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">Mnaoh_need</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span>
+<span class="n">chem1_pr</span> <span class="o">=</span> <span class="p">[</span><span class="mf">0.002</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">constants</span><span class="o">.</span><span class="n">naoh_pr_s</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span>
+<span class="n">chem2_conc</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">Mhcl_need</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span>
+<span class="n">chem2_pr</span> <span class="o">=</span> <span class="p">[</span><span class="mf">0.002</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">constants</span><span class="o">.</span><span class="n">hcl_pr_s</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span>
+<span class="n">wat_conc</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">Qnaoh_need</span><span class="p">,</span> <span class="n">Q_w_in</span><span class="p">]</span>
+<span class="n">cw_conc</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span>
+</pre></div>
+</div>
+</section>
+<section id="equipment-cost">
+<h3>2.5. Equipment cost<a class="headerlink" href="#equipment-cost" title="Link to this heading"></a></h3>
+<p>You can set equipment cost if it is known. In case of preliminary study, where equipment cost is still unknown, scale-up function (<code class="docutils literal notranslate"><span class="pre">scaleup.py</span></code>) can be used.</p>
+<div class="math notranslate nohighlight">
+\[\frac{\text{Cost of purchased equipment (Plant A)}}{\text{Cost of purchased equipment (Plant B)}} = \left( \frac{\text{Capacity of Plant A}}{\text{Capacity of Plant B}} \right)^m\]</div>
+<p>Where <em>m</em> is six-tenths factor rule (m=0.6 or m=0.8) depends on the nature of technology.</p>
+<p>In this example, equipment costs from pilot units are used as reference. The equipment costs are included in the <code class="docutils literal notranslate"><span class="pre">constantc.py</span></code> so the user can call the function in case of scale-up and unknown equipment costs.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Units: nf, mfpfr, edbm, ed</span>
+<span class="n">Mf_basic_sc</span> <span class="o">=</span> <span class="p">[</span><span class="mf">2290.86</span><span class="p">,</span> <span class="mf">595.03</span><span class="p">,</span> <span class="mf">229.01</span><span class="p">,</span> <span class="mi">253</span><span class="p">]</span>
+</pre></div>
+</div>
+<p>After setting the reference scenario, the equipment cost of the scaled-up unit can be calculated as below:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Import equipment cost for reference scenario from constants function</span>
+<span class="n">eq_c</span> <span class="o">=</span> <span class="p">[</span><span class="n">constants</span><span class="o">.</span><span class="n">eq_c_nf</span><span class="p">,</span> <span class="n">constants</span><span class="o">.</span><span class="n">eq_c_ed</span><span class="p">,</span> <span class="n">constants</span><span class="o">.</span><span class="n">eq_c_mfpfr</span><span class="p">,</span> <span class="n">constants</span><span class="o">.</span><span class="n">eq_c_edbm</span><span class="p">]</span>
+<span class="c1"># Capacity of reference scenario</span>
+<span class="n">Mf_basic_sc</span> <span class="o">=</span> <span class="p">[</span><span class="n">constants</span><span class="o">.</span><span class="n">Mf_basic_sc</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">constants</span><span class="o">.</span><span class="n">Mf_basic_sc</span><span class="p">[</span><span class="mi">8</span><span class="p">],</span> <span class="n">constants</span><span class="o">.</span><span class="n">Mf_basic_sc</span><span class="p">[</span><span class="mi">3</span><span class="p">],</span> <span class="n">constants</span><span class="o">.</span><span class="n">Mf_basic_sc</span><span class="p">[</span><span class="mi">6</span><span class="p">]]</span>
+
+<span class="c1"># Capacity of evaluated treatment chain</span>
+<span class="n">Mf_sce</span> <span class="o">=</span> <span class="p">[</span><span class="n">Qsw</span><span class="p">,</span> <span class="n">Qed_in</span><span class="p">,</span> <span class="n">Qin_mfpfr</span><span class="p">,</span> <span class="n">Q_in_edbm</span><span class="p">]</span>
+
+<span class="c1"># Calculation of the new equipment cost</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">eq_c</span><span class="p">)):</span>
+    <span class="k">if</span> <span class="n">Mf_basic_sc</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">!=</span> <span class="n">Mf_sce</span><span class="p">[</span><span class="n">i</span><span class="p">]:</span>
+        <span class="n">eq_c</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">scaleup</span><span class="o">.</span><span class="n">scaleup_eq</span><span class="p">(</span><span class="n">eq_c</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">Mf_basic_sc</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">Mf_sce</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">tec_names</span><span class="p">[</span><span class="n">i</span><span class="p">])</span>
+</pre></div>
+</div>
+</section>
+<section id="calculate-capital-costs-capex">
+<h3>2.6. Calculate Capital costs (CAPEX)<a class="headerlink" href="#calculate-capital-costs-capex" title="Link to this heading"></a></h3>
+<p>The CAPEX consists of fixed-capital investment and working capital, and the former includes hardware costs, costs of buildings, process, and auxiliary, land, working capital, and other indirect costs.</p>
+<p><strong>Table 2</strong> gives an overview of the main assumptions made to calculate the CAPEX.</p>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>CAPEX</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Installation: 25% of purchased equipment cost</p></td>
+</tr>
+<tr class="row-odd"><td><p>Buildings, process, and auxiliary: 20% of
+purchased equipment cost</p></td>
+</tr>
+<tr class="row-even"><td><p>Land: 6% of purchased equipment cost</p></td>
+</tr>
+<tr class="row-odd"><td><p>Indirect costs: 15% of direct cost</p></td>
+</tr>
+<tr class="row-even"><td><p>Working capital: 20% of total investment cost</p></td>
+</tr>
+</tbody>
+</table>
+<p>The assumptions in <strong>Table 2</strong> are set. Note that they can change for different case studies.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Set assumptions for Capital investment cost</span>
+<span class="n">inst_percent</span> <span class="o">=</span> <span class="mf">0.25</span>  <span class="c1"># % of purchased equipment cost</span>
+<span class="n">buildings_percent</span> <span class="o">=</span> <span class="mf">0.2</span>  <span class="c1"># of purchased equipment cost</span>
+<span class="n">land_percent</span> <span class="o">=</span> <span class="mf">0.06</span>  <span class="c1"># of purchased equipment cost</span>
+<span class="n">indirect_c_percent</span> <span class="o">=</span> <span class="mf">0.15</span>  <span class="c1"># of direct cost</span>
+<span class="n">working_c_percent</span> <span class="o">=</span> <span class="mf">0.2</span>  <span class="c1"># of total investment cost</span>
+</pre></div>
+</div>
+<p>Based on those assumptions the normalized factor is calculated and all the assumptions are assigned to the <em>capex_assumptions</em> list.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">capex_assumptions</span> <span class="o">=</span> <span class="p">[</span><span class="n">inst_percent</span><span class="p">,</span> <span class="n">buildings_percent</span><span class="p">,</span> <span class="n">land_percent</span><span class="p">,</span> <span class="n">indirect_c_percent</span><span class="p">,</span> <span class="n">working_c_percent</span><span class="p">]</span>
+</pre></div>
+</div>
+<p>Then the <strong>CAPEX</strong> is calculated:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Create list with capital cost for each unit. This will help us to identify the hotspots in capital investment.</span>
+<span class="n">capex_list</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="c1"># Initialize value</span>
+<span class="n">CAPEX</span> <span class="o">=</span> <span class="mi">0</span>
+<span class="c1"># Calculate investment cost (CAPEX)</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">eq_c</span><span class="p">)):</span>
+    <span class="n">total_econom</span> <span class="o">=</span> <span class="n">econom</span><span class="p">(</span><span class="n">eq_c</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">el_conc</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">s_conc</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">chem1_conc</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">chem1_pr</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">chem2_conc</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">chem2_pr</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">cw_conc</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">wat_conc</span><span class="p">[</span><span class="n">i</span><span class="p">])</span>
+    <span class="n">total_econom</span><span class="o">.</span><span class="n">capex_calc</span><span class="p">(</span><span class="n">capex_assumptions</span><span class="p">)</span>
+    <span class="n">CAPEX</span> <span class="o">=</span> <span class="n">total_econom</span><span class="o">.</span><span class="n">t_capital_inv</span>
+    <span class="n">capex_list</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">total_econom</span><span class="o">.</span><span class="n">t_capital_inv</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Total investment cost (CAPEX) of system is &quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="nb">round</span><span class="p">(</span><span class="n">CAPEX</span><span class="p">))</span> <span class="o">+</span> <span class="s2">&quot; Euro&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<section id="calculate-annual-capital-costs">
+<h3>2.6.1 Calculate annual capital costs<a class="headerlink" href="#calculate-annual-capital-costs" title="Link to this heading"></a></h3>
+<p>For the calculation of the annualized CAPEX, the amortization factor (α) is used:</p>
+<div class="math notranslate nohighlight">
+\[\text{Annualized CAPEX} = \text{CAPEX} \times a\]</div>
+<p>where <em>a</em> is the amortisation factor.</p>
+<p>Amortisation factor is calculated as:</p>
+<div class="math notranslate nohighlight">
+\[a = \frac{r \cdot (1+r)^{lf}}{(1+r)^{lf} - 1}\]</div>
+<p>where <em>r</em> is discount rate, <em>lf</em> is plant lifetime (year).</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Calculate amortisation factor</span>
+<span class="n">lf</span> <span class="o">=</span> <span class="mi">20</span>  <span class="c1"># years</span>
+<span class="n">r</span> <span class="o">=</span> <span class="mf">0.06</span>  <span class="c1"># interest rate</span>
+<span class="n">a</span> <span class="o">=</span> <span class="p">(</span><span class="n">r</span> <span class="o">*</span> <span class="p">(</span><span class="mi">1</span> <span class="o">+</span> <span class="n">r</span><span class="p">)</span> <span class="o">**</span> <span class="n">lf</span><span class="p">)</span> <span class="o">/</span> <span class="p">((</span><span class="mi">1</span> <span class="o">+</span> <span class="n">r</span><span class="p">)</span> <span class="o">**</span> <span class="n">lf</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<section id="calculate-operating-costs-opex">
+<h3>2.7. Calculate Operating costs (OPEX)<a class="headerlink" href="#calculate-operating-costs-opex" title="Link to this heading"></a></h3>
+<p>The OPEX refers to expenditure directly generated by manufacturing operation or connected to the equipment of a technical unit. Table 3 gives an overview of the costs that constitute OPEX (Peters, Timmerhaus and West, 2003). In this study, the utilities in this system are mainly energy, chemicals, and water costs. The calculation of yearly electrical (Cel) and thermal (Cth) energy costs follows equations:</p>
+<div class="math notranslate nohighlight">
+\[C_{el} = E_{\text{tot, el}} \cdot t_{\text{operation}} \cdot P_{\text{el}}\]</div>
+<div class="math notranslate nohighlight">
+\[C_{th} = E_{\text{tot, th}} \cdot t_{\text{operation}} \cdot P_{\text{st}}\]</div>
+<div class="math notranslate nohighlight">
+\[C_{e} = C_{el} + C_{th}\]</div>
+<p>Where:</p>
+<p>E<sub>el</sub> and E<sub>th</sub> are the total energy consumption per operating hour (in kWh/hr),
+t<sub>operation</sub> is the total operation time in one year (in hr),
+P<sub>el</sub> and P<sub>steam</sub> are the prices of electricity and steam, respectively (in €/kWh).</p>
+<p>The calculation of chemicals and water costs is similar to the energy cost, multiplying the amount of consumption every year by their price. The other costs are calculated in <em>opex_calc</em> class (see <code class="docutils literal notranslate"><span class="pre">economic.py</span></code>).</p>
+<p><strong>Table 3</strong> gives an overview of the main assumptions made to calculate the OPEX.</p>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Annual OPEX</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Maintenance: 3% of the fixed-capital investment</p></td>
+</tr>
+<tr class="row-odd"><td><p>Operating Supplies: 5% of maintenance</p></td>
+</tr>
+<tr class="row-even"><td><p>Operating Labor: 15% of annual OPEX</p></td>
+</tr>
+<tr class="row-odd"><td><p>Direct supervisory and clerical labor: 15% of operating labor</p></td>
+</tr>
+<tr class="row-even"><td><p>Laboratory charges: 15% of operating labor</p></td>
+</tr>
+<tr class="row-odd"><td><p>Patents and royalties: 3% of annual OPEX</p></td>
+</tr>
+<tr class="row-even"><td><p>Fixed charges: 5% of annual OPEX</p></td>
+</tr>
+<tr class="row-odd"><td><p>Plant overhead costs: 5% of annual OPEX</p></td>
+</tr>
+</tbody>
+</table>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Set assumptions for Operating cost (OPEX)</span>
+<span class="n">main_c_percent</span> <span class="o">=</span> <span class="mf">0.03</span>  <span class="c1"># % of the fixed-capital investment</span>
+<span class="n">oper_sup_c_percent</span> <span class="o">=</span> <span class="mf">0.05</span>  <span class="c1"># % of maintenance</span>
+<span class="n">oper_lab_c_percent</span> <span class="o">=</span> <span class="mf">0.15</span>  <span class="c1"># % of annual OPEX</span>
+<span class="n">super_c_percent</span> <span class="o">=</span> <span class="mf">0.15</span>  <span class="c1"># % of operating labor</span>
+<span class="n">lab_c_percent</span> <span class="o">=</span> <span class="mf">0.15</span>  <span class="c1"># % of operating labor</span>
+<span class="n">pat_c_percent</span> <span class="o">=</span> <span class="mf">0.03</span>  <span class="c1"># % of annual OPEX</span>
+<span class="n">fix_char_percent</span> <span class="o">=</span> <span class="mf">0.05</span>  <span class="c1"># % of annual OPEX</span>
+<span class="n">over_c_percent</span> <span class="o">=</span> <span class="mf">0.05</span>  <span class="c1"># % of annual OPEX</span>
+</pre></div>
+</div>
+<p>Based on those assumptions the normalized factor is calculated and all the assumptions are assigned to the <em>economic assumptions</em> list.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Calculate normalized factor</span>
+<span class="n">norm_factor</span> <span class="o">=</span> <span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="n">oper_lab_c_percent</span> <span class="o">-</span> <span class="n">oper_lab_c_percent</span> <span class="o">*</span> <span class="n">super_c_percent</span> <span class="o">-</span> <span class="n">oper_lab_c_percent</span> <span class="o">*</span> <span class="n">lab_c_percent</span> <span class="o">-</span> <span class="n">pat_c_percent</span> <span class="o">-</span> <span class="n">fix_char_percent</span> <span class="o">-</span> <span class="n">over_c_percent</span><span class="p">)</span>
+
+<span class="c1"># Create a list for economic assumptions</span>
+<span class="n">economic_assumptions</span> <span class="o">=</span> <span class="p">[</span><span class="n">main_c_percent</span><span class="p">,</span> <span class="n">oper_sup_c_percent</span><span class="p">,</span> <span class="n">oper_lab_c_percent</span><span class="p">,</span> <span class="n">super_c_percent</span><span class="p">,</span> <span class="n">lab_c_percent</span><span class="p">,</span> <span class="n">pat_c_percent</span><span class="p">,</span> <span class="n">fix_char_percent</span><span class="p">,</span> <span class="n">over_c_percent</span><span class="p">,</span> <span class="n">norm_factor</span><span class="p">]</span>
+</pre></div>
+</div>
+<p>Then the <strong>OPEX</strong> is calculated:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Initialize values</span>
+<span class="n">OPEX</span> <span class="o">=</span> <span class="mi">0</span>
+
+<span class="c1"># Create list with operating for each unit. This will help us to identify the hotspots in operating costs.</span>
+<span class="n">opex_list</span> <span class="o">=</span> <span class="p">[]</span>
+
+<span class="c1"># Calculate OPEX</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">eq_c</span><span class="p">)):</span>
+    <span class="n">total_econom</span> <span class="o">=</span> <span class="n">econom</span><span class="p">(</span><span class="n">eq_c</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">el_conc</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">s_conc</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">chem1_conc</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">chem1_pr</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">chem2_conc</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">chem2_pr</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">cw_conc</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">wat_conc</span><span class="p">[</span><span class="n">i</span><span class="p">])</span>
+    <span class="n">total_econom</span><span class="o">.</span><span class="n">opex_calc</span><span class="p">(</span><span class="n">hr</span><span class="p">,</span> <span class="n">el_pr</span><span class="p">,</span> <span class="n">s_pr</span><span class="p">,</span> <span class="n">cw_pr</span><span class="p">,</span> <span class="n">w_pr</span><span class="p">,</span> <span class="n">economic_assumptions</span><span class="p">)</span>
+    <span class="n">OPEX</span> <span class="o">=</span> <span class="n">total_econom</span><span class="o">.</span><span class="n">opex</span>
+    <span class="n">capex_list</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">total_econom</span><span class="o">.</span><span class="n">t_capital_inv</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Total operating cost (OPEX) is &quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">OPEX</span><span class="p">)</span> <span class="o">+</span> <span class="s2">&quot; Euro/year&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<section id="calculate-revenues">
+<h3>2.8. Calculate Revenues<a class="headerlink" href="#calculate-revenues" title="Link to this heading"></a></h3>
+<p>The total amount of <strong>Revenues</strong> from selling products is used to evaluate the economic performance of the treatment chain.</p>
+<div class="math notranslate nohighlight">
+\[\text{revenues} = \sum_{i=1}^{n} Q_{\text{product}_i} \times \text{Selling price of product}_i\]</div>
+<p>First, the updated market prices of the recovered products need to be set.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Quantity of recovered products</span>
+<span class="n">prd</span> <span class="o">=</span> <span class="p">[</span><span class="n">Qw_tot</span><span class="p">,</span> <span class="n">M_MgOH2_1</span><span class="p">,</span> <span class="n">Q_b_out</span><span class="p">,</span> <span class="n">Q_a_out</span><span class="p">]</span>
+
+<span class="c1"># Specify products</span>
+<span class="n">prd_name</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;Water&quot;</span><span class="p">,</span> <span class="s2">&quot;Mg(OH)2&quot;</span><span class="p">,</span> <span class="s2">&quot;NaOH&quot;</span><span class="p">,</span> <span class="s2">&quot;HCl&quot;</span><span class="p">]</span>
+
+<span class="c1"># Market prices</span>
+<span class="n">hcl_pr</span> <span class="o">=</span> <span class="mf">5.78</span>  <span class="c1"># euro/l 1M solution</span>
+<span class="n">w_pr</span> <span class="o">=</span> <span class="mf">0.001</span>  <span class="c1"># euro/kg</span>
+<span class="n">mgoh2_pr</span> <span class="o">=</span> <span class="mf">1.0</span>  <span class="c1"># euro/kg</span>
+<span class="n">naoh_pr</span> <span class="o">=</span> <span class="mf">7.2</span>  <span class="c1"># euro/L 1M NaOH solution</span>
+</pre></div>
+</div>
+<p>After the set of input parameters, the <strong>Revenues</strong> of the treatment chain are calculated:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Initialize lists</span>
+<span class="n">reve_t</span> <span class="o">=</span> <span class="mi">0</span>
+<span class="n">reve_list</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="c1"># Revenue calculation</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">prd</span><span class="p">)):</span>
+    <span class="n">rev_calc</span> <span class="o">=</span> <span class="n">revenue</span><span class="p">(</span><span class="n">prd</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">prd_name</span><span class="p">[</span><span class="n">i</span><span class="p">])</span>
+    <span class="n">rev_calc</span><span class="o">.</span><span class="n">rev</span><span class="p">(</span><span class="n">hr</span><span class="p">,</span> <span class="n">w_pr</span><span class="p">,</span> <span class="n">nacl_pr</span><span class="p">,</span> <span class="n">mgoh2_pr</span><span class="p">,</span> <span class="n">na2so4_pr</span><span class="p">,</span> <span class="n">naoh_pr</span><span class="p">,</span> <span class="n">hcl_pr</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Revenues from selling product &quot;</span> <span class="o">+</span> <span class="n">prd_name</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">+</span> <span class="s2">&quot; are &quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="nb">round</span><span class="p">(</span><span class="n">rev_calc</span><span class="o">.</span><span class="n">rev_prd</span><span class="p">,</span> <span class="mi">2</span><span class="p">))</span> <span class="o">+</span> <span class="s2">&quot; Euro/year&quot;</span><span class="p">)</span>
+    <span class="n">reve_t</span> <span class="o">=</span> <span class="n">reve_t</span> <span class="o">+</span> <span class="n">rev_calc</span><span class="o">.</span><span class="n">rev_prd</span>
+    <span class="n">reve_list</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">rev_calc</span><span class="o">.</span><span class="n">rev_prd</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+</section>
+<section id="results-evaluation">
+<h2>3. Results evaluation<a class="headerlink" href="#results-evaluation" title="Link to this heading"></a></h2>
+<p>Running the economic model for <strong>Example 1</strong>, the following results are obtained.</p>
+<p>Total operating cost (OPEX) is 3714921 Euro/year</p>
+<p>Total investment cost (CAPEX) of the system is 6017026 Euro</p>
+<p>Annual capital investment cost of the system is 524592 Euro/year</p>
+<p>Revenues from selling product Water are 0.0 Euro/year</p>
+<p>Revenues from selling product Mg(OH)2 are 2891274 Euro/year</p>
+<p>Revenues from selling product NaOH are 3943229426 Euro/year</p>
+<p>Revenues from selling product HCl are 3274716868 Euro/year</p>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="Desalsim_Tutorial.html" class="btn btn-neutral float-left" title="Desalsim Tutorial" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="Example_1_Tutorial.html" class="btn btn-neutral float-right" title="Example 1: Tutorial" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2024, Rodoula Ktori.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>
