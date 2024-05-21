@@ -40,6 +40,26 @@ If you want to install the latest GitHub version:
    pip install -r requirements.txt
 
 
+
+**This work was supported by the EU within the WATER MINING (Next generation water-smart management systems: large scale demonstrations for a circular economy and society) - 
+Horizon 2020 research and innovation programme under grant agreement No 869474 (https://watermining.eu/).**
+
+.. raw:: html
+
+    <p align="center">
+      <img src="https://github.com/rodoulak/Desalsim_web/assets/150446818/ead6221b-518e-483e-8a4a-1b03bea2d717" alt="water mining logo" width="200"/>
+      <img src="https://github.com/rodoulak/Desalsim_web/assets/150446818/a0f67488-9f5a-4cd9-a5dd-7bce2564a9ae" alt="eu" width="400"/>
+    </p>
+
+
+
+Developed by TU Delft. 
+
+.. figure:: https://github.com/rodoulak/Desalsim_web/assets/150446818/d824528c-1710-4c61-adca-340c051fd1e7
+   :width: 600px
+   :alt: Image
+
+
 .. toctree::
    :maxdepth: 2
    :hidden:
@@ -68,14 +88,4 @@ If you want to install the latest GitHub version:
 
    Contributors
 
-
-This work was supported by the EU within the WATER MINING (Next generation water-smart management systems: large scale demonstrations for a circular economy and society) - 
-Horizon 2020 research and innovation programme under grant agreement No 869474.
-
-
-Developed by TU Delft. 
-
-.. figure:: c:\Users\rodoulaktori\surfdrive - Rodoula Ktori@surfdrive.surf.nl\PhD\tu_delft_logo.png
-   :width: 600px
-   :alt: Image
 
