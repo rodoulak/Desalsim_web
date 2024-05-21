@@ -70,7 +70,7 @@ You can find Tutorials and documents at:
 - `Example 2 <https://github.com/rodoulak/Desalination-and-Brine-Treatment-Simulation-/tree/main/example/example_2.py>`_
 - `Scenarios comparison <https://github.com/rodoulak/Desalination-and-Brine-Treatment-Simulation-/tree/main/example/comparison.py>`_
 
-1. Technical process models
+4. Technical process models
 ------------------------
 For more detailed steps and instructions see Tutorial for :doc:`Example 1 </Tutorials/Example_1_Tutorial>`.
 The mathematical description of each technology is given in `Mathematical description <https://github.com/rodoulak/desalsim/blob/main/paper/Mathematical_description.pdf>`_.
