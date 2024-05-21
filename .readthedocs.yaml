@@ -7,6 +7,6 @@ build:
     python: "3.9"
 
 sphinx:
-  configuration: conf.py
+  configuration: source/conf.py
   builder: html
 
