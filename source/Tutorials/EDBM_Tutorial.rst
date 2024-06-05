@@ -69,6 +69,8 @@ You can initialize the feed solution by setting the flow rate, specifying the fo
 
    # Feed flow rate L/h
    Q_in_edbm = 47000
+   # Water flow rate for acid and base channels
+   Q_w_in=2*Q_in_edbm
 
    # Feed concentration for base and acid channels
    C_b_in = [0, 0, 0, 0, 0, 0, 0, 10**(-ph_b), 10**(-(14-ph_b))]
