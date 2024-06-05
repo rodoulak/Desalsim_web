@@ -10,7 +10,7 @@ Contributors
 
 .. _Rodoula Ktori: https://github.com/rodoulak
 
-The main developer of ``Desalsim`` is `Rodoula Ktori`_, we would like to thank all technology experts who supported the development of the process models 
+The main developer of ``Desalsim`` is `Rodoula Ktori`_. This work is part of Rodoula Ktori's PhD research. We would like to thank all technology experts who supported the development of the process models 
 and contributed in the validation of each simulation model for the respective technology: 
 
 - Nanofiltration: Dionysia Diamantidou, Niels van Linden; 
