@@ -291,7 +291,7 @@ The HClAddition class provides the following method:
 .. code-block:: python
 
         # Calculate HClAdditione for pH=7
-    HCl_conc=1 #l of HCl 1M
+    HCl_conc=1 # concentration of HCl 1M
     unit = HClAddition(Qout_2, Cout_all_m, MW_Cl, ph_2, HCl_conc)
     QHCl, Cout_mfpfr_g = unit.calculate_HCl_addition(Cout_mfpfr_g)
 
@@ -319,7 +319,7 @@ Total effluent flow rate is 1679.27kg/hr
 
 .. _use-energycons-class:
 
-1. Use energycons class
+4. Use energycons class
 ========
 
 ``energycons`` is a class used to represent the calculation of energy consumption and the specific energy consumption for MF-PFR Unit. The takes as input the total volumetric flow rate (*Qtot*), the volumetric flow rate of sodium hydroxide (*QNaOH*), the volumetric flow rate of input (*Qin*), the volumetric flow rate of sodium hydroxide in the first step (*QNaOH_1*), the Added volumetric flow rate of sodium hydroxide needed to reach a pH of 13 (*QNaOH_2_add*), the stoichiometric volumetric flow rate of sodium hydroxide for the second step (*QNaOH_2_st*), the expected pressure drop (*dp*) and the pump efficiency (*npump*). The class ``energycons`` *returns the energy consumption for pumping in the two steps (*Epump_1, Epump_2_)*.

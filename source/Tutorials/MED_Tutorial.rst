@@ -175,9 +175,9 @@ This method calculates the permeate and concentrate flow rates, as well as their
 .. raw:: html
 
    <div style="text-align: justify;">
-
-MEDCalculator takes as input the feed volumetric flow rate (*Qf_med*) and mass flow rate (*Mf_med*), the concentration in the feed for the components (*CNa_in, CCl_in, CK_in, CMg_in, CCa_in, CSO4_in*) and the 
- Cin_med[0], Cin_med[1], Cin_med[2], Cin_med[3], Cin_med[4], Cin_med[5], and the inlet temperature (*T_in*). 
+MEDCalculator takes as input the feed volumetric flow rate (*Qf_med*) and mass flow rate (*Mf_med*), the concentration in the feed for 
+the components (*CNa_in, CCl_in, CK_in, CMg_in, CCa_in, CSO4_in*) and the Cin_med[0], Cin_med[1], Cin_med[2], Cin_med[3], Cin_med[4], 
+Cin_med[5], and the inlet temperature (*T_in*). 
  
 .. code-block:: python
 

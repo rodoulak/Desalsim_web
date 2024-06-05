@@ -289,7 +289,8 @@ The HClAddition class provides the following method:
 
 .. code-block:: python
 
-        # Calculate HClAdditione for  
+        # Calculate HClAdditione for pH=7
+    HCl_conc=1 # concentration of HCl 1M
     unit = HClAddition(Qout_2, Cout_all_m, MW_Cl, ph_2, HCl_conc)
     QHCl, Cout_mfpfr_g = unit.calculate_HCl_addition(Cout_mfpfr_g)
 
