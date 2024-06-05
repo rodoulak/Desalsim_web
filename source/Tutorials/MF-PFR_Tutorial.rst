@@ -99,7 +99,7 @@ You can calculate the density of the feed solution:
     d_in = density_calc(T-273, mg_in)  # kg/m3
 
 
-1.3. Set Porducts Characteristics  
+1.3. Set Products Characteristics  
 -------------
 You need to set product characteristics such as product solubility and density. 
 
@@ -180,7 +180,7 @@ The MFPFRCALC class provides the following methods:
     calc_step1()
 
     # Calculation for the 2nd step 
-    calc_step2():
+    calc_step2()
 
 The two methods calculate the flowrates, the concentration of the streams and the requirements of alkaline solution in the two steps. It is automatically called upon initialization of the class instance.
 
@@ -189,6 +189,7 @@ The two methods calculate the flowrates, the concentration of the streams and th
 ``MFPFRCALC`` takes as input the feed flow rate (*Qin_mfpfr*), the ion concentration in the feed (*Cin_mfpfr*), the concentration of NaOH solution for step 1 and step 2 (*C_NaOH*), the Conversion rate (*conv_).
 
 .. code-block:: python
+    
     # Create an instance of the inputpar class with the defined parameters
     mfpfr_dat = MFPFRCALC(Qin_mfpfr, Cin_mfpfr, *C_NaOH, *conv)
 
@@ -289,7 +290,8 @@ The HClAddition class provides the following method:
 
 .. code-block:: python
 
-        # Calculate HClAdditione for  
+        # Calculate HClAdditione for pH=7
+    HCl_conc=1 #l of HCl 1M
     unit = HClAddition(Qout_2, Cout_all_m, MW_Cl, ph_2, HCl_conc)
     QHCl, Cout_mfpfr_g = unit.calculate_HCl_addition(Cout_mfpfr_g)
 
@@ -317,7 +319,7 @@ Total effluent flow rate is 1679.27kg/hr
 
 .. _use-energycons-class:
 
-4. Use energycons class
+1. Use energycons class
 ========
 
 ``energycons`` is a class used to represent the calculation of energy consumption and the specific energy consumption for MF-PFR Unit. The takes as input the total volumetric flow rate (*Qtot*), the volumetric flow rate of sodium hydroxide (*QNaOH*), the volumetric flow rate of input (*Qin*), the volumetric flow rate of sodium hydroxide in the first step (*QNaOH_1*), the Added volumetric flow rate of sodium hydroxide needed to reach a pH of 13 (*QNaOH_2_add*), the stoichiometric volumetric flow rate of sodium hydroxide for the second step (*QNaOH_2_st*), the expected pressure drop (*dp*) and the pump efficiency (*npump*). The class ``energycons`` *returns the energy consumption for pumping in the two steps (*Epump_1, Epump_2_)*.

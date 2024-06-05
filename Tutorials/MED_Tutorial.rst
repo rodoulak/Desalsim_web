@@ -226,7 +226,7 @@ This method calculate temperature-related parameters and it takes as input the t
 
 .. code-block:: python
 
-    med*dat.temperature_calc(DT_loss, T_N, T_s)
+    med_dat.temperature_calc(DT_loss, T_N, T_s)
 
 
 2.6. Use ``performance_parameters`` method 

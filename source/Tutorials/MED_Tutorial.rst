@@ -195,7 +195,15 @@ This method calculates the inflow salinity.
 
 It doesn't take additional inputs. 
 
-2.4. Use ``mass_balance_med`` method 
+2.4. Use ``temperature_calc`` method 
+-----
+This method calculate temperature-related parameters and it takes as input the temperature difference (*DT_loss*), temperature in the last effect (*T_N*), and steam temperature (*T_s). 
+
+.. code-block:: python
+
+    med_dat.temperature_calc(DT_loss, T_N, T_s)
+
+2.5. Use ``mass_balance_med`` method 
 -----
 This method performs mass balance calculations. In particular, it calculates the brine flow rate of leaving effect n (*Bn*, *Qb*), and the total distillate flow rate (*Mdist*, *Qdist*). 
 
@@ -204,7 +212,7 @@ This method performs mass balance calculations. In particular, it calculates the
     med_dat.mass_balance_med(Cb_out)
 
 
-**2.4.1. Assigned the results to output parameters**
+**2.5.1. Assigned the results to output parameters**
 
 After the mass calculation, you can assigned the results to output parameters: 
 
@@ -218,15 +226,6 @@ After the mass calculation, you can assigned the results to output parameters:
 
     #Calculate circulation flow rate 
     Qr=Xr*Qf_med
-
-
-2.5. Use ``temperature_calc`` method 
------
-This method calculate temperature-related parameters and it takes as input the temperature difference (*DT_loss*), temperature in the last effect (*T_N*), and steam temperature (*T_s). 
-
-.. code-block:: python
-
-    med*dat.temperature_calc(DT_loss, T_N, T_s)
 
 
 2.6. Use ``performance_parameters`` method 
@@ -328,8 +327,6 @@ You can print results from mass calculations
     print("Cooling water flow rate: " + str(round(Qcw,2)) + " kg/hr")
     print("-----------------------------------------")
 
-    # Chemical consumption
-    print("Total Chemical Consumption: " + str(round(Cchem,2))+"kg/hr")
 
 
 Brine flow rate: 131.99kg/hr  
@@ -349,5 +346,3 @@ Total thermal energy consumption: 318.96 kW
 Specific energy consumption (thermal) per m3 feed: 324.73 kWh_th/m3  
 
 Cooling water flow rate: 16267.76 kg/hr  
-
-Total Chemical Consumption: 0kg/hr  

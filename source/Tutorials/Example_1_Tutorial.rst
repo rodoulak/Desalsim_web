@@ -392,6 +392,7 @@ NaOH flow rate is 21918.92 l/hr
 
 .. code-block:: python
 
+    HCl_conc=1 # Concentration of HCl: 1M
         # Create an instance of the HCladdition class
     unit = HClAddition(Qout_2, Cout_all_m, MW_Cl, ph_2, HCl_conc)
 

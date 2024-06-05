@@ -58,17 +58,17 @@ You can initialize the feed solution by setting the flow rate, specifying the fo
 
 .. code-block:: python
 
+   # Input conditions
+   ph_s = 4.71  # pH salt channel (units: -)
+   ph_b = 7  # pH base channel (units: -)
+   ph_a = 7  # pH acid channel (units: -)
+
    # Feed concentration
    components = ['Na', 'Cl', 'K', 'Mg', 'Ca', 'SO4', 'HCO3', 'H', 'OH']
    Cin_edbm = [13.44, 20.725, 1.146, 0, 0, 0.18, 0, 10**(-ph_s), 3.01551E-11]
 
    # Feed flow rate L/h
    Q_in_edbm = 47000
-
-   # Input conditions
-   ph_s = 4.71  # pH salt channel (units: -)
-   ph_b = 7  # pH base channel (units: -)
-   ph_a = 7  # pH acid channel (units: -)
 
    # Feed concentration for base and acid channels
    C_b_in = [0, 0, 0, 0, 0, 0, 0, 10**(-ph_b), 10**(-(14-ph_b))]
@@ -202,7 +202,7 @@ This method calculates the flowrate in each channel (``Q1_s_in``, ``Q1_a_in``, `
 
 .. code-block:: python
 
-   flowrate()
+   edbm_dat.flowrate()
 
 It doesn't take additional inputs.
 
@@ -213,7 +213,7 @@ This method calculates the inlet mass flow rates. In particular, it calculates t
 
 .. code-block:: python
 
-   in_mass_flow_rates(ph_s)
+   edbm_dat.in_mass_flow_rates(ph_s)
 
 It takes the initial pH in the salt channel as input. The results are used in the following calculations.
 
@@ -224,7 +224,7 @@ It calculates the mass balance calculations for Acid channel. In particular, it 
 
 .. code-block:: python
 
-   acid_channel()
+   edbm_dat.acid_channel()
 
 It doesn't take additional inputs.
 
@@ -255,7 +255,7 @@ It calculates the mass balance calculations for Base channel. In particular, it 
 
 .. code-block:: python
 
-   base_channel()
+   edbm_dat.base_channel()
 
 It doesn't take additional inputs.
 
@@ -287,7 +287,7 @@ It calculates the mass balance calculations for Salt channel and the Voltage (`V
 
 .. code-block:: python
 
-    salt_channel(Cm_bp_H, Cm_bp_OH)
+    edbm_dat.salt_channel(Cm_bp_H, Cm_bp_OH)
 
 It takes additional inputs Cm_bp_H, Cm_bp_OH, membrane characteristics.
 
