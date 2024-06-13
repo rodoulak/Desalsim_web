@@ -293,7 +293,7 @@ This class consists of three methods that calculate the concentration of differe
 .. code-block:: python
 
  # Calculation of the concentration of different ions in the solution
-    th_cryst_dat_2=conc_cal(Qf, M_Nacl , 'Na',Cf_tcr_in[0], 'cl',Cf_tcr_in[1],'k', Cf_tcr_in[2], 'mg', Cf_tcr_in[3], 'ca', Cf_tcr_in[4], 'so4', Cf_tcr_in[5], T_in)
+ th_cryst_dat_2=conc_cal(Qf, M_Nacl , 'Na',Cf_tcr_in[0], 'cl',Cf_tcr_in[1],'k', Cf_tcr_in[2], 'mg', Cf_tcr_in[3], 'ca', Cf_tcr_in[4], 'so4', Cf_tcr_in[5], T_in)
     th_cryst_dat_2.molarity()
     th_cryst_dat_2.conc_salt_comp()
     th_cryst_dat_2.salt_conc()
