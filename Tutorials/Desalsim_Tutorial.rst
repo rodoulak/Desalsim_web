@@ -16,7 +16,7 @@ The easiest way is through pip, in command-line interface:
 
 .. code-block:: shell
 
-   pip install DesalSim
+   pip install desalsim
 
 If you want to install the latest GitHub version:
 
