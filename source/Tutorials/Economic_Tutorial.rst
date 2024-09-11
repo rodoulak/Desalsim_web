@@ -66,7 +66,7 @@ Import ``constants.py`` for more constant parameters like molecular weights (MW)
 
 .. code-block:: python
 
-    import constants
+    import desalsim.constants
 
 2.3. Set input data 
 -------------------
