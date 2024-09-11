@@ -86,7 +86,9 @@ You can initialize the feed solution by setting the flow rate, specifying the fo
     # input conditions 
     T_in = 40 # °C
 
-Note that if you want to add more components, you need to update the components list and include the concentration of the new component in the *Cf_tcr_in*.
+.. note::
+
+   Note that if you want to add more components, you need to update the components list and include the concentration of the new component in the *Cf_tcr_in*.
 
 You can calculate the density of the feed solution:
 
