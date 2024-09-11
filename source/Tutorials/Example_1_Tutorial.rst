@@ -132,6 +132,7 @@ You can calculate the density of the feed solution:
     Qsw = 3000 / 24 * d_in #m3/d
 
 .. note::
+
    Note that if you want to add more components, you need to update the components list and include the concentration of the new component in the *Ci_in*
 
 3.2. Use process unit model
@@ -311,6 +312,7 @@ First, the results from the previous process unit (in this case, Nanofiltration)
 Then the required input for MFPFR unit need to be added from user. First, the concentration of the alkaline solution (NaOH) and acid solution (HCl) are import. 
 
 .. note::
+
    Note that different chemicals and concentrations can be used for the percicipation and the pH neutralization.
 
 .. code-block:: python
@@ -460,7 +462,9 @@ Calculate the total pumping energy including the HCl stream.
 
 
 .. note::
+
    Note that you can add a calculation for filtration unit and then sum the energy requirements. 
+
 Specific energy consumption can also be calculated: 
 
 .. code-block:: python
@@ -514,6 +518,7 @@ You need to follow similar steps for the other two processes.
 
 
 .. note::
+
    Note that the feed flow rate and concentration of the units are the effluent flow rate and ions concentration of the unit before in the treatment chain.
 
 .. raw:: html
@@ -676,6 +681,7 @@ After the set of input parameters, the **Revenues** of the treatment chain are c
         reve_list.append(rev_calc.rev_prd)
 
 .. note::
+
    Note that a detailed description of the economic model and more economic indicators can be found in Economic_Tutorial. 
 
 4.2.3. Environmental indicators 
