@@ -102,24 +102,30 @@ The market prices for focused products need to be set. Use updated market values
 
 2.4. Import results from technical model
 ----------------------------------------
-Import results from the technical models:
+Before importing the results from ``example_1.py``, ensure that the script has been executed successfully. This can be done either by running the script directly or by making sure the necessary variables are defined and ready for import.
+
 
 .. code-block:: python
 
-    import example_1
+    from example_1 import E_el_all, E_th_all, Qchem_all, Mhcl_need, Qnaoh_need, Q_w_in
 
-Then create lists with the results:
+.. important::
+
+   Ensure that ``example_1.py`` has been executed so that these variables are properly defined.
+   If these variables do not exist or the script has not been run, you will encounter an error.
+
+After importing, you can create lists with the results as shown below: 
 
 .. code-block:: python
 
-    el_conc = E_el_all
-    s_conc = E_th_all
-    chem1_conc = [Qantsc_nf, 0, Mnaoh_need, 0]
-    chem1_pr = [0.002, 0, constants.naoh_pr_s, 0]
-    chem2_conc = [0, 0, Mhcl_need, 0]
-    chem2_pr = [0.002, 0, constants.hcl_pr_s, 0]
-    wat_conc = [0, 0, Qnaoh_need, Q_w_in]
-    cw_conc = [0, 0, 0, 0]
+    el_conc=E_el_all
+    s_conc=E_th_all
+    chem1_conc=Qchem_all
+    chem1_pr=[0.002,0,constants.naoh_pr_s,0]
+    chem2_conc=[0,0,Mhcl_need,0]
+    chem2_pr=[0.002,0,constants.hcl_pr_s,0]
+    wat_conc=[0,0, Qnaoh_need, Q_w_in]
+    cw_conc=[0,0, 0, 0]
 
 2.5. Equipment cost 
 -------------------
