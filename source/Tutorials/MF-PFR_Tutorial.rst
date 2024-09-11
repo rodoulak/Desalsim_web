@@ -86,7 +86,9 @@ You can initialize the feed solution by setting the flow rate, specifying the fo
         # Feed flowrate
     Qin_mfpfr = 1000  # Flow rate in l/hr
 
-Note that if you want to add more components, you need to update the components list and include the concentration of the new component in the *Ci_in*
+.. note::
+
+   Note that if you want to add more components, you need to update the components list and include the concentration of the new component in the *Ci_in*
 
 You can calculate the density of the feed solution:
 
