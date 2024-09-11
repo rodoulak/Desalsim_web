@@ -96,14 +96,15 @@ Similarly for the other process units. Additionally, function for calculating de
 For example:
 
 .. code-block:: python
+
    # Molecular weights 
-MW_Na=constants.MW_Na
-MW_Cl=constants.MW_cl
-MW_SO4=constants.MW_so4
-MW_K=constants.MW_K
-MW_Ca=constants.MW_Ca
-MW_Mg=constants.MW_Mg
-MW = [MW_Na, MW_Cl, MW_K, MW_Mg, MW_Ca, MW_SO4]
+   MW_Na=constants.MW_Na
+   MW_Cl=constants.MW_cl
+   MW_SO4=constants.MW_so4
+   MW_K=constants.MW_K
+   MW_Ca=constants.MW_Ca
+   MW_Mg=constants.MW_Mg
+   MW = [MW_Na, MW_Cl, MW_K, MW_Mg, MW_Ca, MW_SO4]
 
 
 3.1.1. Define feed characteristics
