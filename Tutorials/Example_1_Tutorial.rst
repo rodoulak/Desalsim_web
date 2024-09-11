@@ -93,6 +93,18 @@ Similarly for the other process units. Additionally, function for calculating de
     import desalsim.constants
     import desalsim.scaleup
 
+For example:
+
+.. code-block:: python
+   # Molecular weights 
+MW_Na=constants.MW_Na
+MW_Cl=constants.MW_cl
+MW_SO4=constants.MW_so4
+MW_K=constants.MW_K
+MW_Ca=constants.MW_Ca
+MW_Mg=constants.MW_Mg
+MW = [MW_Na, MW_Cl, MW_K, MW_Mg, MW_Ca, MW_SO4]
+
 
 3.1.1. Define feed characteristics
 ------------
@@ -106,11 +118,6 @@ You can initialize the feed solution by setting the flow rate, specifying the fo
     Ci_in = [12.33, 21.67, 0.45, 1.39, 0.45, 3.28]
     z_values = [1, -1, 1, 2, 2, -2]
 
-        # Feed flowrate
-    Qsw = 3000 / 24 * d_in #m3/d
-
-Note that if you want to add more components, you need to update the components list and include the concentration of the new component in the *Ci_in*
-
 You can calculate the density of the feed solution:
 
 .. code-block:: python
@@ -121,6 +128,11 @@ You can calculate the density of the feed solution:
         # Feed flow density 
     d_in = density_calc(T-273, mg_in)  # kg/m3
 
+        # Feed flowrate
+    Qsw = 3000 / 24 * d_in #m3/d
+
+.. note::
+   Note that if you want to add more components, you need to update the components list and include the concentration of the new component in the *Ci_in*
 
 3.2. Use process unit model
 ------------
@@ -182,6 +194,7 @@ Assigned the results to output parameters
     Cconc = [nf_mass.Cconci for nf_mass in nfmass_objects]
         # Components concentrattion in permeate stream 
     Cperm = [nf_mass.Cpermi for nf_mass in nfmass_objects]
+    d_p=density_calc(T-273, sum(Cperm))  # Permeate desnity kg/m3
         # Permeate stream mass flow rate
     Qperm = nfmass_objects[0].Qperm  # kg/hr
         # Concentrate stream mass flow rate
@@ -227,8 +240,11 @@ For the calculation of the energy consumption, first the Osmotic pressure for th
 The following objective is created for energy consumption. Assumptions for pressure drop and pump efficiency need to be made. 
 
 .. code-block:: python
-
-    nf_energy=NfEnergy(P_osmo_c, P_osmo_f, P_osmo_p, dp=2, d_p, Qperm, Qf_nf, d_in,n=0.8) # dp: pressure drop (units: bar) and n: pump efficiency (units: -)
+   
+    # Assumptions
+    n=0.8 #pump efficiency (units: -)
+    dp=2 # pressure drop (units: bar)
+    nf_energy=NfEnergy(P_osmo_c, P_osmo_f, P_osmo_p, dp, d_p, Qperm, Qf_nf, d_in,n) 
     result=nf_energy.calculate_energy_consumption()
     E_el_nf = nf_energy.E_el_nf
 
@@ -292,7 +308,10 @@ First, the results from the previous process unit (in this case, Nanofiltration)
 
    <div style="text-align: justify;">
 
-Then the required input for MFPFR unit need to be added from user. First, the concentration of the alkaline solution (NaOH) and acid solution (HCl) are import. Note that different chemicals and concentrations can be used for the percicipation and the pH neutralization.
+Then the required input for MFPFR unit need to be added from user. First, the concentration of the alkaline solution (NaOH) and acid solution (HCl) are import. 
+
+.. note::
+   Note that different chemicals and concentrations can be used for the percicipation and the pH neutralization.
 
 .. code-block:: python
 
@@ -440,7 +459,8 @@ Calculate the total pumping energy including the HCl stream.
     print("Total electricity energy consumption is "+str(round(E_el_mfpf,2))+ " KW")
 
 
-Note that you can add a calculation for filtration unit and then sum the energy requirements. 
+.. note::
+   Note that you can add a calculation for filtration unit and then sum the energy requirements. 
 Specific energy consumption can also be calculated: 
 
 .. code-block:: python
@@ -493,7 +513,9 @@ You need to follow similar steps for the other two processes.
      - Electricity requirements [kWhel]
 
 
-*Note that the feed flow rate and concentration of the units are the effluent flow rate and ions concentration of the unit before in the treatment chain.* 
+.. note::
+   Note that the feed flow rate and concentration of the units are the effluent flow rate and ions concentration of the unit before in the treatment chain.
+
 .. raw:: html
 
    <div style="text-align: justify;">
@@ -653,7 +675,8 @@ After the set of input parameters, the **Revenues** of the treatment chain are c
         reve_t = reve_t+rev_calc.rev_prd
         reve_list.append(rev_calc.rev_prd)
 
-**Note that a detailed description of the economic model and more economic indicators can be found in Economic_Tutorial.** 
+.. note::
+   Note that a detailed description of the economic model and more economic indicators can be found in Economic_Tutorial. 
 
 4.2.3. Environmental indicators 
 ------------
