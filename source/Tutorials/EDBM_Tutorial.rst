@@ -79,7 +79,9 @@ You can initialize the feed solution by setting the flow rate, specifying the fo
    # Temperature
    T = 20 + 273.15  # K
 
-Note that if you want to add more components, you need to update the components list and include the concentration of the new component in the *Cin_edbm*.
+.. note::
+
+   Note that if you want to add more components, you need to update the components list and include the concentration of the new component in the *Cin_edbm*.
 
 You can calculate the density of the feed solution and the water quantity in inflow:
 
