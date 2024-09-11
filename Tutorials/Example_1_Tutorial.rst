@@ -75,9 +75,15 @@ Then the required functions for each unit. For example for Nanofiltration unit:
 
 .. code-block:: python
 
+    # Nanofiltration unit
     from desalsim.nanofiltration_unit_f import OsmoticPressure
     from desalsim.nanofiltration_unit_f import NFMass
     from desalsim.nanofiltration_unit_f import NfEnergy
+
+    # MF-PFR unit
+    from desalsim.mfpfr_unit_f import MFPFRCALC
+    from desalsim.mfpfr_unit_f import HClAddition
+    from desalsim.mfpfr_unit_f import energycons
 
 .. raw:: html
 
@@ -543,6 +549,7 @@ In this treatment chain, Electrodialysis with bipolar membrane has two streams a
 4. Results evaluation 
 =========================
 After the simulation of the treatment chain, the performance of the process units needs to be evaluated individually and overall as a system. 
+
 4.1. Summarise results
 ------------
 
@@ -551,42 +558,88 @@ The following code can be used to summarise the most important results from each
 .. code-block:: python
 
     class indic:
+    """
+    A class to summarize the performance indicators of a given technology.
+
+    Attributes
+    ----------
+    tech : str
+        The name of the technology (e.g., "NF" for Nanofiltration).
+    Qout : float
+        The output flow rate (e.g., m³/h).
+    Qin : float
+        The input flow rate (e.g., m³/h).
+    Qprod_1 : float
+        The flow rate of the first product stream (e.g., m³/h).
+    prod_1_name : str
+        The name of the first product stream (e.g., "water").
+    Qprod_2 : float
+        The flow rate of the second product stream, if any (e.g., m³/h).
+    prod_2_name : str
+        The name of the second product stream, if any.
+    E_el : float
+        The electrical energy consumption (e.g., kWh).
+    E_th : float
+        The thermal energy consumption (e.g., kWh).
+    Cin : list
+        The concentration of components in the input stream.
+    Cout : list
+        The concentration of components in the output stream.
+    chem : float
+        The total chemical consumption (sum of chem1 and chem2).
+    """
+
+    def __init__(self, tech, Qout, Qin, Qprod_1, prod_1_name, Qprod_2, prod_2_name, E_el, E_th, Cin, Cout, chem1, chem2):
+        self.tech = tech
+        self.Qout = Qout
+        self.Qin = Qin
+        self.E_el = E_el
+        self.E_th = E_th
+        self.Cin = Cin
+        self.Cout = Cout
+        self.Qprod_1 = Qprod_1
+        self.Qprod_2 = Qprod_2
+        self.prod_1_name = prod_1_name
+        self.prod_2_name = prod_2_name
+        self.chem = chem1 + chem2
+
+    def techn_indi(self):
+        """
+        Calculate and return the technical indicators for the technology.
         
-        def __init__(self, tech, Qout, Qin, Qprod_1, prod_1_name, Qprod_2, prod_2_name, E_el, E_th, Cin, Cout, chem1,chem2):
-            self.tech=tech
-            self.Qout=Qout
-            self.Qin=Qin
-            self.E_el=E_el
-            self.E_th=E_th
-            self.Cin=Cin
-            self.Cout=Cout
-            self.Qprod_1=Qprod_1
-            self.Qprod_2=Qprod_2
-            self.prod_1_name=prod_1_name
-            self.prod_2_name=prod_2_name
-            self.chem=chem1+chem2
-            
-            
-        def techn_indi(self):        
-            if self.prod_1_name=="water": 
-                self.Water_rr=self.Qprod_1/self.Qin*100 # %
-                self.Qwater=self.Qprod_1
-            elif self.prod_2_name=="water":
-                self.Water_rr=self.Qprod_2/self.Qin*100 # %
-                self.Qwater=self.Qprod_2
-            else:
-                self.Qwater=0
-                self.Water_rr=0
-                print("no water production by " + self.tech)
+        This method calculates the water recovery rate (if applicable) and
+        assigns it to the instance. It also handles cases where no water is produced.
+        
+        Returns
+        -------
+        None
+        """
+        if self.prod_1_name == "water":
+            self.Water_rr = self.Qprod_1 / self.Qin * 100  # Water recovery rate in %
+            self.Qwater = self.Qprod_1
+        elif self.prod_2_name == "water":
+            self.Water_rr = self.Qprod_2 / self.Qin * 100  # Water recovery rate in %
+            self.Qwater = self.Qprod_2
+        else:
+            self.Qwater = 0
+            self.Water_rr = 0
+            print("No water production by " + self.tech)
 
 Let's use Nanofiltration unit as example, here is how it can be used: 
 
 .. code-block:: python
 
-    tec1=indic("NF", Qconc, Qf_nf, Qperm, "none", 0, "none", E_el_nf, 0, Ci_in, Cconc, QHCl_nf, Qantsc_nf)   
-    tec1.techn_indi()
+    # Example of summarizing performance indicators for a Nanofiltration (NF) process
+
+   # Create an instance of the 'indic' class to summarize the NF results
+   tec1=indic("NF", Qconc, Qf, Qperm, "none", 0, "none", E_el_nf, 0, Ci_in, Cconc, QHCl_nf, Qantsc_nf)
+
+   # Generate the summary of performance indicators
+   tec1.techn_indi()
+
 
 **Create lists with important results**
+
 After collecting all the important results, they can summarise in lists: 
 
 .. code-block:: python
