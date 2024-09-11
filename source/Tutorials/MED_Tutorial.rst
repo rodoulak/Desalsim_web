@@ -73,7 +73,9 @@ You can initialize the feed solution by setting the flow rate, specifying the fo
     #input conditions
     T=20
 
-Note that if you want to add more components, you need to update the components list and include the concentration of the new component in the *Ciin_med*. 
+.. note::
+
+   Note that if you want to add more components, you need to update the components list and include the concentration of the new component in the *Ciin_med*. 
 
 You can calculate the density of the feed solution and the mass flow rate:
 
