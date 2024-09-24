@@ -491,7 +491,7 @@ Specific energy consumption per brine intake is 1.49 KWh/m3 of feed
 3.2.3.  Other units
 ------------
 
-You need to follow similar steps like Sections [3.2.1.](#321-nanofiltration) and [3.2.2.](#322-multi-plug-flow-reactor) for the other two processes. 
+You need to follow similar steps like Sections 3.2.1. and 3.2.2.for the other two processes. 
 **Table 3** gives an overview of the main inputs and outputs for each process unit of Electrodialysis with bipolar membranes and Electrodialysis. 
 
 .. list-table:: Overview of Inputs and Outputs
