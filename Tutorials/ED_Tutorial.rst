@@ -387,11 +387,15 @@ You can print results from the calculations:
     print("-----------------------------------------")
 
 Mass flowrate concentrate stream is 78.5 kg/hr  
+
 Volume flowrate concentrate stream is 67.74 l/hr  
+
 The total effluent concentration concentrate stream  is 200.0g/kg 
 
 Mass flowrate of diluate stream is 921.5 kg/hr  
+
 volume flowrate diluate stream is 909.36 l/hr  
+
 The total effluent concentration dilute is 20.0g/kg 
 
 .. code-block:: python
@@ -405,6 +409,7 @@ The total effluent concentration dilute is 20.0g/kg
     print("-----------------------------------------")
 
 Mass balance difference is 7.21  
+
 Balance error percentage is 0.02%  
 
 .. code-block:: python
@@ -415,5 +420,7 @@ Balance error percentage is 0.02%
     print("Specific energy consumption of Electrodialysis (ED) is "+str(round(sec_ed,2))+"KW/m3 feed")
   
 Power required is 95.19KW  
+
 Total energy consumption is 95.26KW  
+
 Specific energy consumption of Electrodialysis (ED) is 98.23KW/m3 feed  
