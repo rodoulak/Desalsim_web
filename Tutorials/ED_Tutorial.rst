@@ -213,8 +213,11 @@ After setting all the required inputs and initialize the values, then you can cr
 
 `ElectrodialysisCalc` is a class used to represent mass and energy balance for ED Unit. In particular, it calculates the flowrate in each channel, the outlet concentration in each channel, the external Voltage and power needed.
 
-### 2.1. Overview
+2.1. Overview
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
 The following attributes are available within the `ElectrodialysisCalc` class:  
+
 - ``MWs``: Molecular weight of NaCl (g/mol)
 - ``MWw``: Molecular weight of water (g/mol)
 -``R``: Resistance of rinse stream (ohm)
@@ -258,7 +261,8 @@ The ElectrodialysisCalc class provides the following methods:
     # Calculate the change in concentration
     dC(Ts_cp, tcu, D, Ij, h, Sh)
 
-### 2.2. Create ElectrodialysisCalc objects
+2.2. Create ElectrodialysisCalc objects
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 ElectrodialysisCalc has no inputs.
 
@@ -267,7 +271,8 @@ ElectrodialysisCalc has no inputs.
     # Create an instance of the ElectrodialysisCalc class 
     ed_em = ElectrodialysisCalc()
 
-### 2.3. Use Ts_cp, w_cp, Ls_cpv, Lw_cp, p_osmo, dC methods
+2.3. Use Ts_cp, w_cp, Ls_cpv, Lw_cp, p_osmo, dC methods
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 The ED system is modeled by adapting a model developed by `Nayar et al. <https://www.sciencedirect.com/science/article/pii/S0011916418312761>`_, keeping both the concentrate and diluate channels fully continuous, with the salinities of both channels varying along the length of the ED stack. The following code simulates the ED unit using the `Ts_cp`, `w_cp`, `Ls_cpv`, `Lw_cp`, `p_osmo`, and `dC` methods.
 
@@ -299,7 +304,8 @@ The ED system is modeled by adapting a model developed by `Nayar et al. <https:/
         Q_c[j] = Nw_c[j] * MWw / (rho_w * (1 - Sc[j] / 1000))
         Q_d[j] = Nw_d[j] * MWw / (rho_w * (1 - Sd[j] / 1000))
 
-### 2.3.1. Assign the results to output parameters
+2.3.1. Assign the results to output parameters
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 You can assign the results to output parameters:
 
@@ -309,7 +315,8 @@ You can assign the results to output parameters:
     Cc_cl_f = Sc[N-1] / MWs * constants.MW_cl
     Sc_out = [Cc_na_f, Cc_cl_f]
 
-### 2.4. Calculate the concentrate stream flow rate
+2.4. Calculate the concentrate stream flow rate
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 .. code-block:: python
 
@@ -322,7 +329,8 @@ You can assign the results to output parameters:
     for i in range(2, len(Csw)):
         Sc_out.append(Csw[i] * Qed_in_c / Qc)  # The total effluent concentration concentrate stream
 
-### 2.5. Calculate the dilute stream flow rate
+2.5. Calculate the dilute stream flow rate
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 .. code-block:: python
 
@@ -341,7 +349,8 @@ You can assign the results to output parameters:
     for i in range(2, len(Csw)):
         Sd_out.append(Csw[i] * Qed_in / Qd)
 
-### 2.6. Calculate energy consumption
+2.6. Calculate energy consumption
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 You can calculate the total energy requirements for the ED unit using the voltage applied across an ED cell-pair (`Vcp`), the voltage across the electrodes (`Vel`), and the energy for pumping (`Ppump_ed`).
 
@@ -360,7 +369,8 @@ You can calculate the total energy requirements for the ED unit using the voltag
     # Specific energy consumption
     sec_ed = Eel_t_ed / (Qed_in / 1000)
 
-### 2.7. Print results
+2.7. Print results
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 You can print results from the calculations:
 
