@@ -146,7 +146,7 @@ You can calculate the density of the feed solution:
 ------------
 3.2.1. Nanofiltration 
 ------------
-To run simulation model for Nanofiltration unit, you need to implement the following steps (see also `NF Tutorial </Tutorials/NF_Tutorial>`). 
+To run simulation model for Nanofiltration unit, you need to implement the following steps (see also :doc:`NF Tutorial </Tutorials/NF_Tutorial>`). 
 
 **Table 1** gives an overview of the main inputs and outputs for each process unit of Nanofiltration. 
 
