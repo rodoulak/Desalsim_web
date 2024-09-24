@@ -1,13 +1,18 @@
 Tutorial: Electrodialysis (ED) unit
 ====================================
+.. raw:: html
 
+   <div style="text-align: justify;">
 ED is a technique that uses ion exchange membranes and electricity to extract ionic compounds from aqueous solutions, with an electrical field serving as the driving force for solute separation. In this work, ED aims to purify NF permeate.
 
 .. image:: https://github.com/user-attachments/assets/386c055d-9935-41fa-b15c-e790fc169f9a
    :alt: ed
 
+.. raw:: html
+
+   <div style="text-align: justify;">
 In **desalsim** package, the ED unit is used to model the operation of an Electrodialysis technology. Upon simulation, it calculates the flow rate of the concentrate and dilute streams, their ion concentration, and the electricity requirements of the unit.
-The ED function consists of one class: `ElectrodialysisCalc`_ that consists of six methods: `Ts_cp`, `w_cp`, `Ls_cpv`, `Lw_cp`, `p_osmo`, `dC` (see Section 2.3_).
+The ED function consists of one class: `ElectrodialysisCalc` that consists of six methods: `Ts_cp`, `w_cp`, `Ls_cpv`, `Lw_cp`, `p_osmo`, `dC` (see `Section 2.3 <#section_2_3>`_).
 
 In this tutorial, we will focus on how to use the class and its methods.
 
@@ -270,6 +275,8 @@ ElectrodialysisCalc has no inputs.
 
     # Create an instance of the ElectrodialysisCalc class 
     ed_em = ElectrodialysisCalc()
+
+.. _section_2_3:
 
 2.3. Use Ts_cp, w_cp, Ls_cpv, Lw_cp, p_osmo, dC methods
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
