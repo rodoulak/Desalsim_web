@@ -74,6 +74,7 @@ Developed by  `Rodoula Ktori`_, TU Delft.
    Tutorials/NF_Tutorial
    Tutorials/MF-PFR_Tutorial
    Tutorials/TCr_Tutorial
+   Tutorials/ED_Tutorial
 
 .. toctree::
    :maxdepth: 2
