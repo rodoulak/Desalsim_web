@@ -223,7 +223,7 @@ After setting all the required inputs and initialize the values, then you can cr
 
 The following attributes are available within the `ElectrodialysisCalc` class:  
 
-- ``MWs``: Molecular weight of NaCl (g/mol)
+- ``MWs``: Molecular weight of NaCl (g/mol) 
 - ``MWw``: Molecular weight of water (g/mol)
 -``R``: Resistance of rinse stream (ohm)
 - ``Rp``: Resistance of polarization (ohm)
