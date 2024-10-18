@@ -18,9 +18,9 @@ In this tutorial, we will focus on how to use the class and their methods.
 +-----------------------------------------------+---------------------------------------------+-------------------------------------------------------+
 |                                               | Ion concentration [g/L]                     | Flow rate of base [m3/h] and composition [g/L]        |
 +-----------------------------------------------+---------------------------------------------+-------------------------------------------------------+
-|                                               | Electric density                            | Flow rate of salt [m3/h] and composition [g/L]        |
+|                                               | Current Density [A/m2]                      | Flow rate of salt [m3/h] and composition [g/L]        |
 +-----------------------------------------------+---------------------------------------------+-------------------------------------------------------+
-|                                               |                                             | Electricity requirements [kWhel]                      |
+|                                               | Number of triplets                          | Electricity requirements [kWhel]                      |
 +-----------------------------------------------+---------------------------------------------+-------------------------------------------------------+
 
 The mathematical description of Electrodialysis with Bipolar membranes technology is given in `Mathematical description`_, see Section A.6.
