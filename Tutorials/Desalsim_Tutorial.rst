@@ -159,7 +159,7 @@ The mathematical description of each technology is given in `Mathematical descri
      - Ion concentration [g/L]
      - Flow rate of base [m³/h] and composition [g/L]
    * -
-     - Electric density
+     - Current Density [A/m2] 
      - Flow rate of salt [m³/h] and composition [g/L]
    * -
      -
@@ -171,7 +171,7 @@ The mathematical description of each technology is given in `Mathematical descri
      - Ion concentration [g/L]
      - Flow rate of concentrate stream [m³/h] and composition [g/L]
    * -
-     - Electric density
+     - Current Density [A/m2] 
      - Electricity requirements [kWhel]
 
 
