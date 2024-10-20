@@ -3,7 +3,7 @@ Tutorial for Economic model
 
 1. Introduction 
 ================
-Welcome to our comprehensive tutorial on running economic models. The economic model (``economic_f.py``) can be used to perform economic assessments of the treatment chain or of individual units to identify economic hotspots. The economic assessment will help researchers, engineers, and decision-makers improve the system's performance and select the most economically feasible integration of technologies.
+Welcome to our comprehensive tutorial on running economic models. The economic model (``economic_f.py``) can be used to perform economic assessments of the treatment train or of individual units to identify economic hotspots. The economic assessment will help researchers, engineers, and decision-makers improve the system's performance and select the most economically feasible integration of technologies.
 
 In this tutorial, we provide step-by-step instructions on how to use economic models and analyse the results obtained using **Example 1** as a case study (see **Figure 1**).
 
@@ -153,7 +153,7 @@ After setting the reference scenario, the equipment cost of the scaled-up unit c
     # Capacity of reference scenario
     Mf_basic_sc = [constants.Mf_basic_sc[0], constants.Mf_basic_sc[8], constants.Mf_basic_sc[3], constants.Mf_basic_sc[6]]
 
-    # Capacity of evaluated treatment chain 
+    # Capacity of evaluated treatment train 
     Mf_sce = [Qsw, Qed_in, Qin_mfpfr, Q_in_edbm]
 
     # Calculation of the new equipment cost
@@ -330,7 +330,7 @@ Then the **OPEX** is calculated:
 
 2.8. Calculate Revenues
 ------------------------
-The total amount of **Revenues** from selling products is used to evaluate the economic performance of the treatment chain.
+The total amount of **Revenues** from selling products is used to evaluate the economic performance of the treatment train.
 
 .. math::
 
@@ -352,7 +352,7 @@ First, the updated market prices of the recovered products need to be set.
     mgoh2_pr = 1.0  # euro/kg
     naoh_pr = 7.2  # euro/L 1M NaOH solution
 
-After the set of input parameters, the **Revenues** of the treatment chain are calculated:
+After the set of input parameters, the **Revenues** of the treatment train are calculated:
 
 .. code-block:: python
 
