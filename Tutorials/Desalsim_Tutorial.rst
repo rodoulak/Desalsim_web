@@ -230,6 +230,9 @@ For the economic analysis of a full-scale desalination plant, the equipment cost
    * - 
      - Plant overhead costs: 5% of annual OPEX
 
+.. note::
+
+   Note that the assumptions listed in **Table 3** can be modified to suit different case studies.
 
 6. Treatment trains comparison 
 ------------
