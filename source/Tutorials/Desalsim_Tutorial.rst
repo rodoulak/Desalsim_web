@@ -254,7 +254,6 @@ Import required functions:
 
     import numpy as np
     import pandas as pd
-    import numpy as np 
 
 **Create lists with results**
 
