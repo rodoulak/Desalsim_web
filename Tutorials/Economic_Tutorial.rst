@@ -182,7 +182,9 @@ The CAPEX consists of fixed-capital investment and working capital, and the form
 | Working capital: 20% of total investment cost     |
 +---------------------------------------------------+
 
-The assumptions in **Table 2** are set. Note that they can change for different case studies.
+.. note::
+
+   Note that the assumptions listed in **Table 2** can be modified to suit different case studies.
 
 .. code-block:: python
 
@@ -287,6 +289,9 @@ The calculation of chemicals and water costs is similar to the energy cost, mult
 | Plant overhead costs: 5% of annual OPEX                       |
 +---------------------------------------------------------------+
 
+.. note::
+
+   Note that the assumptions listed in **Table 3** can be modified to suit different case studies.
 
 .. code-block:: python
 
