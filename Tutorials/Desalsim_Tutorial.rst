@@ -251,8 +251,7 @@ Import required functions:
 .. code-block:: python
 
     import numpy as np
-    import pandas as pd
-    import numpy as np 
+    import pandas as pd 
 
 **Create lists with results**
 
