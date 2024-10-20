@@ -8,10 +8,10 @@ Example 1: Tutorial
    <div style="text-align: justify;">
 
 Welcome to our comprehensive tutorial on running simulation models and evaluating the 
-performance of treatment chains for water purification processes. In this tutorial, 
-we provide step-by-step instructions on how to `create treatment chains <#create-treatment-chain>`_, 
+performance of treatment trains for water purification processes. In this tutorial, 
+we provide step-by-step instructions on how to `create treatment trains <#create-treatment-train>`_, 
 `define feed characteristics <#define-feed-characteristics>`_, `use process unit models <#use-process-unit-model>`_, and `analyze the results obtained from the simulation <#results-evaluation>`_, using **Example 1** as a case study.
-Each section guides you through setting up the simulation environment, running the models, and interpreting the results. Additionally, we discuss technical, economic, and environmental indicators to evaluate the performance of the treatment chain.
+Each section guides you through setting up the simulation environment, running the models, and interpreting the results. Additionally, we discuss technical, economic, and environmental indicators to evaluate the performance of the treatment train.
 
 
 
@@ -21,7 +21,7 @@ Each section guides you through setting up the simulation environment, running t
 
    <div style="text-align: justify;">
 
-**Figure 1** presents the process flow diagram of example 1 which consists of four technologies: Nanofiltration (NF), Multiple Feed Plug Flow Reactor (MF-PFR), Electrodialysis (ED), Electrodialysis With Bipolar Membranes (EDBM). The treatment chain represents an MLD system aiming to maximize valuable resources recovery from brine, such as Mg(OH)\ :sub:`2`\ , Ca(OH)\ :sub:`2`\ , HCl, and NaOH. The seawater stream or concentrate stream from a Reverse Osmosis plant (RO) first goes to the NF unit. The NF unit is separated into two different streams: one that is high in monovalent ions and one that is high in multi-valent ions. The latter stream from NF, high in monovalent ions, is directed to ED, in which the NaCl stream is concentrated further, and a dilute stream is also recovered. The former is directed to a treatment line comprising selective MF-PFR and EDBM units. In particular, the retentate is sent to the MF-PFR, in which magnesium and calcium are recovered in the form of hydroxide precipitates via a chemical reaction between the NF retentate and an alkaline reactant. Then, the brine stream is free from Mg\ :sup:`2+`\ and Ca\ :sup:`2+`\ mixed with the ED concentrate stream. The mixed solution (NaCl rich) is fed to EDBM. EDBM unit recovers, and the saline solution (low concentration) can be recycled back into the treatment chain.
+**Figure 1** presents the process flow diagram of example 1 which consists of four technologies: Nanofiltration (NF), Multiple Feed Plug Flow Reactor (MF-PFR), Electrodialysis (ED), Electrodialysis With Bipolar Membranes (EDBM). The treatment train represents an MLD system aiming to maximize valuable resources recovery from brine, such as Mg(OH)\ :sub:`2`\ , Ca(OH)\ :sub:`2`\ , HCl, and NaOH. The seawater stream or concentrate stream from a Reverse Osmosis plant (RO) first goes to the NF unit. The NF unit is separated into two different streams: one that is high in monovalent ions and one that is high in multi-valent ions. The latter stream from NF, high in monovalent ions, is directed to ED, in which the NaCl stream is concentrated further, and a dilute stream is also recovered. The former is directed to a treatment line comprising selective MF-PFR and EDBM units. In particular, the retentate is sent to the MF-PFR, in which magnesium and calcium are recovered in the form of hydroxide precipitates via a chemical reaction between the NF retentate and an alkaline reactant. Then, the brine stream is free from Mg\ :sup:`2+`\ and Ca\ :sup:`2+`\ mixed with the ED concentrate stream. The mixed solution (NaCl rich) is fed to EDBM. EDBM unit recovers, and the saline solution (low concentration) can be recycled back into the treatment train.
 
 
 
@@ -55,9 +55,9 @@ https://github.com/rodoulak/Desalination-and-Brine-Treatment-Simulation-
 
 3. Running the Simulation models
 =========================
-3.1. Create treatment chain 
+3.1. Create treatment train 
 ------------
-To create the treatment chain, the required units have to be imported. 
+To create the treatment train, the required units have to be imported. 
 For **Example 1** which consists of four technologies:
 
 - Nanofiltration (NF),
@@ -530,13 +530,13 @@ You need to follow similar steps like Sections 3.2.1. and 3.2.2. for the other t
 
 .. important::
 
-   Note that the feed flow rate and concentration of the units are the effluent flow rate and ions concentration of the unit before in the treatment chain. 
+   Note that the feed flow rate and concentration of the units are the effluent flow rate and ions concentration of the unit before in the treatment train. 
 
 .. raw:: html
 
    <div style="text-align: justify;">
 
-In this treatment chain, Electrodialysis with bipolar membrane has two streams as feed for the salt channel. The two streams are mixed. For this the following calculations are required to calculate the new flow rate and concentration after the mixing. 
+In this treatment train, Electrodialysis with bipolar membrane has two streams as feed for the salt channel. The two streams are mixed. For this the following calculations are required to calculate the new flow rate and concentration after the mixing. 
 
 .. code-block:: python
 
@@ -553,11 +553,11 @@ In this treatment chain, Electrodialysis with bipolar membrane has two streams a
 
 .. important::
 
-   For complete steps on simulating EDBM and ED technologies, refer to their respective tutorials (:doc:`EDBM Tutorial </Tutorials/EDBM_Tutorial>`, :doc:`ED Tutorial </Tutorials/ED_Tutorial>`). This tutorial primarily focuses on demonstrating how to integrate the technologies into a treatment chain and calculate mixed stream flow rates and concentrations.
+   For complete steps on simulating EDBM and ED technologies, refer to their respective tutorials (:doc:`EDBM Tutorial </Tutorials/EDBM_Tutorial>`, :doc:`ED Tutorial </Tutorials/ED_Tutorial>`). This tutorial primarily focuses on demonstrating how to integrate the technologies into a treatment train and calculate mixed stream flow rates and concentrations.
 
 4. Results evaluation 
 =========================
-After the simulation of the treatment chain, the performance of the process units needs to be evaluated individually and overall as a system. 
+After the simulation of the treatment train, the performance of the process units needs to be evaluated individually and overall as a system. 
 
 4.1. Summarise results
 ------------
@@ -663,7 +663,7 @@ After collecting all the important results, they can summarise in lists:
 
 4.2. Formulate performance indicators
 ------------
-In Example 1, technical, economic and environmental indicators are used to evaluate the treatment chain. 
+In Example 1, technical, economic and environmental indicators are used to evaluate the treatment train. 
 
 4.2.1. Technical indicators 
 ------------
@@ -701,7 +701,7 @@ Another technical indicator is the **Specific energy consumption**.
 
 4.2.2. Economic indicators 
 ------------
-For the economic analysis, the total amount of **Revenues** from selling products is used to evaluate the economic performance of the treatment chain. 
+For the economic analysis, the total amount of **Revenues** from selling products is used to evaluate the economic performance of the treatment train. 
 
 .. math::
 
@@ -728,7 +728,7 @@ First, the updated market prices of the recovered products need to be set.
 
 **Revenue calculation**
 
-After the set of input parameters, the **Revenues** of the treatment chain are calculated: 
+After the set of input parameters, the **Revenues** of the treatment train are calculated: 
 
 .. code-block:: python
 
@@ -749,7 +749,7 @@ After the set of input parameters, the **Revenues** of the treatment chain are c
 
 4.2.3. Environmental indicators 
 ------------
-A simple indicator to evaluate the environmental performance of the treatment chain is the **Carbon dioxide emissions**.  
+A simple indicator to evaluate the environmental performance of the treatment train is the **Carbon dioxide emissions**.  
 
 .. math::
 
@@ -768,7 +768,7 @@ First, the emissions factor from electrical and thermal energy consumption must 
 
 **Carbon dioxide emissions**
 
-After the set of input parameters, the **Carbon dioxide emissions** of the treatment chain are calculated: 
+After the set of input parameters, the **Carbon dioxide emissions** of the treatment train are calculated: 
 
 .. code-block:: python
 
@@ -810,7 +810,7 @@ Additionally, table with flowrates and concentrations can be developed (see 'exm
 
 4.3. Visualization 
 ------------
-For the visualization of the treatment chain, a **Sankey** diagram is created. For this diagram, the mass flow rates are needed. 
+For the visualization of the treatment train, a **Sankey** diagram is created. For this diagram, the mass flow rates are needed. 
 
 First, you need to import: 
 
