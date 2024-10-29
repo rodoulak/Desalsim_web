@@ -193,14 +193,14 @@ Concentrate stream total concentration is 70.73g/l
 .. raw:: html
 
    <div style="text-align: justify;">
-OsmoticPressure is a class used to represent the calculation of osmotic pressure for Nanofiltration Unit. For the calculation of the energy consumption, first the Osmotic pressure for the three streams (feed, concentrate, permeate) need to be calculated. For this calculation, you need to use the ion concentration of the stream (*Ci_in*, *Cperm*, *Cconc*) the ionelectric charge (*z_values*), and the stream temperature (*T*). The class *returns the Osmotic pressure* of the solution.   
+OsmoticPressure is a class used to represent the calculation of osmotic pressure for Nanofiltration Unit. For the calculation of the energy consumption, first the Osmotic pressure for the three streams (feed, concentrate, permeate) need to be calculated. For this calculation, you need to use the ion concentration of the stream (*Ci_in*, *Cperm*, *Cconc*) and the Ions molar mass (*MW_values*). The class *returns the Osmotic pressure* of the solution.   
 
 3.1. Oveview
 -------------
 The following attributes are available within the OsmoticPressure class:  
 
--  `C1, C2 C3, C4, C5, C6 `: (float) Concentration of ions in the solution (mol/L).
--  `z1, z2,z3, z4, z5, z6`: (int) Charge of ions in the solution.
+-  `Ci_in `: (float) Concentration of ions in the solution (mol/L).
+-  `MW_values`: (float) ons molar mass in g/mol.
 
 The OsmoticPressure class provides the following method:
 
@@ -208,7 +208,12 @@ The OsmoticPressure class provides the following method:
 
     osmotic_pressure_calculation()
 
-This method calculates the osmotic pressure of a solution.
+This method calculates the osmotic pressure of a solution based on the Gibbs equation:
+
+.. math::
+
+   \pi = -\left( \frac{RT}{V} \right) \ln(a_w)
+
 
 3.2. Create OsmoticPressure objectives and calculate Osmotic Pressure
 -------------
@@ -216,9 +221,9 @@ This method calculates the osmotic pressure of a solution.
 .. code-block:: python
 
         # Calculate Osmotic Pressure for the three streams 
-    P_osmo_f = OsmoticPressure(Ci_in, z_values, T).osmotic_pressure_calculation()
-    P_osmo_p = OsmoticPressure(Cperm, z_values, T).osmotic_pressure_calculation()
-    P_osmo_c = OsmoticPressure(Cconc, z_values, T).osmotic_pressure_calculation()
+   P_osmo_f = OsmoticPressure(Ci_in, MW_values).calculate_osmotic_pressure()  
+   P_osmo_p = OsmoticPressure(Cperm, MW_values).calculate_osmotic_pressure()  
+   P_osmo_c = OsmoticPressure(Cconc, MW_values).calculate_osmotic_pressure()  
 
 .. _use-nfenergy-class:
 
