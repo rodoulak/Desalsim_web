@@ -232,15 +232,15 @@ Concentrate stream total concentration is 70.73g/l
 
    <div style="text-align: justify;">
 
-For the calculation of the energy consumption, first the Osmotic pressure for the three streams (feed, concentrate, permeate) need to be calculated. For this calculation, you need to use the ion concentration of the stream (*Ci_in*, *Cperm*, *Cconc*) the ionelectric charge (*z_values*), and the stream temperature (*T*).
+OsmoticPressure is a class used to represent the calculation of osmotic pressure for Nanofiltration Unit. For the calculation of the energy consumption, first the Osmotic pressure for the three streams (feed, concentrate, permeate) need to be calculated. For this calculation, you need to use the ion concentration of the stream (*Ci_in*, *Cperm*, *Cconc*) and the Ions molar mass (*MW_values*). The class *returns the Osmotic pressure* of the solution.   
 
 
 .. code-block:: python
 
         # Calculate Osmotic Pressure
-    P_osmo_f = OsmoticPressure(Ci_in, z_values, T).osmotic_pressure_calculation()
-    P_osmo_p = OsmoticPressure(Cperm, z_values, T).osmotic_pressure_calculation()
-    P_osmo_c = OsmoticPressure(Cconc, z_values, T).osmotic_pressure_calculation()
+      P_osmo_f = OsmoticPressure(Ci_in, MW_values).calculate_osmotic_pressure()
+      P_osmo_p = OsmoticPressure(Cperm, MW_values).calculate_osmotic_pressure()
+      P_osmo_c = OsmoticPressure(Cconc, MW_values).calculate_osmotic_pressure()
 
 
 **Calculate Energy Consumption**
