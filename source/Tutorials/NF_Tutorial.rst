@@ -203,7 +203,7 @@ OsmoticPressure is a class used to represent the calculation of osmotic pressure
 -------------
 The following attributes are available within the OsmoticPressure class:  
 
--  `Ci_in `: (float) Concentration of ions in the solution (mol/L).
+-  `Ci_in`: (float) Concentration of ions in the solution (mol/L).
 -  `MW_values`: (float) ons molar mass in g/mol.
 
 The OsmoticPressure class provides the following method:
