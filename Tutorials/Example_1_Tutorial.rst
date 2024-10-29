@@ -264,13 +264,13 @@ You can print results from energy calculations. The specific energy consumption 
             print(f"{key}: {value}")
 
 
-Applied pressure (Bar): 24.45  
+Applied pressure (Bar): 21.16  
 
-Power for pump (KW): 60.01  
+Power for pump (KW): 51.93  
 
-E_el_nf (KW): 75.02  
+E_el_nf (KW): 64.92  
 
-Specific Energy Consumption (KWh/m3 of permeate): 0.85
+Specific Energy Consumption (KWh/m3 of permeate): 0.73
 
 
 3.2.2.  Multi-plug flow reactor
