@@ -225,9 +225,9 @@ This method calculates the osmotic pressure of a solution based on the Gibbs equ
 .. code-block:: python
 
         # Calculate Osmotic Pressure for the three streams 
-P_osmo_f = OsmoticPressure(Ci_in, MW_values).calculate_osmotic_pressure()
-P_osmo_p = OsmoticPressure(Cperm, MW_values).calculate_osmotic_pressure()
-P_osmo_c = OsmoticPressure(Cconc, MW_values).calculate_osmotic_pressure()
+   P_osmo_f = OsmoticPressure(Ci_in, MW_values).calculate_osmotic_pressure()  
+   P_osmo_p = OsmoticPressure(Cperm, MW_values).calculate_osmotic_pressure()  
+   P_osmo_c = OsmoticPressure(Cconc, MW_values).calculate_osmotic_pressure()  
 
 .. _use-nfenergy-class:
 
