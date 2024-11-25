@@ -67,7 +67,7 @@ You can find Tutorials and documents at:
 
 - Tutorial for :doc:`Example 1 </Tutorials/Example_1_Tutorial>`
 - :doc:`Economic Tutorial </Tutorials/Economic_Tutorial>`
-- The mathematical description of each technology is given in `Mathematical description <https://github.com/rodoulak/Desalination-and-Brine-Treatment-Simulation-/tree/main/paper/Mathematical_description.pdf>`_
+- The mathematical description of each technology is given in `Mathematical description <https://github.com/rodoulak/Desalsim_web/blob/main/Mathematical%20description.pdf>`_
 - `Example 1 <https://github.com/rodoulak/Desalination-and-Brine-Treatment-Simulation-/tree/main/example/example_1.py>`_
 - `Example 2 <https://github.com/rodoulak/Desalination-and-Brine-Treatment-Simulation-/tree/main/example/example_2.py>`_
 - `Scenarios comparison <https://github.com/rodoulak/Desalination-and-Brine-Treatment-Simulation-/tree/main/example/comparison.py>`_
@@ -75,7 +75,7 @@ You can find Tutorials and documents at:
 4. Technical process models
 ------------------------
 For more detailed steps and instructions see Tutorial for :doc:`Example 1 </Tutorials/Example_1_Tutorial>`.
-The mathematical description of each technology is given in `Mathematical description <https://github.com/rodoulak/desalsim/blob/main/paper/Mathematical_description.pdf>`_.
+The mathematical description of each technology is given in `Mathematical description <https://github.com/rodoulak/Desalsim_web/blob/main/Mathematical%20description.pdf>`_.
 **Table 1** gives an overview of the main inputs and outputs for each process unit in **Desalsim**.
 
 .. list-table:: Table 1. Overview of Inputs and Outputs for each process unit in **Desalsim**. 
