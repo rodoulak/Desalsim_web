@@ -39,7 +39,9 @@ In this tutorial, we will focus on how to use the three classes. **Table 1** giv
      - Osmotic pressure [bar]
 
 
-The mathematical description of Nanofiltration technology is given in [Mathematical description](https://github.com/rodoulak/Desalination-and-Brine-Treatment-Simulation-/tree/main/paper/Mathematical_description.pdf), see Section A.1. 
+The mathematical description of Nanofiltration technology is given in `Mathematical description`_, see Section A.1.
+
+.. _Mathematical description: https://github.com/rodoulak/Desalsim_web/blob/main/Mathematical%20description.pdf
 
 1. Getting started 
 =======================================================================================
