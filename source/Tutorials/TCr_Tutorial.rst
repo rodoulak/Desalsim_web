@@ -36,7 +36,7 @@ In this tutorial, we will focus on how to use the classes and their methods. **T
 
 The mathematical description of Thermal Crystallizer technology is given in `Mathematical description`_, see Section A.3.
 
-.. _Mathematical description: https://github.com/rodoulak/Desalination-and-Brine-Treatment-Simulation-/tree/main/paper/Mathematical_description.pdf
+.. _Mathematical description: https://github.com/rodoulak/Desalsim_web/blob/main/Mathematical%20description.pdf
 
 1. Getting started
 ==================
