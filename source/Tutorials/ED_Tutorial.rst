@@ -34,7 +34,7 @@ In this tutorial, we will focus on how to use the class and its methods.
      - Current density [A/m²]
      - Electricity requirements [kWhel]
 
-The mathematical description of Electrodialysis is given in `Mathematical description <https://github.com/rodoulak/Desalination-and-Brine-Treatment-Simulation-/tree/main/paper/Mathematical_description.pdf>`_, see Section A.8.
+The mathematical description of Electrodialysis is given in `Mathematical description <https://github.com/rodoulak/Desalsim_web/blob/main/Mathematical%20description.pdf>`_, see Section A.8.
 
 1. Getting started
 --------------------
